@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import DashboardTable from '../components/DashboardTable';
+import Welcome from '../components/Welcome';
 
 function Dashboard() {
   return (
@@ -8,7 +9,13 @@ function Dashboard() {
       <header>
       <Navbar/>
       </header>
+      <div>
+        <Welcome/>
+      </div>
     <div>
+      <div>
+        Current tickets
+      </div>
       <DashboardTable/>
     </div>
 
