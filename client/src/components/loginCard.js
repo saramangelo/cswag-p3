@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
-import LoginForm from "./loginForm";
-import SignUpForm from "./signUpForm";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
 function LoginCard() {
   const [newUser, setNewUser] = useState(false);
