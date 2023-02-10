@@ -39,7 +39,7 @@ type Query {
 }
 
 type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addTicket(ticketTitle: String!, ticketDescription: String!, ticketStatus: String!, ticketPriority: String!): Ticket
     addComment(ticketId: ID!, commentText: String!):Ticket
