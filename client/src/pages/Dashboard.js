@@ -13,6 +13,9 @@ function Dashboard() {
         <Welcome/>
       </div>
     <div>
+      <div>
+        Current tickets
+      </div>
       <DashboardTable/>
     </div>
 
