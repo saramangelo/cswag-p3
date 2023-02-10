@@ -17,8 +17,8 @@ type Ticket {
     ticketStatus: String
     ticketPriority: String
     ticketAssignee: String
-    createdAt: Date
-    updatedAt: Date
+    createdAt: String
+    updatedAt: String
     comments: [Comment]!
 }
 
@@ -26,7 +26,7 @@ type Comment {
     _id: ID
     commentText: String
     commentAuthor: String
-    createdAt: Date
+    createdAt: String
 }
 
 type Auth {
