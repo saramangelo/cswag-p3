@@ -40,7 +40,7 @@ db.once('open', async () => {
     users.push(user);
   }
 
-  const  await User.collection.insertMany(users);
+  await User.collection.insertMany(users);
   
 
   console.log('Database seeded!');
