@@ -1,44 +1,19 @@
-import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import Nav from 'react-bootstrap/Nav';
 
-export default class Navbar extends Component {
-  state = { activeItem: 'Home' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  render() {
-    const { activeItem } = this.state
-
-    return (
-      <div>
-        <Menu pointing secondary>
-          <Menu.Item
-            name='Home'
-            active={activeItem === 'Home'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='My Tickets'
-            active={activeItem === 'My Tickets'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='Messages'
-            active={activeItem === 'Messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position='right'>
-            <Menu.Item
-              name='Logout'
-              active={activeItem === 'Logout'}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu>
-
-        {/* this is where we'll call Dashboard - to include table, button-to-modal to create new ticket, etc */}
-        
-      </div>
-    )
-  }
+function Navbar() {
+  return (
+    <Nav fill variant="tabs" defaultActiveKey="/home">
+      <Nav.Item>
+        <Nav.Link href="/mytickets">My Tickets</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/messages">Message Center</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="/logout">Logout</Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
 }
+
+export default Navbar;
