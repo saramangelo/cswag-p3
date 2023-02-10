@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
         trim: true,
     },
@@ -23,9 +23,8 @@ const userSchema = new Schema({
     // role: {
     //     type: String,
     //     required: true,
-
     // },
-    ticket: [
+    tickets: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Ticket',
@@ -50,11 +49,10 @@ userSchema.pre('save', async function (next) {
     next();
   });
   
-  userSchema.methods.isCorrectPassword = async function (password) {
+userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
-  };
-  
-  const User = model('User', userSchema);
-  
-  module.exports = User;
-  
+};
+
+const User = model('User', userSchema);
+
+module.exports = User;
