@@ -52,7 +52,11 @@ const ticketSchema = new Schema({
       },
     },
   ],
-});
+},
+{
+  timestamps: true,
+},
+);
 
 
 const Ticket = model('Ticket', ticketSchema);
