@@ -5,7 +5,9 @@ import Container from "react-bootstrap/Container";
 
 const Login = () => {
   return (
-    <div className="">
+
+    <div>
+
       <Container className="display-flex">
         <LoginCard />
       </Container>
