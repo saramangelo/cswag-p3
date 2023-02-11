@@ -7,15 +7,14 @@ import { useMutation } from "@apollo/client";
 
 import Auth from "../utils/auth";
 
-// CSWAG
 function LoginForm({ setUser }) {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
-  const handleBlur = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-
+    localStorage.setItem("test", 2)
     setFormState({
       ...formState,
       [name]: value,
@@ -28,12 +27,13 @@ function LoginForm({ setUser }) {
   // submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
+    localStorage.setItem("test", 2)
     console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
       });
-
+      console.log(data)
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
@@ -53,7 +53,8 @@ function LoginForm({ setUser }) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            onBlur={handleBlur}
+            name="email"
+            onChange={handleChange}
             type="email"
             placeholder="Enter email"
           />
@@ -63,7 +64,8 @@ function LoginForm({ setUser }) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            onBlur={handleBlur}
+            name="password"
+            onChange={handleChange}
             type="password"
             placeholder="Password"
           />
