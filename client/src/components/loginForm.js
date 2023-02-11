@@ -74,7 +74,7 @@ function LoginForm({ setUser }) {
           <Button
             onClick={handleSubmit}
             className="mr-1 mb-2"
-            variant="primary"
+            variant="dark"
             type="submit"
           >
             Log in
@@ -82,7 +82,7 @@ function LoginForm({ setUser }) {
           <Button
             onClick={handleViewLoginCard}
             className="mb-2"
-            variant="primary"
+            variant="danger"
             type="submit"
           >
             Sign up

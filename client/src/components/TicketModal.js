@@ -3,6 +3,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
+const styles = {
+  button: {
+  fontFamily: 'Rubik Mono One, sans-serif'
+
+}
+}
+
 function TicketModal() {
   const [show, setShow] = useState(false);
 
@@ -11,7 +18,7 @@ function TicketModal() {
 
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
+      <Button style={styles.button} variant="dark" onClick={handleShow}>
         Create a ticket
       </Button>
 
