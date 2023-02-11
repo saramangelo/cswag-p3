@@ -35,6 +35,11 @@ const ticketSchema = new Schema(
       required: false,
       trim: true,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      // get: (timestamp) => dateFormat(timestamp),
+    },
     comments: [
       {
         commentText: {
