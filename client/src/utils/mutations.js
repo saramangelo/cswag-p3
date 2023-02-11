@@ -26,11 +26,12 @@ export const ADD_USER = gql`
 
 export const ADD_TICKET = gql`
 mutation Mutation($ticketTitle: String!, $ticketDescription: String!, $ticketStatus: String!, $ticketPriority: String!) {
-  addTicket(ticketTitle: $ticketTitle, ticketDescription: $ticketDescription, ticketStatus: $ticketStatus, ticketPriority: $ticketPriority) {
+  addTicket(ticketTitle: $ticketTitle, ticketDescription: $ticketDescription, ticketType: $ticketType, ticketStatus: $ticketStatus, ticketPriority: $ticketPriority) {
     ticketTitle
     ticketDescription
-    ticketStatus
+    ticketType
     ticketPriority
+    ticketStatus
   }
 }
 `;
