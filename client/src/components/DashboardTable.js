@@ -1,4 +1,4 @@
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
 
 // {/* MAP THROUGH DATA, PRINT {} WHERE 'INSERT DATA' */}
 function DashboardTable() {
@@ -7,14 +7,10 @@ function DashboardTable() {
       <thead>
         <tr>
           <th>Title</th>
-          <th>Description</th>
+          <th>Developer</th>
           <th>Status</th>
-          <th>Issue Type</th>
           <th>Priority</th>
-          <th>Project</th>
           <th>Date Created</th>
-          <th>Estimated TOC</th>
-          <th>Assignee</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -26,16 +22,8 @@ function DashboardTable() {
           <td>INSERT DATA</td>
           <td>INSERT DATA</td>
           <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
         </tr>
         <tr>
-        <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
           <td>INSERT DATA</td>
           <td>INSERT DATA</td>
           <td>INSERT DATA</td>
@@ -44,10 +32,6 @@ function DashboardTable() {
           <td>INSERT DATA</td>
         </tr>
         <tr>
-        <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
-          <td>INSERT DATA</td>
           <td>INSERT DATA</td>
           <td>INSERT DATA</td>
           <td>INSERT DATA</td>
@@ -61,6 +45,3 @@ function DashboardTable() {
 }
 
 export default DashboardTable;
-
-
-

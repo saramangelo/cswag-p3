@@ -5,10 +5,9 @@ import Form from "react-bootstrap/Form";
 
 const styles = {
   button: {
-  fontFamily: 'Rubik Mono One, sans-serif'
-
-}
-}
+    fontFamily: "Rubik Mono One, sans-serif",
+  },
+};
 
 function TicketModal() {
   const [show, setShow] = useState(false);
@@ -51,59 +50,35 @@ function TicketModal() {
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicStatus">
-              <Form.Label>Status</Form.Label>
-              <Form.Control type="" placeholder="Ticket Status" />
-              <Form.Text className="text-muted">
-                Open, Closed, maybe make this a radio button?
-              </Form.Text>
+              <Form.Label>Type</Form.Label>
+              <Form.Select aria-label="Default select example">
+                <option>Select Type</option>
+                <option value="1">Front End</option>
+                <option value="2">API</option>
+                <option value="3">Back End</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicType">
-              <Form.Label>Type</Form.Label>
-              <Form.Control type="" placeholder="Ticket Type" />
-              <Form.Text className="text-muted">
-                Please indicate what type of ticket this is.
-              </Form.Text>
+              <Form.Label>Priority</Form.Label>
+              <Form.Select aria-label="Default select example">
+                <option>Select Priority</option>
+                <option value="1">Urgent</option>
+                <option value="2">High</option>
+                <option value="3">Medium</option>
+                <option value="4">Low</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPriority">
-              <Form.Label>Priority</Form.Label>
-              <Form.Control type="" placeholder="Ticket Priority" />
-              <Form.Text className="text-muted">
-                Please indicate the priority level - can make this a selection
-                instead of input.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicProject">
-              <Form.Label>Project</Form.Label>
-              <Form.Control type="" placeholder="Ticket Project" />
-              <Form.Text className="text-muted">
-                Please indicate the project associated to this ticket.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicDate">
-              <Form.Label>Date</Form.Label>
-              <Form.Control type="" placeholder="Ticket Date" />
-              <Form.Text className="text-muted">Today's date.</Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicTOC">
-              <Form.Label>Estimated Time of Completion</Form.Label>
-              <Form.Control type="" placeholder="Ticket TOC" />
-              <Form.Text className="text-muted">
-                Please indicate the estimated time of completion for this
-                ticket.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicAssignee">
-              <Form.Label>Assignee</Form.Label>
-              <Form.Control type="" placeholder="Ticket Assignee" />
-              <Form.Text className="text-muted">
-                Please indicate the team member to whom you'd like to assign
-                this ticket.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicAction">
-              <Form.Label>Action</Form.Label>
-              <Form.Control type="" placeholder="Ticket Action" />
-              <Form.Text className="text-muted">Action.</Form.Text>
+              <Form.Label>Status</Form.Label>
+              <Form.Select aria-label="Default select example">
+                <option>Select Status</option>
+                <option value="1">Archived</option>
+                <option value="2">Resolved</option>
+                <option value="3">Testing</option>
+                <option value="4">Development</option>
+                <option value="5">Unassigned</option>
+                <option value="6">New</option>
+              </Form.Select>
             </Form.Group>
           </Form>
         </Modal.Body>
