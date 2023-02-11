@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { useMutation } from '@apollo/client';
+import { Link } from 'react-router-dom';
+
+import { ADD_TICKET } from '../utils/mutations';
+
+import Auth from '../utils/auth';
+
+
+
 
 const styles = {
   button: {
@@ -10,12 +19,76 @@ const styles = {
 };
 
 function TicketModal() {
+
+  const [ticketTitle, setTitle] = useState('');
+  const [ticketDescription, setDescription] = useState('');
+  const [ticketType, setType] = useState('');
+  const [ticketPriority, setPriority] = useState('');
+  const [ticketStatus, setStatus] = useState('');
+
+  const [addTicket, { error }] = useMutation(ADD_TICKET);
+
+  // handle form submit
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await addTicket({
+        variables: {
+          ticketTitle,
+          ticketDescription,
+          ticketType,
+          ticketPriority,
+          ticketStatus,
+          // ticketAuthor: Auth.getProfile().data.username,
+        },
+      });
+
+      setTitle('');
+      setDescription('');
+      setType('');
+      setPriority('');
+      setStatus('');
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // handle change
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === 'title') {
+      setTitle(value);
+    }
+    if (name === 'description') {
+      setDescription(value);
+    }
+    if (name === 'type') {
+      setType(value);
+    }
+    if (name === 'priority') {
+      setPriority(value);
+    }
+    if (name === 'status') {
+      setStatus(value);
+    }
+  };
+  
+  
+
+// modal variable states
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  
+
   return (
+    <>
+    {Auth.loggedIn() ? ( 
     <>
       <Button style={styles.button} variant="dark" onClick={handleShow}>
         Create a ticket
@@ -26,10 +99,10 @@ function TicketModal() {
           <Modal.Title>New Ticket</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit} >
             <Form.Group className="mb-3" controlId="formBasicTitle">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="" placeholder="Enter ticket title" />
+              <Form.Control value={ticketTitle} onChange={handleChange} name="title" type="" placeholder="Enter ticket title" />
               <Form.Text className="text-muted">
                 Please give your ticket a title.
               </Form.Text>
@@ -39,7 +112,8 @@ function TicketModal() {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Description</Form.Label>
-              <Form.Control
+              <Form.Control value={ticketDescription} onChange={handleChange}
+              name="description"
                 as="textarea"
                 rows={3}
                 type=""
@@ -51,7 +125,7 @@ function TicketModal() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicStatus">
               <Form.Label>Type</Form.Label>
-              <Form.Select aria-label="Default select example">
+              <Form.Select value={ticketType} onChange={handleChange} name="type" aria-label="Default select example">
                 <option>Select Type</option>
                 <option value="1">Front End</option>
                 <option value="2">API</option>
@@ -60,7 +134,7 @@ function TicketModal() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicType">
               <Form.Label>Priority</Form.Label>
-              <Form.Select aria-label="Default select example">
+              <Form.Select value={ticketPriority} onChange={handleChange} name="priority" aria-label="Default select example">
                 <option>Select Priority</option>
                 <option value="1">Urgent</option>
                 <option value="2">High</option>
@@ -70,7 +144,7 @@ function TicketModal() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPriority">
               <Form.Label>Status</Form.Label>
-              <Form.Select aria-label="Default select example">
+              <Form.Select value={ticketStatus} onChange={handleChange} name="status" aria-label="Default select example">
                 <option>Select Status</option>
                 <option value="1">Archived</option>
                 <option value="2">Resolved</option>
@@ -91,6 +165,13 @@ function TicketModal() {
           </Button>
         </Modal.Footer>
       </Modal>
+    </>
+    ) : (
+      <p>
+        You need to be logged in to share your thoughts. Please{' '}
+        <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+      </p>
+    )}
     </>
   );
 }

@@ -24,19 +24,15 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
-    }
+export const ADD_TICKET = gql`
+mutation Mutation($ticketTitle: String!, $ticketDescription: String!, $ticketStatus: String!, $ticketPriority: String!) {
+  addTicket(ticketTitle: $ticketTitle, ticketDescription: $ticketDescription, ticketStatus: $ticketStatus, ticketPriority: $ticketPriority) {
+    ticketTitle
+    ticketDescription
+    ticketStatus
+    ticketPriority
   }
+}
 `;
 
 export const ADD_COMMENT = gql`
