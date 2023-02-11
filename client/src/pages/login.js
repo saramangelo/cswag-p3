@@ -4,14 +4,6 @@ import Container from "react-bootstrap/Container";
 // import background from "../images/BackgroundLog.jpg";
 import background from '../images/bg4.jpg'
 
-const styles = {
-    image: {
-    backgroundImage: `url(${background})`,
-    height:'100vh',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-}
-}
 
 const Login = () => {
   return (

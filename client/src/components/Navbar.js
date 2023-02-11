@@ -1,4 +1,4 @@
-import Nav from 'react-bootstrap/Nav';
+import Nav from "react-bootstrap/Nav";
 
 function Navbar() {
   return (
@@ -10,7 +10,7 @@ function Navbar() {
         <Nav.Link href="/messages">Message Center</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="/logout">Logout</Nav.Link>
+        <Nav.Link href="/">Logout</Nav.Link>
       </Nav.Item>
     </Nav>
   );

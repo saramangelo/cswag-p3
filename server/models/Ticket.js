@@ -70,4 +70,3 @@ Potential future properties:
   Project (parent entity to ticket): String
   Estimated time of completion: Date
 */
-git
