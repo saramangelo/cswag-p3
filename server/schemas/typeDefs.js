@@ -14,6 +14,7 @@ const typeDefs = gql`
     ticketDescription: String
     ticketAuthor: String
     ticketStatus: String
+    ticketType: String
     ticketPriority: String
     ticketAssignee: String
     createdAt: String
@@ -43,6 +44,7 @@ const typeDefs = gql`
     addTicket(
       ticketTitle: String!
       ticketDescription: String!
+      ticketType: String!
       ticketStatus: String!
       ticketPriority: String!
     ): Ticket
