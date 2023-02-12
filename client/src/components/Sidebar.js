@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function Sidebar() {
   const [show, setShow] = useState(false);
@@ -18,9 +18,7 @@ export default function Sidebar() {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>This is a sidebar</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          I will not close if you click outside of me.
-        </Offcanvas.Body>
+        <Offcanvas.Body></Offcanvas.Body>
       </Offcanvas>
     </>
   );

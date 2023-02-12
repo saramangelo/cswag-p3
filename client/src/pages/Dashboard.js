@@ -23,11 +23,9 @@ function Dashboard() {
         <div style={styles.header}>Current tickets</div>
         <DashboardTable />
       </div>
-      
+
     </div>
   );
 }
 
 export default Dashboard;
-
-
