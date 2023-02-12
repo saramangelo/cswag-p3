@@ -18,7 +18,7 @@ const ticketSchema = new Schema(
     },
     ticketAuthor: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     ticketStatus: {

@@ -31,17 +31,14 @@ function TicketModal({ ticketId }) {
     try {
       const { data } = await addTicket({
         variables: {
-          ticketId,
           ticketTitle,
           ticketDescription,
           ticketType,
-          ticketPriority,
           ticketStatus,
-          ticketAuthor: Auth.getProfile().data.username,
+          ticketPriority,
         },
       });
-
-
+      console.log(data);
 
       setTitle("");
       setDescription("");
@@ -58,29 +55,29 @@ function TicketModal({ ticketId }) {
     const { name, value } = event.target;
 
     if (name === "title") {
-      console.log("title:", value)
+      console.log("title:", value);
       setTitle(value);
-      console.log(ticketTitle)
+      console.log(ticketTitle);
     }
     if (name === "description") {
-      console.log("description:", value)
+      console.log("description:", value);
       setDescription(value);
-      console.log(ticketDescription)
+      console.log(ticketDescription);
     }
     if (name === "type") {
-      console.log("type:", value)
+      console.log("type:", value);
       setType(value);
-      console.log(ticketType)
+      console.log(ticketType);
     }
     if (name === "priority") {
-      console.log("priority:", value)
+      console.log("priority:", value);
       setPriority(value);
-      console.log(ticketPriority)
+      console.log(ticketPriority);
     }
     if (name === "status") {
-      console.log("status:", value)
+      console.log("status:", value);
       setStatus(value);
-      console.log(ticketStatus)
+      console.log(ticketStatus);
     }
   };
 

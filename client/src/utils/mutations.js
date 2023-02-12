@@ -28,6 +28,7 @@ export const ADD_TICKET = gql`
   mutation Mutation(
     $ticketTitle: String!
     $ticketDescription: String!
+    $ticketType: String!
     $ticketStatus: String!
     $ticketPriority: String!
   ) {
