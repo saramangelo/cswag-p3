@@ -1,7 +1,31 @@
 import Card from 'react-bootstrap/Card';
 import Navbar from '../components/Navbar';
+import { useQuery, useMutation } from '@apollo/client';
+import { useParams, Link } from 'react-router-dom';
+import { CREATE_VOTE } from '../utils/mutations';
+import { QUERY_MATCHUPS } from '../utils/queries';
 
-function ViewTicket() {
+const ViewTicket = () => {
+  
+  let { id } = useParams();
+
+  const { loading, data } = useQuery(QUERY_MATCHUPS, {
+    variables: { _id: id },
+  });
+
+  const matchup = data?.matchups || [];
+
+  const [createVote, { error }] = useMutation(CREATE_VOTE);
+
+  const handleVote = async (techNum) => {
+    try {
+      await createVote({
+        variables: { _id: id, techNum: techNum },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
     <Navbar/>
