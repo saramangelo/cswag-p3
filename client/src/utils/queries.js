@@ -24,10 +24,10 @@ export const QUERY_TICKETS = gql`
     ticketAuthor
     ticketStatus
     ticketPriority
-    # ticketAssignee
-    # createdAt
-    # updatedAt
-    # comments
+    ticketAssignee
+    createdAt
+    updatedAt
+    comments
     }
   }
 `;
@@ -41,12 +41,12 @@ export const QUERY_SINGLE_TICKET = gql`
     ticketAuthor
     ticketStatus
     ticketPriority
-      # comments {
-      #   _id
-      #   commentText
-      #   commentAuthor
-      #   createdAt
-      # }
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
   }
 `;

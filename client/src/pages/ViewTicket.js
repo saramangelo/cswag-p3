@@ -3,29 +3,18 @@ import Navbar from '../components/Navbar';
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
 import { CREATE_VOTE } from '../utils/mutations';
-import { QUERY_MATCHUPS } from '../utils/queries';
+import { QUERY_SINGLE_TICKET } from '../utils/queries';
 
 const ViewTicket = () => {
-  
+
   let { id } = useParams();
 
-  const { loading, data } = useQuery(QUERY_MATCHUPS, {
+  const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
     variables: { _id: id },
   });
 
-  const matchup = data?.matchups || [];
+  const ticket = data?.tickets || [];
 
-  const [createVote, { error }] = useMutation(CREATE_VOTE);
-
-  const handleVote = async (techNum) => {
-    try {
-      await createVote({
-        variables: { _id: id, techNum: techNum },
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
   return (
     <>
     <Navbar/>
@@ -33,10 +22,25 @@ const ViewTicket = () => {
     <Card className="text-center">
       <Card.Header>Ticket</Card.Header>
       <Card.Body>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
         <Card.Title>Ticket Details</Card.Title>
+        
         <Card.Text>
-          Import ticket data here
+          {ticket[0].ticketTitle}
+          {ticket[0].ticketDescription}
+          {ticket[0].ticketAuthor}
+          {ticket[0].ticketStatus}
+          {ticket[0].ticketPriority}
+          {ticket[0].ticketAssignee}
+          {ticket[0].createdAt}
+          {ticket[0].updatedAt}
+          {ticket[0].comments}
         </Card.Text>
+      </>
+      )}
       </Card.Body>
       <Card.Footer className="text-muted"></Card.Footer>
     </Card>
