@@ -34,7 +34,13 @@ const resolvers = {
     },
     addTicket: async (
       parent,
-      { ticketTitle, ticketDescription, ticketStatus, ticketPriority },
+      {
+        ticketTitle,
+        ticketDescription,
+        ticketType,
+        ticketStatus,
+        ticketPriority,
+      },
       context
     ) => {
       console.log(context.user);
@@ -42,6 +48,7 @@ const resolvers = {
         const ticket = await Ticket.create({
           ticketTitle,
           ticketDescription,
+          ticketType,
           ticketStatus,
           ticketPriority,
         });
