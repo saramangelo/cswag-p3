@@ -1,8 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import Navbar from '../components/Navbar';
-import { useQuery, useMutation } from '@apollo/client';
-import { useParams, Link } from 'react-router-dom';
-import { CREATE_VOTE } from '../utils/mutations';
+import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 import { QUERY_SINGLE_TICKET } from '../utils/queries';
 
 const ViewTicket = () => {
