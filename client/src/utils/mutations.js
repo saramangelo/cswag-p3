@@ -39,11 +39,11 @@ export const ADD_TICKET = gql`
       ticketStatus: $ticketStatus
       ticketPriority: $ticketPriority
     ) {
-      ticketDescription
-      ticketStatus
-      ticketPriority
       ticketTitle
+      ticketDescription
       ticketType
+      ticketPriority
+      ticketStatus
     }
   }
 `;
@@ -52,12 +52,15 @@ export const ADD_COMMENT = gql`
   mutation addComment($thoughtId: ID!, $commentText: String!) {
     addComment(thoughtId: $thoughtId, commentText: $commentText) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
+      ticketTitle
+      ticketDescription
+      ticketType
+      ticketPriority
+      ticketStatus
       comments {
         _id
         commentText
+        commentAuthor
         createdAt
       }
     }
