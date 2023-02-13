@@ -16,18 +16,14 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_TICKETS = gql`
-  query getTickets {
+  query tickets {
     tickets {
-      _id
-      ticketTitle
       ticketDescription
-      ticketAuthor
-      ticketStatus
       ticketPriority
-      ticketAssignee
-      createdAt
-      updatedAt
-      comments
+      ticketStatus
+      ticketTitle
+      ticketType
+
     }
   }
 `;

@@ -1,11 +1,11 @@
 import Table from "react-bootstrap/Table";
 
-function DashboardTable({ tickets = [] }) {
-  
+
+function DashboardTable({ tickets }) {
   if (!tickets.length) {
-    return <h3>No Tickets Yet</h3>
+    return <h3>No Tickets Yet</h3>;
   }
-  
+
   return (
     <Table striped bordered hover variant="dark">
       <thead>
