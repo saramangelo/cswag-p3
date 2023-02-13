@@ -7,6 +7,9 @@ const resolvers = {
     tickets: async () => {
       return Ticket.find().sort({ createdAt: -1 });
     },
+    ticket: async (parent, { ticketId }) => {
+      return Ticket.findOne({ _id: ticketId });
+    },
   },
 
   Mutation: {

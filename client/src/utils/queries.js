@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -19,15 +19,15 @@ export const QUERY_TICKETS = gql`
   query getTickets {
     tickets {
       _id
-    ticketTitle
-    ticketDescription
-    ticketAuthor
-    ticketStatus
-    ticketPriority
-    ticketAssignee
-    createdAt
-    updatedAt
-    comments
+      ticketTitle
+      ticketDescription
+      ticketAuthor
+      ticketStatus
+      ticketPriority
+      ticketAssignee
+      createdAt
+      updatedAt
+      comments
     }
   }
 `;
@@ -36,11 +36,15 @@ export const QUERY_SINGLE_TICKET = gql`
   query getSingleTicket($ticketId: ID!) {
     ticket(ticketId: $ticketId) {
       _id
-    ticketTitle
-    ticketDescription
-    ticketAuthor
-    ticketStatus
-    ticketPriority
+      ticketTitle
+      ticketDescription
+      ticketType
+      ticketPriority
+      ticketStatus
+      updatedAt
+      createdAt
+      ticketAssignee
+      ticketAuthor
       comments {
         _id
         commentText
@@ -66,4 +70,3 @@ export const QUERY_ME = gql`
     }
   }
 `;
-

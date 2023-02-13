@@ -36,6 +36,7 @@ const typeDefs = gql`
 
   type Query {
     tickets: [Ticket]
+    ticket(ticketId: ID!): Ticket
   }
 
   type Mutation {
