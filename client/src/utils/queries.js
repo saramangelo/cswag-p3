@@ -29,7 +29,7 @@ export const QUERY_TICKETS = gql`
 `;
 
 export const QUERY_SINGLE_TICKET = gql`
-  query getSingleTicket($ticketId: ID!) {
+  query ticket($ticketId: ID!) {
     ticket(ticketId: $ticketId) {
       _id
       ticketTitle
@@ -37,16 +37,6 @@ export const QUERY_SINGLE_TICKET = gql`
       ticketType
       ticketPriority
       ticketStatus
-      updatedAt
-      createdAt
-      ticketAssignee
-      ticketAuthor
-      comments {
-        _id
-        commentText
-        commentAuthor
-        createdAt
-      }
     }
   }
 `;

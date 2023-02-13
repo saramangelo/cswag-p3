@@ -48,7 +48,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/viewticket/:id" element={<ViewTicket />} />
+              <Route path="/viewticket/:ticketId" element={<ViewTicket />} />
 
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
