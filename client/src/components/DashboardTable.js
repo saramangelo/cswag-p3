@@ -1,5 +1,6 @@
 import Table from "react-bootstrap/Table";
 
+
 function DashboardTable({ tickets }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;

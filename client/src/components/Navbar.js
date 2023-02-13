@@ -2,6 +2,9 @@ import Nav from "react-bootstrap/Nav";
 import Sidebar from "./Sidebar";
 import AuthService from "../utils/auth";
 
+const auth = AuthService;
+
+
 function Navbar() {
   return (
     <Nav fill variant="tabs" defaultActiveKey="/home">
@@ -14,7 +17,7 @@ function Navbar() {
       </Nav.Item>
       <Nav.Item>
         {/* need to link <LoginForm/> ? */}
-        <Nav.Link href="/">Logout</Nav.Link>
+        <Nav.Link onClick={auth.logout}>Logout</Nav.Link>
       </Nav.Item>
     </Nav>
   );
