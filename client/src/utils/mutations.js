@@ -25,7 +25,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TICKET = gql`
-  mutation Mutation(
+  mutation addTicket(
     $ticketTitle: String!
     $ticketDescription: String!
     $ticketType: String!
