@@ -24,7 +24,6 @@ export const QUERY_TICKETS = gql`
       ticketStatus
       ticketTitle
       ticketType
-
     }
   }
 `;
@@ -38,6 +37,8 @@ export const QUERY_SINGLE_TICKET = gql`
       ticketType
       ticketPriority
       ticketStatus
+      createdAt
+      updatedAt
     }
   }
 `;
