@@ -15,18 +15,18 @@ const styles = {
   },
 };
 
-function TicketModal({ ticketId }) {
+function TicketModal({ ticketId, dashData, setDashData }) {
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
   const [ticketPriority, setPriority] = useState("");
   const [ticketStatus, setStatus] = useState("");
-  const [submitData, setSubmitData] = useState({});
+
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
-  useEffect(() => {
-    console.log(submitData);
-  }, [submitData]);
+  // useEffect(() => {
+  //   console.log(submitData);
+  // }, [submitData]);
   // handle form submit
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,7 +41,9 @@ function TicketModal({ ticketId }) {
           ticketPriority,
         },
       });
-      setSubmitData(data);
+      console.log("data:", data.addTicket)
+      setDashData([...dashData, data.addTicket]);
+
     } catch (err) {
       console.error(err);
     }

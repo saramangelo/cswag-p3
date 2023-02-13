@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import DashboardTable from "../components/DashboardTable";
-import Welcome from "../components/Welcome";
 import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS } from "../utils/queries";
+import TicketModal from "../components/TicketModal";
+import Card from "react-bootstrap/Card";
 
 const styles = {
   header: {
@@ -14,33 +15,38 @@ const styles = {
 
 function Dashboard() {
   const { loading, data } = useQuery(QUERY_TICKETS, {
-    fetchpolicy: "no cache",
+    onCompleted: () => {
+      setDashData(data.tickets);
+    },
   });
 
   const [dashData, setDashData] = useState([]);
 
-  useEffect(){
-  }
-  
+  // useEffect(() => {
+  //   setDashData(data?.tickets);
+  // }, [data?.tickets]);
 
-  const tickets = data?.tickets || [];
-  console.log(tickets);
+  // const tickets = data?.tickets || [];
+ 
   return (
     <div>
       <header>
         <Navbar />
       </header>
       <div>
-        <Welcome />
+        <Card body>
+          <header style={styles.header}>Welcome to your Dashboard!</header>
+        </Card>
+        <TicketModal dashData={dashData} setDashData={setDashData}/>
       </div>
       <div>
-      {loading ? (
+        {loading ? (
           <div>Loading...</div>
         ) : (
           <div>
-        <div style={styles.header}>Current tickets</div>
-        <DashboardTable tickets={tickets} />
-        </div>
+            <div style={styles.header}>Current tickets</div>
+            <DashboardTable tickets={dashData} />
+          </div>
         )}
       </div>
     </div>
