@@ -8,7 +8,7 @@ const auth = AuthService;
 function Navbar() {
   return (
     <Nav fill variant="tabs" defaultActiveKey="/home">
-      <Sidebar/>
+      <Sidebar />
       <Nav.Item>
         <Nav.Link href="/mytickets">My Tickets</Nav.Link>
       </Nav.Item>
