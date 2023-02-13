@@ -44,7 +44,9 @@ const resolvers = {
       context
     ) => {
       console.log(context.user);
+      console.log("we are in!");
       if (context.user) {
+        console.log("seriously now!");
         const ticket = await Ticket.create({
           ticketTitle,
           ticketDescription,

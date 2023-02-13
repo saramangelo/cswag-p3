@@ -26,6 +26,10 @@ const ticketSchema = new Schema(
       required: true,
       default: "Open",
     },
+    ticketType: {
+      type: String,
+      required: true,
+    },
     ticketPriority: {
       type: String,
       required: true,

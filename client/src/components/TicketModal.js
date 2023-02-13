@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -21,13 +21,16 @@ function TicketModal({ ticketId }) {
   const [ticketType, setType] = useState("");
   const [ticketPriority, setPriority] = useState("");
   const [ticketStatus, setStatus] = useState("");
+  const [submitData, setSubmitData] = useState({});
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
-
+  useEffect(() => {
+    console.log(submitData);
+  }, [submitData]);
   // handle form submit
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("about to make request");
     try {
       const { data } = await addTicket({
         variables: {
@@ -38,16 +41,16 @@ function TicketModal({ ticketId }) {
           ticketPriority,
         },
       });
-      console.log(data);
-
-      setTitle("");
-      setDescription("");
-      setType("");
-      setPriority("");
-      setStatus("");
+      setSubmitData(data);
     } catch (err) {
       console.error(err);
     }
+    setTitle("");
+    setDescription("");
+    setType("");
+    setPriority("");
+    setStatus("");
+    handleClose();
   };
 
   // handle change
@@ -103,7 +106,7 @@ function TicketModal({ ticketId }) {
               <Modal.Title>New Ticket</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form onSubmit={handleSubmit}>
+              <Form>
                 <Form.Group className="mb-3" controlId="formBasicTitle">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
@@ -187,7 +190,7 @@ function TicketModal({ ticketId }) {
               <Button variant="dark" onClick={handleClose}>
                 Cancel
               </Button>
-              <Button variant="dark" onClick={handleClose}>
+              <Button variant="dark" onClick={handleSubmit}>
                 Submit ticket
               </Button>
             </Modal.Footer>
