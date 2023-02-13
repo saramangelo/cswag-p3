@@ -11,8 +11,8 @@ const ViewTicket = () => {
     variables: { ticketId },
   });
 
-  const ticket = data?.tickets || [];
-  console.log(ticket);
+  const ticket = data?.ticket || [];
+  console.log(data);
   return (
     <>
       <Navbar />
@@ -27,15 +27,15 @@ const ViewTicket = () => {
               <Card.Title>Ticket Details</Card.Title>
 
               <Card.Text>
-                {ticket[0].ticketTitle}
-                {ticket[0].ticketDescription}
-                {ticket[0].ticketAuthor}
-                {ticket[0].ticketStatus}
-                {ticket[0].ticketPriority}
-                {ticket[0].ticketAssignee}
-                {ticket[0].createdAt}
-                {ticket[0].updatedAt}
-                {ticket[0].comments}
+                {ticket.ticketTitle}
+                {ticket.ticketDescription}
+                {ticket.ticketAuthor}
+                {ticket.ticketStatus}
+                {ticket.ticketPriority}
+                {ticket.ticketAssignee}
+                {ticket.createdAt}
+                {ticket.updatedAt}
+                {ticket.comments}
               </Card.Text>
             </>
           )}
