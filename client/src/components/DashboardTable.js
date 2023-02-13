@@ -1,5 +1,5 @@
 import Table from "react-bootstrap/Table";
-
+import { MDBIcon } from 'mdb-react-ui-kit';
 
 function DashboardTable({ tickets }) {
   if (!tickets.length) {
@@ -11,13 +11,11 @@ function DashboardTable({ tickets }) {
       <thead>
         <tr>
           <th>Title</th>
-          {/* <th>Developer</th> */}
-          <th>Description</th>
+          <th>Developer</th>
           <th>Type</th>
           <th>Priority</th>
           <th>Status</th>
-          {/* <th>Date Created</th> */}
-          {/* <th>Action</th> */}
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -25,11 +23,15 @@ function DashboardTable({ tickets }) {
           tickets.map((ticket) => (
             <tr key={ticket._id}>
               <td>{ticket.ticketTitle}</td>
-              <td>{ticket.ticketDescription}</td>
+              <td>Unassigned</td>
               <td>{ticket.ticketType}</td>
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
-              {/* <td>INSERT DATA</td> */}
+              <td>
+              <MDBIcon fas icon="eye"  />
+              <MDBIcon fas icon="pencil-alt" />
+              <MDBIcon far icon="trash-alt" />
+              </td>
             </tr>
           ))}
       </tbody>

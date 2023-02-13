@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import DashboardTable from "../components/DashboardTable";
 import Welcome from "../components/Welcome";
@@ -17,6 +17,12 @@ function Dashboard() {
     fetchpolicy: "no cache",
   });
 
+  const [dashData, setDashData] = useState([]);
+
+  useEffect(){
+  }
+  
+
   const tickets = data?.tickets || [];
   console.log(tickets);
   return (
@@ -28,8 +34,14 @@ function Dashboard() {
         <Welcome />
       </div>
       <div>
+      {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
         <div style={styles.header}>Current tickets</div>
         <DashboardTable tickets={tickets} />
+        </div>
+        )}
       </div>
     </div>
   );
