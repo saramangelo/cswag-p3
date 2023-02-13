@@ -18,6 +18,7 @@ export const QUERY_USER = gql`
 export const QUERY_TICKETS = gql`
   query tickets {
     tickets {
+      _id
       ticketDescription
       ticketPriority
       ticketStatus
