@@ -1,11 +1,11 @@
 import Nav from "react-bootstrap/Nav";
 import Sidebar from "./Sidebar";
-
+import AuthService from "../utils/auth";
 
 function Navbar() {
   return (
     <Nav fill variant="tabs" defaultActiveKey="/home">
-      <Sidebar/>
+      <Sidebar />
       <Nav.Item>
         <Nav.Link href="/mytickets">My Tickets</Nav.Link>
       </Nav.Item>
