@@ -1,5 +1,6 @@
 import Table from "react-bootstrap/Table";
 import { MDBIcon } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 function DashboardTable({ tickets }) {
   if (!tickets.length) {
@@ -7,7 +8,7 @@ function DashboardTable({ tickets }) {
   }
 
   return (
-    <Table striped bordered hover variant="dark">
+    <Table striped bordered hover variant="light">
       <thead>
         <tr>
           <th>Title</th>
@@ -28,9 +29,10 @@ function DashboardTable({ tickets }) {
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
               <td>
-              <MDBIcon fas icon="eye"  />
-              <MDBIcon fas icon="pencil-alt" />
-              <MDBIcon far icon="trash-alt" />
+
+            <Link> <MDBIcon fas icon="eye"  /> </Link> 
+            <Link>  <MDBIcon fas icon="pencil-alt" /> </Link> 
+            <Link>  <MDBIcon far icon="trash-alt" /> </Link> 
               </td>
             </tr>
           ))}
