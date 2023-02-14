@@ -59,7 +59,13 @@ const typeDefs = gql`
       ticketStatus: String!
       ticketPriority: String!
     ): Ticket
-    addComment(ticketId: ID!, commentText: String!): Ticket
+
+    addComment(ticketId: ID!,
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String): Ticket
+
     removeTicket(ticketId: ID!): Ticket
     removeComment(ticketId: ID!, commentId: ID!): Ticket
   }
