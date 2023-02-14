@@ -39,11 +39,6 @@ const ticketSchema = new Schema(
       required: false,
       trim: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      // get: (timestamp) => dateFormat(timestamp),
-    },
     comments: [
       {
         commentText: {
@@ -59,7 +54,6 @@ const ticketSchema = new Schema(
         createdAt: {
           type: Date,
           default: Date.now,
-          // get: (timestamp) => dateFormat(timestamp),
         },
       },
     ],
@@ -75,7 +69,6 @@ module.exports = Ticket;
 
 /*
 Potential future properties:
-  Issue Type: String
   Project (parent entity to ticket): String
   Estimated time of completion: Date
 */
