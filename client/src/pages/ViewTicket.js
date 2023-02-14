@@ -5,6 +5,8 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import Spinner from "../components/Spinner";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const ViewTicket = () => {
   const { ticketId } = useParams();
@@ -62,6 +64,15 @@ const ViewTicket = () => {
         </Card.Body>
         <Card.Footer className="text-muted"></Card.Footer>
       </Card>
+      <Card.Body>
+        <Form>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Add a comment</Form.Label>
+            <Form.Control as="textarea" rows={3} />
+            <Button variant="outline-dark">Submit</Button>
+          </Form.Group>
+        </Form>
+      </Card.Body>
     </>
   );
 };
