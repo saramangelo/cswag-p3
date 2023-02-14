@@ -3,32 +3,31 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useQuery } from "@apollo/client";
-
 import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { MDBIcon } from 'mdb-react-ui-kit';
-
+import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_TICKET } from "../utils/mutations";
-
 import Auth from "../utils/auth";
 
-function EditTicketModal({ id, dashData, setDashData }) {
-
-
-  const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
-    variables: { id },
-  });
-
-  const ticket = data?.ticket || [];
-
-  console.log(data);
+function EditTicketModal({ ticket }) {
   const [ticketTitle, setTitle] = useState(ticket.ticketTitle);
-  const [ticketDescription, setDescription] = useState(ticket.ticketDescription);
+  const [ticketDescription, setDescription] = useState(
+    ticket.ticketDescription
+  );
   const [ticketType, setType] = useState(ticket.ticketType);
   const [ticketPriority, setPriority] = useState(ticket.ticketPriority);
   const [ticketStatus, setStatus] = useState(ticket.ticketStatus);
 
+  // useEffect(() => {
+  //   if (ticket) {
+  //     setTitle(ticket.ticketTitle);
+  //     setDescription(ticket.ticketDescription);
+  //     setType(ticket.ticketType);
+  //     setPriority(ticket.ticketPriority);
+  //     setStatus(ticket.ticketStatus);
+  //   }
+  // }, [ticket]);
 
   const [updateTicket, { error }] = useMutation(UPDATE_TICKET);
   const handleSubmit = async (event) => {
@@ -44,17 +43,10 @@ function EditTicketModal({ id, dashData, setDashData }) {
           ticketPriority,
         },
       });
-      console.log("data:", data.updateTicket)
-      setDashData([...dashData, data.updateTicket]);
-
     } catch (err) {
       console.error(err);
     }
-    setTitle("");
-    setDescription("");
-    setType("");
-    setPriority("");
-    setStatus("");
+
     handleClose();
   };
 
@@ -103,7 +95,7 @@ function EditTicketModal({ id, dashData, setDashData }) {
             {error && <span className="ml-2">{error.message}</span>}
           </p>
           <Button variant="dark" onClick={handleShow}>
-          <MDBIcon fas icon="pencil-alt" />
+            <MDBIcon fas icon="pencil-alt" />
           </Button>
 
           <Modal show={show} onHide={handleClose}>
