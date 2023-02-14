@@ -32,6 +32,10 @@ function Dashboard() {
 
   const [dashData, setDashData] = useState([]);
 
+  // TicketAuthor from getProfile (current user)
+const currentUser = auth.getProfile().data;
+console.log(currentUser);
+
   return (
     <>
       {auth.loggedIn() ? (
@@ -47,10 +51,10 @@ function Dashboard() {
               <div>
                 <Card body>
                   <header style={styles.header}>
-                    Welcome to your Dashboard!
+                    Welcome, {currentUser.username}!
                   </header>
                 </Card>
-                <TicketModal dashData={dashData} setDashData={setDashData} />
+                <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} />
               </div>
               <div>
                 {loading ? (
