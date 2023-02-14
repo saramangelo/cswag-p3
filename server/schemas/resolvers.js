@@ -67,6 +67,39 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    updateTicket: async (
+      parent,
+      {
+        ticketId,
+        ticketTitle,
+        ticketDescription,
+        ticketType,
+        ticketStatus,
+        ticketPriority,
+      },
+      context
+    ) => {
+      if (context.user) {
+        return Ticket.findOneAndUpdate(
+          { _id: ticketId },
+          {
+            $set: {
+              ticketTitle: ticketTitle,
+              ticketDescription: ticketDescription,
+              ticketType: ticketType,
+              ticketStatus: ticketStatus,
+              ticketPriority: ticketPriority,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
     addComment: async (parent, { ticketId, commentText }, context) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
