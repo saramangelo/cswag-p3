@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { QUERY_SINGLE_TICKET } from "../utils/queries";
+import Spinner from "../components/Spinner";
 
 const ViewTicket = () => {
   const { ticketId } = useParams();
@@ -21,7 +22,7 @@ const ViewTicket = () => {
         <Card.Header>Ticket</Card.Header>
         <Card.Body>
           {loading ? (
-            <div>Loading...</div>
+            <Spinner />
           ) : (
             <>
               <Card.Title>Ticket Details</Card.Title>

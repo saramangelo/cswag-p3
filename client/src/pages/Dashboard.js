@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
 import Card from "react-bootstrap/Card";
+import Spinner from "../components/Spinner";
 
 const styles = {
   header: {
@@ -27,7 +28,7 @@ function Dashboard() {
   // }, [data?.tickets]);
 
   // const tickets = data?.tickets || [];
- 
+
   return (
     <div>
       <header>
@@ -37,11 +38,11 @@ function Dashboard() {
         <Card body>
           <header style={styles.header}>Welcome to your Dashboard!</header>
         </Card>
-        <TicketModal dashData={dashData} setDashData={setDashData}/>
+        <TicketModal dashData={dashData} setDashData={setDashData} />
       </div>
       <div>
         {loading ? (
-          <div>Loading...</div>
+          <Spinner />
         ) : (
           <div>
             <div style={styles.header}>Current tickets</div>
