@@ -18,12 +18,12 @@ export const QUERY_USER = gql`
 export const QUERY_TICKETS = gql`
   query tickets {
     tickets {
+      _id
       ticketDescription
       ticketPriority
       ticketStatus
       ticketTitle
       ticketType
-
     }
   }
 `;
@@ -37,6 +37,8 @@ export const QUERY_SINGLE_TICKET = gql`
       ticketType
       ticketPriority
       ticketStatus
+      createdAt
+      updatedAt
     }
   }
 `;

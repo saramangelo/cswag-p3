@@ -1,25 +1,24 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
+import React from "react";
+import SidebarDropdown from "./SidebarDropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Sidebar() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+function Sidebar() {
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Click for sidebar
-      </Button>
-
-      <Offcanvas show={show} onHide={handleClose} backdrop="static">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>This is a sidebar</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body></Offcanvas.Body>
-      </Offcanvas>
-    </>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-auto min-vh-100 bg-dark">
+          <ul>
+            <li>
+              <SidebarDropdown />
+            </li>
+            <li>
+              <SidebarDropdown />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default Sidebar;

@@ -30,10 +30,11 @@ function DashboardTable({ tickets }) {
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
               <td>
-
+    
             <Link> <MDBIcon fas icon="eye"  /> </Link> 
             <EditTicketModal id={ticket.id}/>
             <Link>  <MDBIcon far icon="trash-alt" /> </Link> 
+
               </td>
             </tr>
           ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -24,10 +24,7 @@ function TicketModal({ ticketId, dashData, setDashData }) {
 
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
-  // useEffect(() => {
-  //   console.log(submitData);
-  // }, [submitData]);
-  // handle form submit
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("about to make request");
