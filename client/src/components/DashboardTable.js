@@ -3,7 +3,7 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import EditTicketModal from "./EditTicketModal";
 
-function DashboardTable({ tickets }) {
+function DashboardTable({ tickets, setDashData }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;
   }
@@ -22,8 +22,8 @@ function DashboardTable({ tickets }) {
       </thead>
       <tbody>
         {tickets &&
-          tickets.map((ticket) => (
-            <tr key={ticket._id}>
+          tickets.map((ticket, i) => (
+            <tr key={i}>
               <td>{ticket.ticketTitle}</td>
               <td>Unassigned</td>
               <td>{ticket.ticketType}</td>
@@ -34,7 +34,11 @@ function DashboardTable({ tickets }) {
                   {" "}
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
-                <EditTicketModal ticket={ticket} />
+                <EditTicketModal
+                  ticket={ticket}
+                  tickets={tickets}
+                  setDashData={setDashData}
+                />
                 <Link>
                   {" "}
                   <MDBIcon far icon="trash-alt" />{" "}

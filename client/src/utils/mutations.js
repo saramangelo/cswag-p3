@@ -49,10 +49,25 @@ export const ADD_TICKET = gql`
 `;
 
 export const UPDATE_TICKET = gql`
-  mutation updateTicket($ticketId: ID!) {
-    updateTicket(ticketId: $ticketId) {
-      ticketTitle
+  mutation updateTicket(
+    $ticketId: ID!
+    $ticketTitle: String!
+    $ticketDescription: String!
+    $ticketType: String!
+    $ticketStatus: String!
+    $ticketPriority: String!
+  ) {
+    updateTicket(
+      ticketId: $ticketId
+      ticketTitle: $ticketTitle
+      ticketDescription: $ticketDescription
+      ticketType: $ticketType
+      ticketStatus: $ticketStatus
+      ticketPriority: $ticketPriority
+    ) {
+      _id
       ticketDescription
+      ticketTitle
       ticketPriority
       ticketStatus
       ticketType
