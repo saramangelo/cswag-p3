@@ -19,7 +19,7 @@ const auth = AuthService;
 const styles = {
   header: {
     fontFamily: "Rubik Mono One, sans-serif",
-    fontSize: "30px",
+    fontSize: "30px"
   },
 };
 
@@ -32,35 +32,31 @@ function Dashboard() {
 
   const [dashData, setDashData] = useState([]);
 
+
   // TicketAuthor from getProfile (current user)
   const currentUser = auth.getProfile().data;
   console.log(currentUser);
 
   return (
-    <>
+      <>
       {auth.loggedIn() ? (
-        <Container>
+        <Container fluid className="body-container">
+          <Sidebar />
           <Row>
-            <Col xs={2} md={2}>
-              <Sidebar />
+            <Col xs={1} lg={2} >
+              {" "}
             </Col>
-            <Col xs={10} md={10}>
-              <header>
+            <Col xs={10} lg={9}>
+              {/* <header>
                 <Navbar />
-              </header>
-              <div>
-                <Card body>
+
+              </header> */}
+              <Card body className="welcome-card">
                   <header style={styles.header}>
                     Welcome, {currentUser.username}!
                   </header>
                 </Card>
-                <TicketModal
-                  dashData={dashData}
-                  setDashData={setDashData}
-                  currentUser={currentUser}
-                />
-              </div>
-              <div>
+                <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} />
                 {loading ? (
                   <Spinner />
                 ) : (
@@ -72,7 +68,6 @@ function Dashboard() {
                     />
                   </div>
                 )}
-              </div>
             </Col>
           </Row>
         </Container>

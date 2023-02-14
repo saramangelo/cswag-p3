@@ -1,6 +1,9 @@
 import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { QUERY_SINGLE_TICKET } from "../utils/queries";
@@ -48,67 +51,72 @@ const ViewTicket = () => {
   
   return (
     <>
-      {auth.loggedIn() ? (
-        <>
-          <Navbar />
-          <Card className="text-center">
-            <Card.Header>Ticket Details</Card.Header>
-            <Card.Body>
-              {loading ? (
-                <Spinner />
-              ) : (
-                <>
-                  <ListGroup>
-                    <ListGroup.Item>Title: {ticket.ticketTitle}</ListGroup.Item>
-                    <ListGroup.Item>
-                      Description: {ticket.ticketDescription}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      Submitter: {ticket.ticketAuthor}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      Status: {ticket.ticketStatus}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      Priority: {ticket.ticketPriority}
-                    </ListGroup.Item>
-                    <ListGroup.Item>Created at: {createdAt}</ListGroup.Item>
-                    <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
-                  </ListGroup>
-                </>
-              )}
-            </Card.Body>
-            <Card.Footer className="text-muted"></Card.Footer>
-          </Card>
-          <Button
-      variant="outline-dark" 
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
-      >
-        Add a comment
-      </Button>
+    {auth.loggedIn() ? (
+      <Container fluid className="body-container">
+        <Sidebar />
+        <Row>
+          <Col xs={1} lg={3} >
+            {" "}
+          </Col>
+          <Col xs={10} lg={8}>
+            <Card className="text-center detail-card">
+              <Card.Header>Ticket Details</Card.Header>
+              <Card.Body>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    <ListGroup>
+                      <ListGroup.Item>Title: {ticket.ticketTitle}</ListGroup.Item>
+                      <ListGroup.Item>
+                        Description: {ticket.ticketDescription}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Submitter: {ticket.ticketAuthor}
+                      </ListGroup.Item>
+                      <ListGroup.Item>Status: {ticket.ticketStatus}</ListGroup.Item>
+                      <ListGroup.Item>
+                        Priority: {ticket.ticketPriority}
+                      </ListGroup.Item>
+                      <ListGroup.Item>Created at: {createdAt}</ListGroup.Item>
+                      <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
+                    </ListGroup>
+                  </>
+                )}
+              </Card.Body>
+              <Card.Footer className="text-muted"></Card.Footer>
+            </Card>
+                <Button
+                  variant="outline-dark" 
+                    onClick={() => setOpen(!open)}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open}
+                  >
+                    Add a comment
+                  </Button>
       <div style={{ minHeight: '150px' }}>
         <Collapse in={open} dimension="width">
           <div id="example-collapse-text">
             <Card body style={{ width: '400px' }}>
-        <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label></Form.Label>
-            <Form.Control as="textarea" rows={3} />
-            <Button variant="outline-dark">Submit</Button>
-          </Form.Group>
-        </Form>
-      </Card>
+              <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Label></Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                  <Button variant="outline-dark">Submit</Button>
+                </Form.Group>
+              </Form>
+            </Card>
           </div>
         </Collapse>
       </div>
-        </>
-      ) : (
-        <div>
-          <ProtectPage />
-        </div>
-      )}
+       </Col>
+       </Row>
+     </Container>
+   ) : (
+     <div>
+       <ProtectPage />
+     </div>
+   )}
     </>
   );
 };
