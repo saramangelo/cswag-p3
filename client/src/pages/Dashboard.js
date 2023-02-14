@@ -15,7 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const styles = {
   header: {
     fontFamily: "Rubik Mono One, sans-serif",
-    fontSize: "30px",
+    fontSize: "30px"
   },
 };
 
@@ -28,22 +28,27 @@ function Dashboard() {
 
   const [dashData, setDashData] = useState([]);
 
+  // modal variable states
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <Container>
+    <Container fluid className="body-container">
+      <Sidebar />
       <Row>
-        <Col xs={2} md={2}>
-          <Sidebar />
+        <Col xs={1} lg={2} >
+          {" "}
         </Col>
-        <Col xs={10} md={10}>
-          <header>
+        <Col xs={10} lg={9}>
+          {/* <header>
             <Navbar />
-          </header>
-          <div>
-            <Card body>
-              <header style={styles.header}>Welcome to your Dashboard!</header>
-            </Card>
-            <TicketModal dashData={dashData} setDashData={setDashData} />
-          </div>
+          </header> */}
+          <Card body className="welcome-card">
+            <header style={styles.header}>Welcome to your Dashboard</header>
+          </Card>
+          <TicketModal dashData={dashData} setDashData={setDashData} />
           <div>
             {loading ? (
               <Spinner />

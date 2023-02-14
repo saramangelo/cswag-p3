@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
 import Form from "react-bootstrap/Form";
 import "./darkMode.css";
+import "./App.css"
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -59,16 +60,16 @@ function App() {
       <Router>
         <div className={`App ${theme}`}>
           <div className="flex-column justify-flex-start min-100-vh">
-            <div className="container">
-          <div>
-          <Form onClick={toggleTheme}>
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              label="Toggle Mode"
-            />
-          </Form>
-          </div>
+            <div>
+              <div>
+              <Form onClick={toggleTheme} className="toggle-button">
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  label="Toggle Mode"
+                />
+              </Form>
+              </div>
               <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
