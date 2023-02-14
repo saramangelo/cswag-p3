@@ -32,11 +32,11 @@ function Dashboard() {
 
   const [dashData, setDashData] = useState([]);
 
-  // modal variable states
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // TicketAuthor from getProfile (current user)
+  const currentUser = auth.getProfile().data;
+  console.log(currentUser);
+
 
   return (
       <>
@@ -50,11 +50,15 @@ function Dashboard() {
             <Col xs={10} lg={9}>
               {/* <header>
                 <Navbar />
+
               </header> */}
               <Card body className="welcome-card">
-                <header style={styles.header}>Welcome to your Dashboard</header>
-              </Card>
-              <TicketModal dashData={dashData} setDashData={setDashData} />
+                  <header style={styles.header}>
+                    Welcome, {currentUser.username}!
+                  </header>
+                </Card>
+                <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} />
+
 
                 {loading ? (
                   <Spinner />

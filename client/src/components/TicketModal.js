@@ -15,15 +15,13 @@ const styles = {
   },
 };
 
-function TicketModal({ ticketId, dashData, setDashData }) {
+function TicketModal({ ticketId, dashData, setDashData, currentUser }) {
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
   const [ticketPriority, setPriority] = useState("");
   const [ticketStatus, setStatus] = useState("");
-  // TicketAuthor from getProfile (current user)
-  const ticketAuthor = Auth.getProfile().data.username;
-  console.log(ticketAuthor);
+  const ticketAuthor = currentUser.username;
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
 
