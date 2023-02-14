@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
+import EditTicket from "./pages/EditTicket";
+
 // import "./index.css";
 
 // Construct our main GraphQL API endpoint
@@ -49,7 +51,7 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/viewticket/:ticketId" element={<ViewTicket />} />
-
+              {/* <Route path="/editticket/:ticketId" element={<EditTicket />} /> */}
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
           </div>
