@@ -39,6 +39,7 @@ export const QUERY_SINGLE_TICKET = gql`
       ticketStatus
       createdAt
       updatedAt
+      ticketAuthor
     }
   }
 `;
