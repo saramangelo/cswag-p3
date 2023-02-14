@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -11,7 +11,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
-// import "./index.css";
+import Form from "react-bootstrap/Form";
+import "./darkMode.css";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -40,18 +41,42 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
+
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/viewticket/:ticketId" element={<ViewTicket />} />
+        <div className={`App ${theme}`}>
+          <div className="flex-column justify-flex-start min-100-vh">
+            <div className="container">
+          <div>
+          <Form onClick={toggleTheme}>
+            <Form.Check
+              type="switch"
+              id="custom-switch"
+              label="Toggle Mode"
+            />
+          </Form>
+          </div>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/viewticket/:ticketId" element={<ViewTicket />} />
 
-              <Route path="*" element={<NotFound />}></Route>
-            </Routes>
+                <Route path="*" element={<NotFound />}></Route>
+              </Routes>
+            </div>
           </div>
         </div>
       </Router>
