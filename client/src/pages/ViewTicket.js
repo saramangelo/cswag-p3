@@ -51,9 +51,9 @@ const ViewTicket = () => {
   
   return (
     <>
-{auth.loggedIn() ? (
-      <Sidebar />
+    {auth.loggedIn() ? (
       <Container fluid className="body-container">
+        <Sidebar />
         <Row>
           <Col xs={1} lg={3} >
             {" "}
@@ -86,34 +86,37 @@ const ViewTicket = () => {
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
             </Card>
-            
-            </Col>
-        </Row>
-      </Container>
                 <Button
-      variant="outline-dark" 
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
-      >
-        Add a comment
-      </Button>
+                  variant="outline-dark" 
+                    onClick={() => setOpen(!open)}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open}
+                  >
+                    Add a comment
+                  </Button>
       <div style={{ minHeight: '150px' }}>
         <Collapse in={open} dimension="width">
           <div id="example-collapse-text">
             <Card body style={{ width: '400px' }}>
-        <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label></Form.Label>
-            <Form.Control as="textarea" rows={3} />
-            <Button variant="outline-dark">Submit</Button>
-          </Form.Group>
-        </Form>
-      </Card>
+              <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Label></Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                  <Button variant="outline-dark">Submit</Button>
+                </Form.Group>
+              </Form>
+            </Card>
           </div>
         </Collapse>
       </div>
-
+       </Col>
+       </Row>
+     </Container>
+   ) : (
+     <div>
+       <ProtectPage />
+     </div>
+   )}
     </>
   );
 };
