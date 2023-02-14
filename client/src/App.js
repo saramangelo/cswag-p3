@@ -14,6 +14,7 @@ import ViewTicket from "./pages/ViewTicket";
 import Form from "react-bootstrap/Form";
 import "./darkMode.css";
 
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -57,6 +58,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+
         <div className={`App ${theme}`}>
           <div className="flex-column justify-flex-start min-100-vh">
             <div className="container">

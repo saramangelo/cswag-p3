@@ -1,6 +1,7 @@
 import Table from "react-bootstrap/Table";
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
+import EditTicketModal from "./EditTicketModal";
 
 function DashboardTable({ tickets }) {
   if (!tickets.length) {
@@ -29,10 +30,11 @@ function DashboardTable({ tickets }) {
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
               <td>
+    
+            <Link> <MDBIcon fas icon="eye"  /> </Link> 
+            <EditTicketModal id={ticket.id}/>
+            <Link>  <MDBIcon far icon="trash-alt" /> </Link> 
 
-            <Link to={`/viewticket/${ticket._id}` } > <MDBIcon fas icon="eye"  /> </Link> 
-            <Link to="/editticket">  <MDBIcon fas icon="pencil-alt" /> </Link> 
-            <Link to="/deleteticket">  <MDBIcon far icon="trash-alt" /> </Link> 
               </td>
             </tr>
           ))}
