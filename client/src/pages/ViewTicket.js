@@ -13,26 +13,48 @@ const ViewTicket = () => {
   });
 
   const ticket = data?.ticket || [];
-  console.log(data);
+
+  // Date formatters for createdAt and updatedAt
+  const createdAt = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(ticket.createdAt);
+  const updatedAt = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(ticket.updatedAt);
   return (
     <>
       <Navbar />
       <Card className="text-center">
-        <Card.Header>Ticket</Card.Header>
+        <Card.Header>Ticket Details</Card.Header>
         <Card.Body>
           {loading ? (
             <div>Loading...</div>
           ) : (
             <>
-              <Card.Title>Ticket Details</Card.Title>
               <ListGroup>
                 <ListGroup.Item>Title: {ticket.ticketTitle}</ListGroup.Item>
-                <ListGroup.Item>Description: {ticket.ticketDescription}</ListGroup.Item>
-                <ListGroup.Item>Submitter: {ticket.ticketAuthor}</ListGroup.Item>
+                <ListGroup.Item>
+                  Description: {ticket.ticketDescription}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Submitter: {ticket.ticketAuthor}
+                </ListGroup.Item>
                 <ListGroup.Item>Status: {ticket.ticketStatus}</ListGroup.Item>
-                <ListGroup.Item>Priority: {ticket.ticketPriority}</ListGroup.Item>
-                <ListGroup.Item>Created at: {ticket.createdAt}</ListGroup.Item>
-                <ListGroup.Item>Updated at: {ticket.updatedAt}</ListGroup.Item>
+                <ListGroup.Item>
+                  Priority: {ticket.ticketPriority}
+                </ListGroup.Item>
+                <ListGroup.Item>Created at: {createdAt}</ListGroup.Item>
+                <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
               </ListGroup>
             </>
           )}
