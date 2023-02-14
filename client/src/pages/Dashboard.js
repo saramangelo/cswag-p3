@@ -22,8 +22,6 @@ function Dashboard() {
 
   const [dashData, setDashData] = useState([]);
 
-
- 
   return (
     <div>
       <header>
@@ -33,7 +31,7 @@ function Dashboard() {
         <Card body>
           <header style={styles.header}>Welcome to your Dashboard!</header>
         </Card>
-        <TicketModal dashData={dashData} setDashData={setDashData}/>
+        <TicketModal dashData={dashData} setDashData={setDashData} />
       </div>
       <div>
         {loading ? (
