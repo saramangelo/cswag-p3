@@ -14,7 +14,6 @@ import ViewTicket from "./pages/ViewTicket";
 import Form from "react-bootstrap/Form";
 import "./darkMode.css";
 
-
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -43,11 +42,18 @@ const client = new ApolloClient({
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [label, setLabel] = useState(localStorage.getItem("label") || "Dark Mode");
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
+    if (label === "Light Mode") {
+      setLabel("Dark Mode")
+      localStorage.setItem("label", "Dark Mode");
+    }
     } else {
       setTheme("light");
+      setLabel("Light Mode");
+      localStorage.setItem("label", "Light Mode");
     }
   };
   useEffect(() => {
@@ -58,19 +64,18 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-
         <div className={`App ${theme}`}>
           <div className="flex-column justify-flex-start min-100-vh">
             <div className="container">
-          <div>
-          <Form onClick={toggleTheme}>
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              label="Toggle Mode"
-            />
-          </Form>
-          </div>
+              <div>
+                <Form onClick={toggleTheme}>
+                  <Form.Check
+                    type="switch"
+                    id="custom-switch"
+                    label={label}
+                  />
+                </Form>
+              </div>
               <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
