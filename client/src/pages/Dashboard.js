@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import DashboardTable from "../components/DashboardTable";
 import { useQuery } from "@apollo/client";
@@ -23,12 +23,13 @@ function Dashboard() {
 
   const [dashData, setDashData] = useState([]);
 
-  // useEffect(() => {
-  //   setDashData(data?.tickets);
-  // }, [data?.tickets]);
 
+<<<<<<< HEAD
   // const tickets = data?.tickets || [];
 
+=======
+ 
+>>>>>>> master
   return (
     <div>
       <header>

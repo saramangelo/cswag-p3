@@ -30,9 +30,9 @@ function DashboardTable({ tickets }) {
               <td>{ticket.ticketStatus}</td>
               <td>
 
-            <Link> <MDBIcon fas icon="eye"  /> </Link> 
-            <Link>  <MDBIcon fas icon="pencil-alt" /> </Link> 
-            <Link>  <MDBIcon far icon="trash-alt" /> </Link> 
+            <Link to={`/viewticket/${ticket._id}` } > <MDBIcon fas icon="eye"  /> </Link> 
+            <Link to="/editticket">  <MDBIcon fas icon="pencil-alt" /> </Link> 
+            <Link to="/deleteticket">  <MDBIcon far icon="trash-alt" /> </Link> 
               </td>
             </tr>
           ))}
