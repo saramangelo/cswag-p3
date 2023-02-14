@@ -31,7 +31,7 @@ function DashboardTable({ tickets }) {
               <td>{ticket.ticketStatus}</td>
               <td>
     
-            <Link> <MDBIcon fas icon="eye"  /> </Link> 
+            <Link to={`/viewticket/${ticket._id}`}> <MDBIcon fas icon="eye"  /> </Link> 
             <EditTicketModal id={ticket.id}/>
             <Link>  <MDBIcon far icon="trash-alt" /> </Link> 
 
