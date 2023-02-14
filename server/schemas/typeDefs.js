@@ -49,6 +49,7 @@ const typeDefs = gql`
       ticketType: String!
       ticketStatus: String!
       ticketPriority: String!
+      ticketAuthor: String!
     ): Ticket
     updateTicket(ticketId: ID!): Ticket
     addComment(ticketId: ID!, commentText: String!): Ticket

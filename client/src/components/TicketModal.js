@@ -21,13 +21,14 @@ function TicketModal({ ticketId, dashData, setDashData }) {
   const [ticketType, setType] = useState("");
   const [ticketPriority, setPriority] = useState("");
   const [ticketStatus, setStatus] = useState("");
-
+  // TicketAuthor from getProfile (current user)
+  const ticketAuthor = Auth.getProfile().data.username;
+  console.log(ticketAuthor);
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("about to make request");
     try {
       const { data } = await addTicket({
         variables: {
@@ -36,11 +37,11 @@ function TicketModal({ ticketId, dashData, setDashData }) {
           ticketType,
           ticketStatus,
           ticketPriority,
+          ticketAuthor,
         },
       });
-      console.log("data:", data.addTicket)
+      console.log("data:", data.addTicket);
       setDashData([...dashData, data.addTicket]);
-
     } catch (err) {
       console.error(err);
     }

@@ -32,6 +32,7 @@ export const ADD_TICKET = gql`
     $ticketType: String!
     $ticketStatus: String!
     $ticketPriority: String!
+    $ticketAuthor: String!
   ) {
     addTicket(
       ticketTitle: $ticketTitle
@@ -39,12 +40,14 @@ export const ADD_TICKET = gql`
       ticketType: $ticketType
       ticketStatus: $ticketStatus
       ticketPriority: $ticketPriority
+      ticketAuthor: $ticketAuthor
     ) {
       ticketTitle
       ticketDescription
       ticketType
       ticketPriority
       ticketStatus
+      ticketAuthor
     }
   }
 `;
