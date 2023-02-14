@@ -13,8 +13,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { email, password }) => {
-      const user = await User.create({ email, password });
+    addUser: async (parent, { email, password, username }) => {
+      const user = await User.create({ email, password, username });
       const token = signToken(user);
       return { token, user };
     },
@@ -43,24 +43,23 @@ const resolvers = {
         ticketType,
         ticketStatus,
         ticketPriority,
+        ticketAuthor,
       },
       context
     ) => {
-      console.log(context.user);
-      console.log("we are in!");
       if (context.user) {
-        console.log("seriously now!");
         const ticket = await Ticket.create({
           ticketTitle,
           ticketDescription,
           ticketType,
           ticketStatus,
           ticketPriority,
+          ticketAuthor,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { ticket: ticket._id } }
+          { $addToSet: { tickets: ticket._id } }
         );
 
         return ticket;

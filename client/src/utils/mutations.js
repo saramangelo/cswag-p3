@@ -13,12 +13,13 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($email: String!, $password: String!) {
-    addUser(email: $email, password: $password) {
+  mutation addUser($email: String!, $password: String!, $username: String!) {
+    addUser(email: $email, password: $password, username: $username) {
       token
       user {
         _id
         email
+        username
       }
     }
   }
@@ -31,6 +32,7 @@ export const ADD_TICKET = gql`
     $ticketType: String!
     $ticketStatus: String!
     $ticketPriority: String!
+    $ticketAuthor: String!
   ) {
     addTicket(
       ticketTitle: $ticketTitle
@@ -38,12 +40,14 @@ export const ADD_TICKET = gql`
       ticketType: $ticketType
       ticketStatus: $ticketStatus
       ticketPriority: $ticketPriority
+      ticketAuthor: $ticketAuthor
     ) {
       ticketTitle
       ticketDescription
       ticketType
       ticketPriority
       ticketStatus
+      ticketAuthor
     }
   }
 `;
