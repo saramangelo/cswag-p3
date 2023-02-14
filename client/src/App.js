@@ -42,18 +42,18 @@ const client = new ApolloClient({
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const [label, setLabel] = useState(localStorage.getItem("label") || "Dark Mode");
+  const [label, setLabel] = useState(localStorage.getItem("Dark Mode") || "Dark Mode");
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
-    if (label === "Light Mode") {
-      setLabel("Dark Mode")
-      localStorage.setItem("label", "Dark Mode");
+    if (label === "Dark Mode") {
+      setLabel("Light Mode")
+      localStorage.setItem("Light Mode", "Light Mode");
     }
     } else {
       setTheme("light");
-      setLabel("Light Mode");
-      localStorage.setItem("label", "Light Mode");
+      setLabel("Dark Mode");
+      localStorage.setItem("Dark Mode", "Dark Mode");
     }
   };
   useEffect(() => {
