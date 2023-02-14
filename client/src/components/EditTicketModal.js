@@ -1,55 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { useQuery } from "@apollo/client";
+import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-
-import { ADD_TICKET } from "../utils/mutations";
-
+import { MDBIcon } from "mdb-react-ui-kit";
+import { UPDATE_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-const styles = {
-  button: {
-    fontFamily: "Rubik Mono One, sans-serif",
-  },
-};
+function EditTicketModal({ ticket, tickets, setDashData }) {
+  const [ticketTitle, setTitle] = useState(ticket.ticketTitle);
+  const [ticketDescription, setDescription] = useState(
+    ticket.ticketDescription
+  );
+  const [ticketType, setType] = useState(ticket.ticketType);
+  const [ticketPriority, setPriority] = useState(ticket.ticketPriority);
+  const [ticketStatus, setStatus] = useState(ticket.ticketStatus);
 
-function TicketModal({ ticketId, dashData, setDashData }) {
-  const [ticketTitle, setTitle] = useState("");
-  const [ticketDescription, setDescription] = useState("");
-  const [ticketType, setType] = useState("");
-  const [ticketPriority, setPriority] = useState("");
-  const [ticketStatus, setStatus] = useState("");
-  // TicketAuthor from getProfile (current user)
-  const ticketAuthor = Auth.getProfile().data.username;
-  console.log(ticketAuthor);
+  const ticketId = ticket._id;
 
-  const [addTicket, { error }] = useMutation(ADD_TICKET);
+  // useEffect(() => {
+  //   if (ticket) {
+  //     setTitle(ticket.ticketTitle);
+  //     setDescription(ticket.ticketDescription);
+  //     setType(ticket.ticketType);
+  //     setPriority(ticket.ticketPriority);
+  //     setStatus(ticket.ticketStatus);
+  //   }
+  // }, [ticket]);
 
+  const [updateTicket, { error }] = useMutation(UPDATE_TICKET);
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("about to make request");
     try {
-      const { data } = await addTicket({
+      const { data } = await updateTicket({
         variables: {
+          ticketId,
           ticketTitle,
           ticketDescription,
           ticketType,
           ticketStatus,
           ticketPriority,
-          ticketAuthor,
         },
       });
-      console.log("data:", data.addTicket);
-      setDashData([...dashData, data.addTicket]);
+      const filterTickets = tickets.filter(
+        (ticket) => ticket._id !== data.updateTicket._id
+      );
+
+      filterTickets.unshift(data.updateTicket);
+
+      console.log("data:", data.updateTicket);
+      setDashData(filterTickets);
     } catch (err) {
       console.error(err);
     }
-    setTitle("");
-    setDescription("");
-    setType("");
-    setPriority("");
-    setStatus("");
+
     handleClose();
   };
 
@@ -97,8 +105,8 @@ function TicketModal({ ticketId, dashData, setDashData }) {
           <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </p>
-          <Button style={styles.button} variant="dark" onClick={handleShow}>
-            Create a ticket
+          <Button variant="dark" onClick={handleShow}>
+            <MDBIcon fas icon="pencil-alt" />
           </Button>
 
           <Modal show={show} onHide={handleClose}>
@@ -198,7 +206,7 @@ function TicketModal({ ticketId, dashData, setDashData }) {
         </>
       ) : (
         <p>
-          You need to be logged in to view your dashboard. Please{" "}
+          You need to be logged in to share your thoughts. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
@@ -206,4 +214,4 @@ function TicketModal({ ticketId, dashData, setDashData }) {
   );
 }
 
-export default TicketModal;
+export default EditTicketModal;

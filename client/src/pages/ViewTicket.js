@@ -8,6 +8,16 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import Spinner from "../components/Spinner";
+import ProtectPage from "../components/ProtectPage";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
+import Collapse from 'react-bootstrap/Collapse';
+import { useState } from 'react';
+import AuthService from "../utils/auth";
+
+const auth = AuthService;
+
 
 const ViewTicket = () => {
   const { ticketId } = useParams();
@@ -35,8 +45,13 @@ const ViewTicket = () => {
     minute: "2-digit",
     second: "2-digit",
   }).format(ticket.updatedAt);
+
+  // state variable for comment button collapse
+  const [open, setOpen] = useState(false);
+  
   return (
     <>
+{auth.loggedIn() ? (
       <Sidebar />
       <Container fluid className="body-container">
         <Row>
@@ -71,9 +86,34 @@ const ViewTicket = () => {
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
             </Card>
+            
             </Col>
         </Row>
       </Container>
+                <Button
+      variant="outline-dark" 
+        onClick={() => setOpen(!open)}
+        aria-controls="example-collapse-text"
+        aria-expanded={open}
+      >
+        Add a comment
+      </Button>
+      <div style={{ minHeight: '150px' }}>
+        <Collapse in={open} dimension="width">
+          <div id="example-collapse-text">
+            <Card body style={{ width: '400px' }}>
+        <Form>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label></Form.Label>
+            <Form.Control as="textarea" rows={3} />
+            <Button variant="outline-dark">Submit</Button>
+          </Form.Group>
+        </Form>
+      </Card>
+          </div>
+        </Collapse>
+      </div>
+
     </>
   );
 };

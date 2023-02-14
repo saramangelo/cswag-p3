@@ -13,8 +13,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { email, password }) => {
-      const user = await User.create({ email, password });
+    addUser: async (parent, { email, password, username }) => {
+      const user = await User.create({ email, password, username });
       const token = signToken(user);
       return { token, user };
     },
@@ -43,30 +43,62 @@ const resolvers = {
         ticketType,
         ticketStatus,
         ticketPriority,
+        ticketAuthor,
       },
       context
     ) => {
-      console.log(context.user);
-      console.log("we are in!");
       if (context.user) {
-        console.log("seriously now!");
         const ticket = await Ticket.create({
           ticketTitle,
           ticketDescription,
           ticketType,
           ticketStatus,
           ticketPriority,
+          ticketAuthor,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { ticket: ticket._id } }
+          { $addToSet: { tickets: ticket._id } }
         );
 
         return ticket;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    updateTicket: async (
+      parent,
+      {
+        ticketId,
+        ticketTitle,
+        ticketDescription,
+        ticketType,
+        ticketStatus,
+        ticketPriority,
+      },
+      context
+    ) => {
+      if (context.user) {
+        return Ticket.findOneAndUpdate(
+          { _id: ticketId },
+          {
+            $set: {
+              ticketTitle: ticketTitle,
+              ticketDescription: ticketDescription,
+              ticketType: ticketType,
+              ticketStatus: ticketStatus,
+              ticketPriority: ticketPriority,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
     addComment: async (parent, { ticketId, commentText }, context) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(

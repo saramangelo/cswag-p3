@@ -43,11 +43,18 @@ const client = new ApolloClient({
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [label, setLabel] = useState(localStorage.getItem("Dark Mode") || "Dark Mode");
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
+    if (label === "Dark Mode") {
+      setLabel("Light Mode")
+      localStorage.setItem("Light Mode", "Light Mode");
+    }
     } else {
       setTheme("light");
+      setLabel("Dark Mode");
+      localStorage.setItem("Dark Mode", "Dark Mode");
     }
   };
   useEffect(() => {
@@ -60,15 +67,17 @@ function App() {
       <Router>
         <div className={`App ${theme}`}>
           <div className="flex-column justify-flex-start min-100-vh">
+
             <div>
               <div>
               <Form onClick={toggleTheme} className="toggle-button">
                 <Form.Check
                   type="switch"
                   id="custom-switch"
-                  label="Toggle Mode"
+                  label={label}
                 />
               </Form>
+
               </div>
               <Routes>
                 <Route path="/" element={<Login />} />
