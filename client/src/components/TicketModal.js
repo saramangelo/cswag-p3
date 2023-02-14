@@ -197,7 +197,7 @@ function TicketModal({ ticketId, dashData, setDashData }) {
         </>
       ) : (
         <p>
-          You need to be logged in to share your thoughts. Please{" "}
+          You need to be logged in to view your dashboard. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
