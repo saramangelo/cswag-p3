@@ -56,7 +56,7 @@ function Dashboard() {
           </div>
         </Col>
       </Row>
-    </Container>
+    </Container> 
   );
 }
 
