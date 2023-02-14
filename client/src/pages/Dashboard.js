@@ -50,13 +50,13 @@ function Dashboard() {
             ) : (
               <div>
                 <div style={styles.header}>Current tickets</div>
-                <DashboardTable tickets={dashData} />
+                <DashboardTable tickets={dashData} setDashData={setDashData} />
               </div>
             )}
           </div>
         </Col>
       </Row>
-    </Container> 
+    </Container>
   );
 }
 

@@ -10,7 +10,7 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditTicketModal({ ticket }) {
+function EditTicketModal({ ticket, tickets, setDashData }) {
   const [ticketTitle, setTitle] = useState(ticket.ticketTitle);
   const [ticketDescription, setDescription] = useState(
     ticket.ticketDescription
@@ -18,6 +18,8 @@ function EditTicketModal({ ticket }) {
   const [ticketType, setType] = useState(ticket.ticketType);
   const [ticketPriority, setPriority] = useState(ticket.ticketPriority);
   const [ticketStatus, setStatus] = useState(ticket.ticketStatus);
+
+  const ticketId = ticket._id;
 
   // useEffect(() => {
   //   if (ticket) {
@@ -36,6 +38,7 @@ function EditTicketModal({ ticket }) {
     try {
       const { data } = await updateTicket({
         variables: {
+          ticketId,
           ticketTitle,
           ticketDescription,
           ticketType,
@@ -43,6 +46,14 @@ function EditTicketModal({ ticket }) {
           ticketPriority,
         },
       });
+      const filterTickets = tickets.filter(
+        (ticket) => ticket._id !== data.updateTicket._id
+      );
+
+      filterTickets.unshift(data.updateTicket);
+
+      console.log("data:", data.updateTicket);
+      setDashData(filterTickets);
     } catch (err) {
       console.error(err);
     }
