@@ -24,6 +24,7 @@ export const QUERY_TICKETS = gql`
       ticketStatus
       ticketTitle
       ticketType
+      ticketAuthor
     }
   }
 `;
