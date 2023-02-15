@@ -77,7 +77,7 @@ function CommentForm(props) {
     </>
   ) : (
     <div>
-      <h3>Update entry: {props.edit.value}</h3>
+      <h3>Update comment: {props.edit.value}</h3>
       <Form className="comment-form">
         <Form.Control
           type="text"
@@ -90,7 +90,13 @@ function CommentForm(props) {
         {/* <div className="dropdown">
           <div className="dropdown-content"></div>
         </div> */}
-        <Button onClick={handleSubmit} className="comment-button">Update</Button>
+        <Button
+          onClick={handleSubmit}
+          variant="dark"
+          className="comment-button"
+        >
+          Update
+        </Button>
       </Form>
     </div>
   );
