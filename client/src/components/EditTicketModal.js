@@ -105,13 +105,13 @@ function EditTicketModal({ ticket, tickets, setDashData }) {
           <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </p>
-          <Button variant="dark" onClick={handleShow}>
-            <MDBIcon fas icon="pencil-alt" />
-          </Button>
+          <Link >
+            <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
+          </Link>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>New Ticket</Modal.Title>
+              <Modal.Title>Edit Ticket</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
