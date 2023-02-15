@@ -1,0 +1,14 @@
+.icons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-icon {
+    margin: 10px;
+    padding: 10px;
+}
+
+.delete-icon {
+    margin: 10px;
+    padding: 10px;
+}

@@ -3,6 +3,7 @@ import CommentForm from "./CommentForm";
 import Card from "react-bootstrap/Card";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
+import '../Comment.css';
 
 function Comment(props) {
   const [edit, setEdit] = useState({
@@ -28,7 +29,7 @@ function Comment(props) {
           <div key={item.id}>{item.text}</div>
 
           <div className="icons">
-            {console.log(item)}
+           <div className="edit-icon">
             <Link>
               {" "}
               <MDBIcon
@@ -42,7 +43,8 @@ function Comment(props) {
                 icon="pencil-alt"
               />
             </Link>
-
+            </div>
+            <div className="delete-icon">
             <Link>
               {" "}
               <MDBIcon
@@ -51,6 +53,7 @@ function Comment(props) {
                 icon="trash-alt"
               />{" "}
             </Link>
+          </div>
           </div>
         </div>
       </Card>
