@@ -32,7 +32,6 @@ function TicketModal({ ticketId, dashData, setDashData, currentUser, handleClose
           ticketAuthor,
         },
       });
-      console.log("data:", data.addTicket);
       setDashData([data.addTicket, ...dashData]);
     } catch (err) {
       console.error(err);
@@ -50,29 +49,19 @@ function TicketModal({ ticketId, dashData, setDashData, currentUser, handleClose
     const { name, value } = event.target;
 
     if (name === "title") {
-      console.log("title:", value);
       setTitle(value);
-      console.log(ticketTitle);
     }
     if (name === "description") {
-      console.log("description:", value);
       setDescription(value);
-      console.log(ticketDescription);
     }
     if (name === "type") {
-      console.log("type:", value);
       setType(value);
-      console.log(ticketType);
     }
     if (name === "priority") {
-      console.log("priority:", value);
       setPriority(value);
-      console.log(ticketPriority);
     }
     if (name === "status") {
-      console.log("status:", value);
       setStatus(value);
-      console.log(ticketStatus);
     }
   };
 

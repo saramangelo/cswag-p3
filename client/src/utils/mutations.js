@@ -110,7 +110,7 @@ export const REMOVE_TICKET = gql `
 
 export const ADD_PROJECT = gql`
   mutation addProject($projectTitle: String!, $projectDescription: String!, $users: [ID], $tickets: [ID]) {
-    addProject(projectTitle: $projectTitle, projectDescription: $projectDescription, users: $users, tickets: [ID]) {
+    addProject(projectTitle: $projectTitle, projectDescription: $projectDescription, users: $users, tickets: $tickets) {
       _id
       projectTitle
       projectDescription

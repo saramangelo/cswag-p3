@@ -10,16 +10,26 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditTicketModal({ ticket, tickets, setDashData, id }) {
-  const [ticketTitle, setTitle] = useState(ticket.ticketTitle);
-  const [ticketDescription, setDescription] = useState(
-    ticket.ticketDescription
-  );
-  const [ticketType, setType] = useState(ticket.ticketType);
-  const [ticketPriority, setPriority] = useState(ticket.ticketPriority);
-  const [ticketStatus, setStatus] = useState(ticket.ticketStatus);
+function EditTicketModal({ ticket, tickets, setDashData, ticketId }) {
 
-  const ticketId = ticket._id;
+  const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
+    variables: { ticketId }
+  });
+
+ if(data == null){
+  console.log('err');
+ }
+
+  //while(loading){ };
+
+
+
+  const [ticketTitle, setTitle] = useState(data.ticket.ticketTitle);
+  const [ticketDescription, setDescription] = useState(data.ticket.ticketDescription);
+  const [ticketType, setType] = useState(data.ticket.ticketType);
+  const [ticketPriority, setPriority] = useState(data.ticket.ticketPriority);
+  const [ticketStatus, setStatus] = useState(data.ticket.ticketStatus);
+
 
   // useEffect(() => {
   //   if (ticket) {
@@ -34,11 +44,10 @@ function EditTicketModal({ ticket, tickets, setDashData, id }) {
   const [updateTicket, { error }] = useMutation(UPDATE_TICKET);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("about to make request");
     try {
       const { data } = await updateTicket({
         variables: {
-          ticketId: id,
+          ticketId,
           ticketTitle,
           ticketDescription,
           ticketType,
@@ -56,8 +65,6 @@ function EditTicketModal({ ticket, tickets, setDashData, id }) {
           }
         }
       );
-
-      console.log("data:", data.updateTicket);
       setDashData(updatedTickets);
     } catch (err) {
       console.error(err);
@@ -71,29 +78,19 @@ function EditTicketModal({ ticket, tickets, setDashData, id }) {
     const { name, value } = event.target;
 
     if (name === "title") {
-      console.log("title:", value);
       setTitle(value);
-      console.log(ticketTitle);
     }
     if (name === "description") {
-      console.log("description:", value);
       setDescription(value);
-      console.log(ticketDescription);
     }
     if (name === "type") {
-      console.log("type:", value);
       setType(value);
-      console.log(ticketType);
     }
     if (name === "priority") {
-      console.log("priority:", value);
       setPriority(value);
-      console.log(ticketPriority);
     }
     if (name === "status") {
-      console.log("status:", value);
       setStatus(value);
-      console.log(ticketStatus);
     }
   };
 
@@ -116,7 +113,7 @@ function EditTicketModal({ ticket, tickets, setDashData, id }) {
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Edit Ticket</Modal.Title>
+              <Modal.Title>New Ticket</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
