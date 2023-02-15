@@ -123,12 +123,13 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     removeTicket: async (parent, { ticketId }, context) => {
+      console.log("deleting tickets!")
       if (context.user) {
         const ticket = await Ticket.findOneAndDelete({
           _id: ticketId,
-          ticketAuthor: context.user.username,
+          // ticketAuthor: context.user.username,
         });
-
+console.log(ticket);
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { ticket: ticket._id } }
