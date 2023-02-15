@@ -97,3 +97,11 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const REMOVE_TICKET = gql ` 
+mutation RemoveTicket($ticketId: ID!) {
+  removeTicket(ticketId: $ticketId) {
+    _id
+  }
+}
+`;
