@@ -36,7 +36,6 @@ function CommentList() {
       <CommentForm onSubmit={addComment} />
       <Comment
         comment={comment}
-        // completeComment={completeComment}
         removeComment={removeComment}
         editComment={editComment}
       />

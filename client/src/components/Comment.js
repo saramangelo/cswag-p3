@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import CommentForm from "./CommentForm";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import { MDBIcon } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 
 function Comment(props) {
   const [edit, setEdit] = useState({
     id: null,
-    value: ""
+    value: "",
   });
 
   console.log(props.comment);
 
   const submitUpdate = (value) => {
     props.editComment(edit.id, value);
-    setEdit({ id: null, value: ""});
+    setEdit({ id: null, value: "" });
   };
 
   if (edit.id) {
@@ -19,29 +23,40 @@ function Comment(props) {
   }
 
   return props.comment.map((item, i) => (
-    <div
+    <>
+      <Card>
+        <div key={i}>
+          <div key={item.id} onClick={() => props.completeComment(item.id)}>
+            {item.text}
+          </div>
+          <div className="icons">
+            {console.log(item)}
+            <Link>
+              {" "}
+              <MDBIcon
+                onClick={() =>
+                  setEdit({
+                    id: item.id,
+                    value: item.text,
+                  })
+                }
+                fas
+                icon="pencil-alt"
+              />
+            </Link>
 
-      key={i}
-    >
-      <div key={item.id} onClick={() => props.completeComment(item.id)}>
-        {item.text}
-      </div>
-      <div className="icons">
-        {console.log(item)}
-        <p
-          onClick={() =>
-            setEdit({
-              id: item.id,
-              value: item.text
-            })
-          }
-        >
-          {" "}
-          ✏️
-        </p>
-        <p onClick={() => props.removeComment(item.id)}> 🗑️</p>
-      </div>
-    </div>
+            <Link>
+              {" "}
+              <MDBIcon
+                onClick={() => props.removeComment(item.id)}
+                far
+                icon="trash-alt"
+              />{" "}
+            </Link>
+          </div>
+        </div>
+      </Card>
+    </>
   ));
 }
 
