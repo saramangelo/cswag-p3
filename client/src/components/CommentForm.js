@@ -52,23 +52,14 @@ function CommentForm(props) {
               className="comment-input"
               onChange={handleChange}
             />
+
             <Button
               onClick={handleSubmit}
               className="comment-button"
-              variant="outline-dark"
+              variant="dark"
             >
               Submit
             </Button>
-            {/* <button onSubmit={handleSubmit} className="comment-button">Submit Comment</button> */}
-
-            {/* <textarea
-          type="text"
-          placeholder="Add a comment"
-          value={input}
-          name="text"
-          className="comment-input"
-          onChange={handleChange}
-        ></textarea> */}
           </Form.Group>
         </Form>
       </div>
@@ -92,7 +83,7 @@ function CommentForm(props) {
         </div> */}
         <Button
           onClick={handleSubmit}
-          variant="dark"
+          variant="outline-dark"
           className="comment-button"
         >
           Update
