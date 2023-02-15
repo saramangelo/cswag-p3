@@ -40,9 +40,13 @@ function Dashboard({ handleShow, handleClose, show }) {
   const [dashData, setDashData] = useState([]);
   const [projectData, setProjectData] = useState([]);
 
+  let currentUser;
+
   // TicketAuthor from getProfile (current user)
-  const currentUser = auth.getProfile().data;
-  console.log(currentUser);
+  if(auth.loggedIn()){
+    currentUser = auth.getProfile().data;
+  }
+  //console.log(currentUser);
 
   return (
     <>

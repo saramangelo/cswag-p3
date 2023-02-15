@@ -2,6 +2,7 @@ import Table from "react-bootstrap/Table";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import EditTicketModal from "./EditTicketModal";
+import RemoveTicketModal from "./RemoveTicketModal";
 
 function TicketTable({ tickets, setDashData }) {
   if (!tickets.length) {
@@ -29,20 +30,22 @@ function TicketTable({ tickets, setDashData }) {
               <td>{ticket.ticketType}</td>
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
-              <td>
+              <td className="dashboard-table-links">
                 <Link to={`/viewticket/${ticket._id}`}>
                   {" "}
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
                 <EditTicketModal
                   ticket={ticket}
+                  id={ticket._id}
                   tickets={tickets}
                   setDashData={setDashData}
                 />
-                <Link>
-                  {" "}
-                  <MDBIcon far icon="trash-alt" />{" "}
-                </Link>
+                <RemoveTicketModal
+                ticket={ticket}
+                tickets={tickets}
+                setDashData={setDashData}
+                />
               </td>
             </tr>
           ))}
