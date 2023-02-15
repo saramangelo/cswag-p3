@@ -70,7 +70,8 @@ function CommentForm(props) {
   ) : (
     <div>
       <h3>Update comment: {props.edit.value}</h3>
-      <Form className="comment-form">
+      <Form className="edit-comment-form comment-form">
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Control
           type="text"
           placeholder={props.edit.value}
@@ -89,6 +90,7 @@ function CommentForm(props) {
         >
           Update
         </Button>
+        </Form.Group>
       </Form>
     </div>
   );

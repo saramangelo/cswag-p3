@@ -24,9 +24,9 @@ function Comment(props) {
 
   return props.comment.map((item, i) => (
     <>
-      <Card>
-        <div key={i}>
-          <div key={item.id}>{item.text}</div>
+      <Card className="comment-list">
+        <div  key={i}>
+          <div  key={item.id}>{item.text}</div>
 
           <div className="icons">
            <div className="edit-icon">
