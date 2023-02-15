@@ -80,14 +80,16 @@ export const UPDATE_TICKET = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      ticketTitle
-      ticketDescription
-      ticketType
-      ticketPriority
-      ticketStatus
+  mutation addComment(
+    $ticketId: ID!
+    $commentText: String!
+    $commentAuthor: String!
+  ) {
+    addComment(
+      commentText: $commentText
+      commentAuthor: $commentAuthor
+      ticketId: $ticketId
+    ) {
       comments {
         _id
         commentText

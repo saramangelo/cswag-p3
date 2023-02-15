@@ -93,7 +93,7 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
 
-              <CommentList />
+              <CommentList ticketId={ticketId} />
             </Col>
           </Row>
         </Container>

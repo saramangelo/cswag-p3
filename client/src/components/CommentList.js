@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
-function CommentList() {
+function CommentList({ ticketId }) {
   const [comment, setComment] = useState([]);
 
   // Function to add a comment
   const addComment = (item) => {
+    console.log(item);
     setComment([...comment, item]);
   };
 
@@ -26,14 +27,15 @@ function CommentList() {
 
     // We use the "prev" argument provided with the useState hook to map through our list of items
     // We then check to see if the item ID matches the id of the item that was clicked and if so, we set it to a new value
-    setComment((prev) =>
-      prev.map((item) => (item.id === itemId ? newValue : item))
-    );
+    setComment((prev) => {
+      console.log(prev);
+      prev.map((item) => (item.id === itemId ? newValue : item));
+    });
   };
 
   return (
     <div>
-      <CommentForm onSubmit={addComment} />
+      <CommentForm onSubmit={addComment} ticketId={ticketId} />
       <Comment
         comment={comment}
         removeComment={removeComment}

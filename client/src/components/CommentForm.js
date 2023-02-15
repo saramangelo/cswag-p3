@@ -2,24 +2,41 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 // import Collapse from "react-bootstrap/Collapse";
 import Form from "react-bootstrap/Form";
-import '../App.css';
+import "../App.css";
+import { useMutation } from "@apollo/client";
+import { ADD_COMMENT } from "../utils/mutations";
+import auth from "../utils/auth";
 
 function CommentForm(props) {
-  const [input, setInput] = useState("");
+  // addComment mutation
+  const [addComment, { error }] = useMutation(ADD_COMMENT);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // addComment variables
+  const [commentText, setCommentText] = useState("");
+  const commentAuthor = auth.getProfile().data.username;
+  const commentAuthorId = auth.getProfile().data._id;
+  const ticketId = props.ticketId;
 
-    props.onSubmit({
-      id: Math.random(Math.floor() * 1000),
-      text: input,
-    });
-
-    setInput("");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(commentAuthor, " | ", ticketId, " | ", commentText);
+    try {
+      const { data } = await addComment({
+        variables: {
+          ticketId,
+          commentText,
+          commentAuthor,
+        },
+      });
+      console.log("data: ", data);
+    } catch (err) {
+      console.error(err);
+    }
+    setCommentText("");
   };
 
   const handleChange = (e) => {
-    setInput(e.target.value);
+    setCommentText(e.target.value);
   };
 
   // TODO: FIGURE OUT IF WE WANT COLLAPSE (CURRENTLY COMMENTED OUT)
@@ -48,7 +65,7 @@ function CommentForm(props) {
               rows={3}
               type="text"
               placeholder="Add a comment"
-              value={input}
+              value={commentText}
               name="text"
               className="comment-input"
               onChange={handleChange}
@@ -71,25 +88,25 @@ function CommentForm(props) {
     <div>
       <h3>Update comment: {props.edit.value}</h3>
       <Form className="edit-comment-form comment-form">
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Control
-          type="text"
-          placeholder={props.edit.value}
-          value={input}
-          name="text"
-          className="comment-input"
-          onChange={handleChange}
-        />
-        {/* <div className="dropdown">
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Control
+            type="text"
+            placeholder={props.edit.value}
+            value={commentText}
+            name="text"
+            className="comment-input"
+            onChange={handleChange}
+          />
+          {/* <div className="dropdown">
           <div className="dropdown-content"></div>
         </div> */}
-        <Button
-          onClick={handleSubmit}
-          variant="outline-dark"
-          className="comment-button"
-        >
-          Update
-        </Button>
+          <Button
+            onClick={handleSubmit}
+            variant="outline-dark"
+            className="comment-button"
+          >
+            Update
+          </Button>
         </Form.Group>
       </Form>
     </div>
