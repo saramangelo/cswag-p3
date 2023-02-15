@@ -26,9 +26,8 @@ function Comment(props) {
     <>
       <Card>
         <div key={i}>
-          <div key={item.id} onClick={() => props.completeComment(item.id)}>
-            {item.text}
-          </div>
+          <div key={item.id}>{item.text}</div>
+
           <div className="icons">
             {console.log(item)}
             <Link>

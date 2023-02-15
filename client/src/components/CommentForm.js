@@ -78,20 +78,20 @@ function CommentForm(props) {
   ) : (
     <div>
       <h3>Update entry: {props.edit.value}</h3>
-      <form className="comment-form" onSubmit={handleSubmit}>
-        <textarea
+      <Form className="comment-form">
+        <Form.Control
           type="text"
           placeholder={props.edit.value}
           value={input}
           name="text"
           className="comment-input"
           onChange={handleChange}
-        ></textarea>
-        <div className="dropdown">
+        />
+        {/* <div className="dropdown">
           <div className="dropdown-content"></div>
-        </div>
-        <button className="comment-button">Update</button>
-      </form>
+        </div> */}
+        <Button onClick={handleSubmit} className="comment-button">Update</Button>
+      </Form>
     </div>
   );
 }
