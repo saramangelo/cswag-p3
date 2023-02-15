@@ -24,6 +24,7 @@ export const QUERY_TICKETS = gql`
       ticketStatus
       ticketTitle
       ticketType
+      ticketAuthor
     }
   }
 `;
@@ -39,6 +40,7 @@ export const QUERY_SINGLE_TICKET = gql`
       ticketStatus
       createdAt
       updatedAt
+      ticketAuthor
     }
   }
 `;

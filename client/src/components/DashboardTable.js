@@ -13,7 +13,7 @@ function DashboardTable({ tickets, setDashData }) {
       <thead>
         <tr>
           <th>Title</th>
-          <th>Developer</th>
+          <th>Submitter</th>
           <th>Type</th>
           <th>Priority</th>
           <th>Status</th>
@@ -25,7 +25,7 @@ function DashboardTable({ tickets, setDashData }) {
           tickets.map((ticket, i) => (
             <tr key={i}>
               <td>{ticket.ticketTitle}</td>
-              <td>Unassigned</td>
+              <td>{ticket.ticketAuthor}</td>
               <td>{ticket.ticketType}</td>
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>

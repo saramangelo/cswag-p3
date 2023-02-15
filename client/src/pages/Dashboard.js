@@ -37,7 +37,6 @@ function Dashboard() {
   const currentUser = auth.getProfile().data;
   console.log(currentUser);
 
-
   return (
       <>
       {auth.loggedIn() ? (
@@ -58,8 +57,6 @@ function Dashboard() {
                   </header>
                 </Card>
                 <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} />
-
-
                 {loading ? (
                   <Spinner />
                 ) : (
