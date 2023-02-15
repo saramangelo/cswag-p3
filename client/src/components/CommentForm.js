@@ -13,8 +13,17 @@ function CommentForm(props) {
 
   // addComment variables
   const [commentText, setCommentText] = useState("");
-  const commentAuthor = auth.getProfile().data.username;
-  const commentAuthorId = auth.getProfile().data._id;
+
+  // current user data (if logged in)
+  let commentAuthor;
+  let commentAuthorId;
+
+  if (auth.loggedIn()) {
+     commentAuthor = auth.getProfile().data.username;
+     commentAuthorId = auth.getProfile().data._id;
+  }
+  console.log(commentAuthor);
+
   const ticketId = props.ticketId;
 
   const handleSubmit = async (event) => {
