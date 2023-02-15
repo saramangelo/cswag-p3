@@ -11,6 +11,7 @@ import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import TicketModal from "../components/TicketModal";
 
 import Collapse from 'react-bootstrap/Collapse';
 import { useState } from 'react';
@@ -19,7 +20,7 @@ import AuthService from "../utils/auth";
 const auth = AuthService;
 
 
-const ViewTicket = () => {
+const ViewTicket = ({handleClose, handleShow, show}) => {
   const { ticketId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
@@ -48,12 +49,16 @@ const ViewTicket = () => {
 
   // state variable for comment button collapse
   const [open, setOpen] = useState(false);
+
+  const [dashData, setDashData] = useState([]);
   
+  const currentUser = auth.getProfile().data;
+
   return (
     <>
     {auth.loggedIn() ? (
       <Container fluid className="body-container">
-        <Sidebar />
+        <Sidebar handleShow={handleShow}/>
         <Row>
           <Col xs={1} lg={3} >
             {" "}
@@ -117,6 +122,7 @@ const ViewTicket = () => {
        <ProtectPage />
      </div>
    )}
+    <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} handleClose={handleClose} show={show}/>
     </>
   );
 };

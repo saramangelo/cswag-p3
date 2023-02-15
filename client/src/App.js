@@ -57,6 +57,13 @@ function App() {
       localStorage.setItem("Dark Mode", "Dark Mode");
     }
   };
+
+  // modal variable states
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   useEffect(() => {
     localStorage.setItem("theme", theme);
     document.body.className = theme;
@@ -81,8 +88,8 @@ function App() {
               </div>
               <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/viewticket/:ticketId" element={<ViewTicket />} />
+                <Route path="/dashboard" element={<Dashboard handleClose={handleClose} handleShow={handleShow} show={show}/>} />
+                <Route path="/viewticket/:ticketId" element={<ViewTicket handleClose={handleClose} handleShow={handleShow} show={show}/>} />
 
                 <Route path="*" element={<NotFound />}></Route>
               </Routes>

@@ -40,15 +40,11 @@ body{
 
 .nav-box{
     width: max-content;
-    margin: 100px 20px;
+    margin: 100px 15px;
     -webkit-box-shadow: none !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-}
-
-.sidebar-title{
-    margin: 0px;
 }
 
 .body-container{
@@ -58,6 +54,10 @@ body{
 
 .detail-card{
     margin-top:50px;
+}
+
+.navbar-toggler{
+    float: left;
 }
 
 @media only screen and (max-width: 991px) {
@@ -70,6 +70,7 @@ body{
         margin-top: 0px;
         display: flex !important;
         flex-direction: row !important;
+        justify-content: flex-start !important;
         margin:0 0;
     }
     

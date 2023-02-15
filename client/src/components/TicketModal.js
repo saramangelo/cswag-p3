@@ -9,13 +9,7 @@ import { ADD_TICKET } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
-const styles = {
-  button: {
-    fontFamily: "Rubik Mono One, sans-serif",
-  },
-};
-
-function TicketModal({ ticketId, dashData, setDashData, currentUser }) {
+function TicketModal({ ticketId, dashData, setDashData, currentUser, handleClose, show }) {
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
@@ -82,12 +76,6 @@ function TicketModal({ ticketId, dashData, setDashData, currentUser }) {
     }
   };
 
-  // modal variable states
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <>
       {Auth.loggedIn() ? (
@@ -95,10 +83,6 @@ function TicketModal({ ticketId, dashData, setDashData, currentUser }) {
           <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </p>
-          <Button style={styles.button} variant="dark" onClick={handleShow}>
-            Create a ticket
-          </Button>
-
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>New Ticket</Modal.Title>
