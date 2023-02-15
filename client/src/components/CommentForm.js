@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 // import Collapse from "react-bootstrap/Collapse";
 import Form from "react-bootstrap/Form";
+import '../App.css';
 
 function CommentForm(props) {
   const [input, setInput] = useState("");
@@ -39,7 +40,7 @@ function CommentForm(props) {
                   </Button>
                   <div id="example-collapse-text">
                   <Collapse in={open} dimension="width"> */}
-      <div>
+      <div className="comment-card">
         <Form className="comment-form" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Control

@@ -3,7 +3,7 @@ import CommentForm from "./CommentForm";
 import Card from "react-bootstrap/Card";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-import '../Comment.css';
+import '../App.css';
 
 function Comment(props) {
   const [edit, setEdit] = useState({
