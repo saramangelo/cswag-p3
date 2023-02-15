@@ -59,11 +59,11 @@ function Dashboard({handleShow, handleClose, show}) {
                     Welcome, {currentUser.username}!
                   </header>
                 </Card>
+
                 <Button style={styles.button} variant="dark" onClick={handleShow}>
                   Create a ticket
                 </Button>
                 <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} handleClose={handleClose} show={show}/>
-
 
                 {loading ? (
                   <Spinner />
