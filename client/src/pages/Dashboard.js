@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import DashboardTable from "../components/DashboardTable";
 import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
@@ -21,9 +21,12 @@ const styles = {
     fontFamily: "Rubik Mono One, sans-serif",
     fontSize: "30px"
   },
+  button: {
+    fontFamily: "Rubik Mono One, sans-serif",
+  },
 };
 
-function Dashboard() {
+function Dashboard({handleShow, handleClose, show}) {
   const { loading, data } = useQuery(QUERY_TICKETS, {
     onCompleted: () => {
       setDashData(data.tickets);
@@ -41,7 +44,7 @@ function Dashboard() {
       <>
       {auth.loggedIn() ? (
         <Container fluid className="body-container">
-          <Sidebar />
+          <Sidebar handleShow={handleShow}/>
           <Row>
             <Col xs={1} lg={2} >
               {" "}
@@ -56,7 +59,12 @@ function Dashboard() {
                     Welcome, {currentUser.username}!
                   </header>
                 </Card>
-                <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} />
+
+                <Button style={styles.button} variant="dark" onClick={handleShow}>
+                  Create a ticket
+                </Button>
+                <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} handleClose={handleClose} show={show}/>
+
                 {loading ? (
                   <Spinner />
                 ) : (
