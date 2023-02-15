@@ -36,6 +36,7 @@ function DashboardTable({ tickets, setDashData }) {
                 </Link>
                 <EditTicketModal
                   ticket={ticket}
+                  id={ticket._id}
                   tickets={tickets}
                   setDashData={setDashData}
                 />

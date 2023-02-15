@@ -14,7 +14,6 @@ function LoginForm({ setUser }) {
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    localStorage.setItem("test", 2)
     setFormState({
       ...formState,
       [name]: value,
@@ -27,13 +26,10 @@ function LoginForm({ setUser }) {
   // submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
-    localStorage.setItem("test", 2)
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log(data)
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const projectSchema = new Schema({
 
-  projectName: {
+  projectTitle: {
       type: String,
       required: true,
       trim: true
@@ -10,7 +10,6 @@ const projectSchema = new Schema({
 
   projectDescription: {
     type: String,
-    required: true,
     trim: true
   },
 
