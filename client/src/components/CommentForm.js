@@ -11,7 +11,7 @@ function CommentForm(props) {
   // addComment mutation
   const [addComment, { error }] = useMutation(ADD_COMMENT);
 
-  // addComment variables
+  // commentText variables for form
   const [commentText, setCommentText] = useState("");
 
   // current user data (if logged in)
@@ -38,6 +38,7 @@ function CommentForm(props) {
         },
       });
       console.log("data: ", data);
+      props.setCommentData(data.addComment.comments)
     } catch (err) {
       console.error(err);
     }

@@ -41,6 +41,12 @@ export const QUERY_SINGLE_TICKET = gql`
       createdAt
       updatedAt
       ticketAuthor
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
   }
 `;
