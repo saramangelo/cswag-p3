@@ -102,12 +102,12 @@ function EditTicketModal({ ticket, tickets, setDashData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
-          <Button variant="dark" onClick={handleShow}>
+          </p> */}
+          <Link variant="dark" onClick={handleShow}>
             <MDBIcon fas icon="pencil-alt" />
-          </Button>
+          </Link>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

@@ -5,19 +5,18 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
-
+import buggin from './assets/buggin.png';
 
 function Sidebar({ handleShow }) {
 
 
-  const handleSidebarSelect = (eventKey) => { };
   return (
 
       <div className="sidebar">
         <Navbar collapseOnSelect expand="lg" variant="dark" className="nav-box">
           <Navbar.Brand as="div" className="sidebar-title">
-            {/* <Image src="/assets/buggin.png" responsive /> */}
-            {`Buggin' Out`}
+            <Image src={buggin} className="buggin-logo"/>
+            <div className="buggin-title">Buggin' Out</div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

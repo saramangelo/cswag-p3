@@ -29,7 +29,7 @@ function DashboardTable({ tickets, setDashData }) {
               <td>{ticket.ticketType}</td>
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
-              <td>
+              <td className="dashboard-table-links">
                 <Link to={`/viewticket/${ticket._id}`}>
                   {" "}
                   <MDBIcon fas icon="eye" />{" "}
