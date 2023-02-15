@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Ticket } = require("../models");
+const { User, Ticket, Project } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -10,6 +10,13 @@ const resolvers = {
     ticket: async (parent, { ticketId }) => {
       return Ticket.findOne({ _id: ticketId });
     },
+    projects: async () => {
+      return Project.find().sort({ createdAt: -1 });
+    },
+    project: async (parent, {projectId}) => {
+      return Project.findOne({ _id: projectId});
+    },
+
   },
 
   Mutation: {
@@ -98,7 +105,6 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-
     addComment: async (parent, { ticketId, commentText }, context) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
@@ -150,6 +156,50 @@ console.log(ticket);
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
+    addProject: async (parent, { projectTitle, projectDescription, users, tickets }, context) => {
+      //users = [...users, context.user._id];
+      if (context.user) {
+        const project = await Project.create({
+          projectTitle,
+          projectDescription,
+          users,
+          tickets
+        });
+        await User.updateMany({_id: {$in: project.users}},
+          {$addToSet: {projects: project._id}});
+        return project;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addProjectUser: async ( parent, { projectId, userId }, context ) => {
+      if(context.user) {
+        const project = await Project.findOneAndUpdate(
+          { _id: projectId },
+          { $addToSet: {users: userId} },
+          { new: true }
+        );
+        await User.findOneAndUpdate({_id: userId},
+          {$addToSet: {projects: projectId}});
+        return project;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addProjectTicket: async ( parent, { projectId, ticketId }, context ) => {
+      if(context.user) {
+        return Project.findOneAndUpdate(
+          { _id: projectId },
+          { $addToSet: {tickets: ticketId} },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    
+
   },
 };
 

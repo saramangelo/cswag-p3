@@ -42,6 +42,7 @@ export const ADD_TICKET = gql`
       ticketPriority: $ticketPriority
       ticketAuthor: $ticketAuthor
     ) {
+      _id
       ticketTitle
       ticketDescription
       ticketType
@@ -98,10 +99,29 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+
 export const REMOVE_TICKET = gql ` 
-mutation RemoveTicket($ticketId: ID!) {
-  removeTicket(ticketId: $ticketId) {
-    _id
-  }
+  mutation RemoveTicket($ticketId: ID!) {
+    removeTicket(ticketId: $ticketId) {
+      _id
+    }
 }
+`;
+
+export const ADD_PROJECT = gql`
+  mutation addProject($projectTitle: String!, $projectDescription: String!, $users: [ID], $tickets: [ID]) {
+    addProject(projectTitle: $projectTitle, projectDescription: $projectDescription, users: $users, tickets: [ID]) {
+      _id
+      projectTitle
+      projectDescription
+      users {
+        username
+        email
+      }
+      tickets {
+        ticketTitle
+        ticketDescription
+      }
+    }
+  }
 `;

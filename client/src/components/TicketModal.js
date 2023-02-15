@@ -33,7 +33,7 @@ function TicketModal({ ticketId, dashData, setDashData, currentUser, handleClose
         },
       });
       console.log("data:", data.addTicket);
-      setDashData([...dashData, data.addTicket]);
+      setDashData([data.addTicket, ...dashData]);
     } catch (err) {
       console.error(err);
     }
