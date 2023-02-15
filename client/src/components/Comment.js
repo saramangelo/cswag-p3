@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CommentForm from "./CommentForm";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 
