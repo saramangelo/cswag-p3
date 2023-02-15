@@ -25,13 +25,14 @@ body{
 
 .toggle-button{
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 40px;
     z-index: 2;
 }
 
 .welcome-card{
-    margin-top: 40px;
+    margin-top: 50px;
+    margin-bottom: 12px;
 }
 
 .nav-dropdown > a:not(:hover){
@@ -40,7 +41,7 @@ body{
 
 .nav-box{
     width: max-content;
-    margin: 100px 15px;
+    margin: 10px 15px;
     -webkit-box-shadow: none !important;
     display: flex !important;
     flex-direction: column !important;
@@ -59,6 +60,27 @@ body{
 .navbar-toggler{
     float: left;
 }
+
+
+.dashboard-table-links{
+    white-space: nowrap;
+}
+
+.dashboard-table-links>a{
+    padding: 11px;
+}
+
+.buggin-logo{
+    width: 12vw;
+    height: auto;
+    margin-bottom: 70px;
+    margin-left: -8px;
+}
+
+.buggin-title{
+    display: none;
+}
+
 
 /* ==== Comment.js ==== */
 
@@ -111,6 +133,7 @@ body{
 
   /* ==== MEDIA QUERIES ==== */
 
+
 @media only screen and (max-width: 991px) {
     .sidebar {
         height: auto;
@@ -122,7 +145,19 @@ body{
         display: flex !important;
         flex-direction: row !important;
         justify-content: flex-start !important;
-        margin:0 0;
+        margin: 0 0;
+    }
+    .buggin-logo{
+        display: none;
+    }
+    .buggin-title{
+        display: inline-block;
+    }
+    .dashboard-table-links>a{
+        padding: 3px;
+    }
+    .welcome-card{
+        margin-top: 20px;
     }
     
   }

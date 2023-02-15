@@ -31,13 +31,13 @@ const userSchema = new Schema({
     },
   ],
   // ** V2 Implementation ** - Requires seperate Project Schema to be defined
-  // project: [
-  //     {
-  //         type: Schema.Types.ObjectId,
-  //         ref: 'Project'
-  //     },
-  // ],
-  //
+  projects: [
+      {
+          type: Schema.Types.ObjectId,
+          ref: 'Project'
+      },
+  ],
+  
 });
 
 userSchema.pre("save", async function (next) {

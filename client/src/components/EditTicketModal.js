@@ -10,7 +10,7 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditTicketModal({ ticket, tickets, setDashData }) {
+function EditTicketModal({ ticket, tickets, setDashData, id }) {
   const [ticketTitle, setTitle] = useState(ticket.ticketTitle);
   const [ticketDescription, setDescription] = useState(
     ticket.ticketDescription
@@ -38,7 +38,7 @@ function EditTicketModal({ ticket, tickets, setDashData }) {
     try {
       const { data } = await updateTicket({
         variables: {
-          ticketId,
+          ticketId: id,
           ticketTitle,
           ticketDescription,
           ticketType,
@@ -46,14 +46,19 @@ function EditTicketModal({ ticket, tickets, setDashData }) {
           ticketPriority,
         },
       });
-      const filterTickets = tickets.filter(
-        (ticket) => ticket._id !== data.updateTicket._id
+
+      const updatedTickets = tickets.map(
+        (ticket) => {
+          if(ticket._id !== data.updateTicket._id){
+            return data.updateTicket;
+          }else{
+            return ticket;
+          }
+        }
       );
 
-      filterTickets.unshift(data.updateTicket);
-
       console.log("data:", data.updateTicket);
-      setDashData(filterTickets);
+      setDashData(updatedTickets);
     } catch (err) {
       console.error(err);
     }
@@ -102,11 +107,11 @@ function EditTicketModal({ ticket, tickets, setDashData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
-          <Link >
-            <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
+          </p> */}
+          <Link variant="dark" onClick={handleShow}>
+            <MDBIcon fas icon="pencil-alt" />
           </Link>
 
           <Modal show={show} onHide={handleClose}>

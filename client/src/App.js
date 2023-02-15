@@ -42,18 +42,18 @@ const client = new ApolloClient({
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const [label, setLabel] = useState(localStorage.getItem("Dark Mode") || "Dark Mode");
+  const [label, setLabel] = useState(localStorage.getItem("label") || "Dark Mode");
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
     if (label === "Dark Mode") {
       setLabel("Light Mode")
-      localStorage.setItem("Light Mode", "Light Mode");
+      localStorage.setItem("label", "Light Mode");
     }
     } else {
       setTheme("light");
       setLabel("Dark Mode");
-      localStorage.setItem("Dark Mode", "Dark Mode");
+      localStorage.setItem("label", "Dark Mode");
     }
   };
 
@@ -76,12 +76,18 @@ function App() {
 
             <div>
               <div>
-              <Form onClick={toggleTheme} className="toggle-button">
+              {/* <Form onClick={toggleTheme} className="toggle-button">
                 <Form.Check
                   type="switch"
                   id="custom-switch"
                   label={label}
                 />
+              </Form> */}
+              <Form onClick={toggleTheme} className="toggle-button">
+              <Form.Switch
+                id="custom-switch"
+                label={label}
+              />
               </Form>
 
               </div>
