@@ -7,6 +7,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
@@ -92,7 +93,8 @@ function App() {
 
               </div>
               <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard handleClose={handleClose} handleShow={handleShow} show={show}/>} />
                 <Route path="/viewticket/:ticketId" element={<ViewTicket handleClose={handleClose} handleShow={handleShow} show={show}/>} />
 
