@@ -12,7 +12,6 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
 import Form from "react-bootstrap/Form";
-import "./darkMode.css";
 import "./App.css"
 
 // Construct our main GraphQL API endpoint
