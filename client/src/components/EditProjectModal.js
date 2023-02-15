@@ -3,11 +3,11 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_PROJECT } from "../utils/queries";
+// import { QUERY_SINGLE_PROJECT } from "../utils/queries";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { MDBIcon } from "mdb-react-ui-kit";
-import { UPDATE_PROJECT } from "../utils/mutations";
+// import { UPDATE_PROJECT } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function EditProjectModal({ project, projects, setProjectData }) {
@@ -15,7 +15,7 @@ function EditProjectModal({ project, projects, setProjectData }) {
 
   const projectId = project._id;
 
-  const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
+  // const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
   
   // handle change
   const handleChange = (event) => {
@@ -24,18 +24,18 @@ function EditProjectModal({ project, projects, setProjectData }) {
     };
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
-      console.log("about to make request");
-      try {
-        const { data } = await updateProject({
-          variables: { ...formData},
-        });
+      // event.preventDefault();
+      // console.log("about to make request");
+      // try {
+      //   const { data } = await updateProject({
+      //     variables: { ...formData},
+      //   });
        
-      } catch (err) {
-        console.error(err);
-      }
+      // } catch (err) {
+      //   console.error(err);
+      // }
   
-      handleClose();
+      // handleClose();
     };
 
   // modal variable states
@@ -48,9 +48,9 @@ function EditProjectModal({ project, projects, setProjectData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </p> */}
           <Link >
             <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
           </Link>

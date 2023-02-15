@@ -16,7 +16,6 @@ function ProjectTable({ projects, setProjectData }) {
           <th>End Date</th>
           <th>Progress</th>
           <th>Project Manager</th>
-          <th>Team</th>
           <th>Status</th>
           <th>Action</th>
         </tr>

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useMutation } from "@apollo/client";
+// import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 
-import { ADD_PROJECT } from "../utils/mutations";
+// import { ADD_PROJECT } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
@@ -19,25 +19,25 @@ function ProjectModal({
   show,
 }) {
   const [formData, setFormData] = useState({});
-  const ticketAuthor = currentUser.username;
+  const projectManager = currentUser.username;
 
-  const [addProject, { error }] = useMutation(ADD_PROJECT);
+  // const [addProject, { error }] = useMutation(ADD_PROJECT);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const { data } = await addProject({
-        variables: {
-          ...formData,
-        },
-      });
-      console.log("data:", data.addProject);
-      setProjectData([...projectData, data.addProject]);
-    } catch (err) {
-      console.error(err);
-    }
-    setFormData();
-    handleClose();
+    // try {
+    //   const { data } = await addProject({
+    //     variables: {
+    //       ...formData, projectManager
+    //     },
+    //   });
+    //   console.log("data:", data.addProject);
+    //   setProjectData([...projectData, data.addProject]);
+    // } catch (err) {
+    //   console.error(err);
+    // }
+    // setFormData();
+    // handleClose();
   };
 
   // handle change
@@ -50,9 +50,9 @@ function ProjectModal({
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </p> */}
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>New Project</Modal.Title>

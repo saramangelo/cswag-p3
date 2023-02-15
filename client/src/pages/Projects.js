@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import DashboardTable from "../components/DashboardTable";
+import ProjectTable from "../components/ProjectTable";
 import { useQuery } from "@apollo/client";
 import { QUERY_PROJECTS } from "../utils/queries";
-import TicketModal from "../components/TicketModal";
+import ProjectModal from "../components/ProjectModal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Spinner from "../components/Spinner";
@@ -57,16 +57,16 @@ function Projects({handleShow, handleClose, show}) {
                 </Card>
 
                 <Button style={styles.button} variant="dark" onClick={handleShow}>
-                  Create a ticket
+                  Create a project
                 </Button>
-                <TicketModal projectData={projectData} setProjectData={setProjectData} currentUser={currentUser} handleClose={handleClose} show={show}/>
+                <ProjectModal projectData={projectData} setProjectData={setProjectData} currentUser={currentUser} handleClose={handleClose} show={show}/>
 
                 {loading ? (
                   <Spinner />
                 ) : (
                   <div>
                     <div style={styles.header}>Current tickets</div>
-                    <DashboardTable
+                    <ProjectTable
                       projects={projectData}
                       setProjectData={setProjectData}
                     />
