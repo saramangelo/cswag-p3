@@ -102,18 +102,7 @@ function ProjectModal({
                     <option value=""></option>
                   </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicType">
-                  <Form.Label>Team</Form.Label>
-                  <Form.Select
-                    value={project.team}
-                    onChange={handleChange}
-                    name="priority"
-                    aria-label="Default select example"
-                  >
-                    <option>Select Team</option>
-                    <option value=""></option>
-                  </Form.Select>
-                </Form.Group>
+
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
                   <Form.Select
