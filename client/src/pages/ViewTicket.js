@@ -10,15 +10,16 @@ import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Form from "react-bootstrap/Form";
+// import Button from "react-bootstrap/Button";
 import TicketModal from "../components/TicketModal";
 
-import Collapse from 'react-bootstrap/Collapse';
+// import Collapse from 'react-bootstrap/Collapse';
 import { useState } from 'react';
 
 import AuthService from "../utils/auth";
-import BucketList from "../components/testcomment/BucketList";
+import CommentList from "../components/CommentList";
+
 
 const auth = AuthService;
 
@@ -53,7 +54,7 @@ const ViewTicket = ({handleClose, handleShow, show}) => {
   }).format(ticket.updatedAt);
 
   // state variable for comment button collapse
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
 
   const [dashData, setDashData] = useState([]);
@@ -97,7 +98,7 @@ const ViewTicket = ({handleClose, handleShow, show}) => {
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
             </Card>
-                <Button
+                {/* <Button
                   variant="outline-dark" 
                     onClick={() => setOpen(!open)}
                     aria-controls="example-collapse-text"
@@ -119,7 +120,9 @@ const ViewTicket = ({handleClose, handleShow, show}) => {
             </Card>
           </div>
         </Collapse>
-      </div>
+      </div> */}
+
+      <CommentList/>
        </Col>
        </Row>
      </Container>
