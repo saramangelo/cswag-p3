@@ -2,7 +2,6 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
 import Sidebar from "../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
@@ -15,6 +14,8 @@ import { useEffect, useState } from "react";
 
 import AuthService from "../utils/auth";
 import CommentList from "../components/CommentList";
+
+const dayjs = require('dayjs');
 
 const auth = AuthService;
 
@@ -70,6 +71,8 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
 
   const [commentData, setCommentData] = useState([]);
 
+  
+
 
   // current user data to send to Ticket Modal
   const currentUser = auth.getProfile().data;
@@ -93,6 +96,9 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
       setFlairColor("#f288d6");
     }
   },[ticket?.ticketPriority]);
+
+
+  const created = dayjs(createdAt).format(`MM/DD/YYYY`)+ " [" + dayjs(createdAt).format(`h:mm A]`);
 
   return (
     <>
