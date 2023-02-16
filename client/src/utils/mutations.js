@@ -42,11 +42,12 @@ export const ADD_TICKET = gql`
       ticketPriority: $ticketPriority
       ticketAuthor: $ticketAuthor
     ) {
+      _id
       ticketTitle
       ticketDescription
       ticketType
-      ticketPriority
       ticketStatus
+      ticketPriority
       ticketAuthor
     }
   }
@@ -70,11 +71,11 @@ export const UPDATE_TICKET = gql`
       ticketPriority: $ticketPriority
     ) {
       _id
-      ticketDescription
       ticketTitle
-      ticketPriority
-      ticketStatus
+      ticketDescription
       ticketType
+      ticketStatus
+      ticketPriority
     }
   }
 `;
@@ -100,6 +101,7 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+
 export const REMOVE_COMMENT = gql`
 mutation removeComment($ticketId: ID!, $commentId: ID!) {
   removeComment(ticketId: $ticketId, commentId: $commentId) {
@@ -112,3 +114,93 @@ mutation removeComment($ticketId: ID!, $commentId: ID!) {
   }
 }
 `
+
+export const REMOVE_TICKET = gql`
+  mutation removeTicket($ticketId: ID!) {
+    removeTicket(ticketId: $ticketId) {
+      _id
+    }
+  }
+`;
+
+export const ADD_PROJECT = gql`
+  mutation addProject(
+    $projectTitle: String!
+    $projectDescription: String!
+    $projectType: String!
+    $projectStatus: String!
+    $projectManager: String!
+  ) {
+    addProject(
+      projectTitle: $projectTitle
+      projectDescription: $projectDescription
+      projectType: $projectType
+      projectStatus: $projectStatus
+      projectManager: $projectManager
+    ) {
+
+      projectTitle
+      projectDescription
+      projectType
+      projectStatus
+      projectManager
+      tickets {
+        _id
+      }
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const UPDATE_PROJECT = gql`
+  mutation updateProject(
+    $projectId: ID!
+    $projectTitle: String!
+    $projectDescription: String!
+    $projectType: String!
+    $projectStatus: String!
+    $projectManager: String!
+  ) {
+    updateProject(
+      projectId: $projectId
+      projectTitle: $projectTitle
+      projectDescription: $projectDescription
+      projectType: $projectType
+      projectStatus: $projectStatus
+      projectManager: $projectManager
+    ) {
+      _id
+      projectTitle
+      projectDescription
+      projectType
+      projectStatus
+      projectManager
+      tickets {
+        _id
+      }
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const ADD_PROJECT_USER = gql`
+  mutation addProjectUser($projectId: ID!, $userId: ID!) {
+    addProjectUser(projectId: $projectId, userId: $userId) {
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const ADD_PROJECT_TICKET = gql`
+  mutation addProjectTicket($projectId: ID!, $ticketId: ID!) {
+    addProjectTicket(projectId: $projectId, ticketId: $ticketId) {
+      _id
+    }
+  }
+`;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import DashboardTable from "../components/DashboardTable";
+import TicketTable from "../components/TicketTable";
 import { useQuery } from "@apollo/client";
-import { QUERY_TICKETS } from "../utils/queries";
+import { QUERY_TICKETS, QUERY_PROJECTS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -13,69 +13,110 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "../utils/auth";
+import ProjectModal from "../components/ProjectModal";
+import ProjectTable from "../components/ProjectTable";
 
 const auth = AuthService;
 
 const styles = {
   header: {
     fontFamily: "Rubik Mono One, sans-serif",
-    fontSize: "30px"
+    fontSize: "30px",
   },
   button: {
     fontFamily: "Rubik Mono One, sans-serif",
   },
 };
 
-function Dashboard({handleShow, handleClose, show}) {
+function Dashboard({
+  handleShow,
+  handleClose,
+  handleProjectShow,
+  handleProjectClose,
+  show,
+  showProject,
+}) {
   const { loading, data } = useQuery(QUERY_TICKETS, {
     onCompleted: () => {
       setDashData(data.tickets);
     },
   });
 
-  const [dashData, setDashData] = useState([]);
+  const projectQuery = useQuery(QUERY_PROJECTS, {
+    onCompleted: () => {
+      setProjectData(projectQuery.data.projects);
+    },
+  });
 
+  const [dashData, setDashData] = useState([]);
+  const [projectData, setProjectData] = useState([]);
+
+  let currentUser;
 
   // TicketAuthor from getProfile (current user)
-  const currentUser = auth.getProfile().data;
-  console.log(currentUser);
+  if (auth.loggedIn()) {
+    currentUser = auth.getProfile().data;
+  }
+  //console.log(currentUser);
 
   return (
-      <>
+    <>
       {auth.loggedIn() ? (
         <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow}/>
+          <Sidebar handleShow={handleShow} />
           <Row>
-            <Col xs={1} lg={2} >
+            <Col xs={1} lg={2}>
               {" "}
             </Col>
             <Col xs={10} lg={9}>
-              {/* <header>
-                <Navbar />
-
-              </header> */}
               <Card body className="welcome-card">
-                  <header style={styles.header}>
-                    Welcome, {currentUser.username}!
-                  </header>
-                </Card>
+                <header style={styles.header}>
+                  Welcome, {currentUser.username}!
+                </header>
+              </Card>
 
-                <Button style={styles.button} variant="dark" onClick={handleShow}>
-                  Create a ticket
-                </Button>
-                <TicketModal dashData={dashData} setDashData={setDashData} currentUser={currentUser} handleClose={handleClose} show={show}/>
+              <ProjectModal
+                projectData={projectData}
+                setProjectData={setProjectData}
+                currentUser={currentUser}
+                handleProjectClose={handleProjectClose}
+                showProject={showProject}
+              />
 
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <div>
-                    <div style={styles.header}>Current tickets</div>
-                    <DashboardTable
-                      tickets={dashData}
-                      setDashData={setDashData}
-                    />
-                  </div>
-                )}
+              <TicketModal
+                dashData={dashData}
+                setDashData={setDashData}
+                currentUser={currentUser}
+                handleClose={handleClose}
+                show={show}
+              />
+              {loading ? (
+                <Spinner />
+              ) : (
+                <div>
+                  <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleProjectShow}
+                  >
+                    Create a Project
+                  </Button>
+                  <div style={styles.header}>Current Projects</div>
+                  <ProjectTable
+                    projects={projectData}
+                    setProjectData={setProjectData}
+                  />
+                  <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleShow}
+                  >
+                    Create a Ticket
+                  </Button>
+                  <div style={styles.header}>Current Tickets</div>
+                  <TicketTable tickets={dashData} setDashData={setDashData} />
+                </div>
+              )}
             </Col>
           </Row>
         </Container>

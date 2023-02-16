@@ -2,12 +2,12 @@ import Table from "react-bootstrap/Table";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import EditTicketModal from "./EditTicketModal";
+import RemoveTicketModal from "./RemoveTicketModal";
 
-function DashboardTable({ tickets, setDashData }) {
+function TicketTable({ tickets, setDashData }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;
   }
-  console.log(tickets);
   return (
     <Table striped bordered hover variant="light">
       <thead>
@@ -29,20 +29,21 @@ function DashboardTable({ tickets, setDashData }) {
               <td>{ticket.ticketType}</td>
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
-              <td>
+              <td className="dashboard-table-links">
                 <Link to={`/viewticket/${ticket._id}`}>
                   {" "}
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
                 <EditTicketModal
+                  ticketId={ticket._id}
+                  tickets={tickets}
+                  setDashData={setDashData}
+                />
+                <RemoveTicketModal
                   ticket={ticket}
                   tickets={tickets}
                   setDashData={setDashData}
                 />
-                <Link>
-                  {" "}
-                  <MDBIcon far icon="trash-alt" />{" "}
-                </Link>
               </td>
             </tr>
           ))}
@@ -51,4 +52,4 @@ function DashboardTable({ tickets, setDashData }) {
   );
 }
 
-export default DashboardTable;
+export default TicketTable;

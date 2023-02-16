@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Ticket } = require("../models");
+const { User, Ticket, Project } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -9,6 +9,12 @@ const resolvers = {
     },
     ticket: async (parent, { ticketId }) => {
       return Ticket.findOne({ _id: ticketId });
+    },
+    projects: async () => {
+      return Project.find().sort({ createdAt: -1 });
+    },
+    project: async (parent, { projectId }) => {
+      return Project.findOne({ _id: projectId });
     },
   },
 
@@ -99,11 +105,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addComment: async (
-      parent,
-      { ticketId, commentText, commentAuthor },
-      context
-    ) => {
+    addComment: async (parent, { ticketId, commentText, commentAuthor }, context) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
           { _id: ticketId },
@@ -125,12 +127,13 @@ const resolvers = {
     },
 
     removeTicket: async (parent, { ticketId }, context) => {
+      console.log("deleting tickets!");
       if (context.user) {
         const ticket = await Ticket.findOneAndDelete({
           _id: ticketId,
-          ticketAuthor: context.user.username,
+          // ticketAuthor: context.user.username,
         });
-
+        console.log(ticket);
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { ticket: ticket._id } }
@@ -152,6 +155,97 @@ const resolvers = {
             },
           },
           { new: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addProject: async (
+      parent,
+      {
+        projectTitle,
+        projectDescription,
+        projectManager,
+        projectType,
+        projectStatus,
+        users,
+        tickets,
+      },
+      context
+    ) => {
+      //users = [...users, context.user._id];
+      if (context.user) {
+        const project = await Project.create({
+          projectTitle,
+          projectDescription,
+          projectManager,
+          projectType,
+          projectStatus,
+          users,
+          tickets,
+        });
+        await User.updateMany(
+          { _id: { $in: project.users } },
+          { $addToSet: { projects: project._id } }
+        );
+        return project;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addProjectUser: async (parent, { projectId, userId }, context) => {
+      if (context.user) {
+        const project = await Project.findOneAndUpdate(
+          { _id: projectId },
+          { $addToSet: { users: userId } },
+          { new: true }
+        );
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { projects: projectId } }
+        );
+        return project;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addProjectTicket: async (parent, { projectId, ticketId }, context) => {
+      if (context.user) {
+        return Project.findOneAndUpdate(
+          { _id: projectId },
+          { $addToSet: { tickets: ticketId } },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    updateProject: async (
+      parent,
+      {
+        projectId,
+        projectTitle,
+        projectDescription,
+        projectType,
+        projectStatus,
+      },
+      context
+    ) => {
+      if (context.user) {
+        return Project.findOneAndUpdate(
+          { _id: projectId },
+          {
+            $set: {
+              projectTitle: projectTitle,
+              projectDescription: projectDescription,
+              projectType: projectType,
+              projectStatus: projectStatus,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
         );
       }
       throw new AuthenticationError("You need to be logged in!");

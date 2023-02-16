@@ -51,17 +51,32 @@ export const QUERY_SINGLE_TICKET = gql`
   }
 `;
 
-export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      email
+export const QUERY_SINGLE_PROJECT = gql`
+  query project($projectId: ID!) {
+    project(projectId: $projectId) {
+      projectTitle
+      projectDescription
       tickets {
         _id
-        ticketTitle
-        ticketAuthor
-        createdAt
+      }
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const QUERY_PROJECTS = gql`
+  query projects {
+    projects {
+      _id
+      projectTitle
+      projectDescription
+      tickets {
+        _id
+      }
+      users {
+        _id
       }
     }
   }

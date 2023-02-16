@@ -3,20 +3,21 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type User {
     _id: ID
-    email: String
+    email: String!
+    username: String!
     password: String
-    username: String
-    ticket: [Ticket]!
+    tickets: [Ticket]
+    projects: [Project]
   }
 
   type Ticket {
     _id: ID
-    ticketTitle: String
-    ticketDescription: String
-    ticketAuthor: String
-    ticketStatus: String
-    ticketType: String
-    ticketPriority: String
+    ticketTitle: String!
+    ticketDescription: String!
+    ticketAuthor: String!
+    ticketStatus: String!
+    ticketType: String!
+    ticketPriority: String!
     ticketAssignee: String
     createdAt: String
     updatedAt: String
@@ -30,6 +31,17 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type Project {
+    _id: ID
+    projectTitle: String!
+    projectDescription: String!
+    projectType: String!
+    projectStatus: String!
+    projectManager: String!
+    users: [User]
+    tickets: [Ticket]
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -38,6 +50,8 @@ const typeDefs = gql`
   type Query {
     tickets: [Ticket]
     ticket(ticketId: ID!): Ticket
+    projects: [Project]
+    project(projectId: ID!): Project
   }
 
   type Mutation {
@@ -60,14 +74,38 @@ const typeDefs = gql`
       ticketPriority: String!
     ): Ticket
 
-    addComment(ticketId: ID!,
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String): Ticket
+    addComment(
+      ticketId: ID!
+      _id: ID
+      commentText: String
+      commentAuthor: String
+      createdAt: String
+    ): Ticket
 
     removeTicket(ticketId: ID!): Ticket
     removeComment(ticketId: ID!, commentId: ID!): Ticket
+
+    addProject(
+      projectTitle: String!
+      projectDescription: String!
+      projectType: String!
+      projectStatus: String!
+      projectManager: String!
+      users: [ID]
+      tickets: [ID]
+    ): Project
+
+    addProjectUser(projectId: ID!, userId: ID!): Project
+
+    addProjectTicket(projectId: ID!, ticketId: ID!): Project
+
+    updateProject(
+      projectId: ID!
+      projectTitle: String!
+      projectDescription: String!
+      projectType: String!
+      projectStatus: String!
+    ): Project
   }
 `;
 
