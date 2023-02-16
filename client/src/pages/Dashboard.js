@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TicketTable from "../components/TicketTable";
 import { useQuery } from "@apollo/client";
-import { QUERY_TICKETS, QUERY_PROJECTS } from "../utils/queries";
+import { QUERY_TICKETS, QUERY_PROJECTS, QUERY_USERS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -48,8 +48,14 @@ function Dashboard({
     },
   });
 
+  const usersQuery = useQuery(QUERY_USERS, {
+    onCompleted: () => {
+      setUserList(usersQuery.data.users);
+    },
+  });
   const [dashData, setDashData] = useState([]);
   const [projectData, setProjectData] = useState([]);
+  const [userList, setUserList] = useState([]);
 
   let currentUser;
 
@@ -63,7 +69,10 @@ function Dashboard({
     <>
       {auth.loggedIn() ? (
         <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow} handleProjectShow={handleProjectShow}/>
+          <Sidebar
+            handleShow={handleShow}
+            handleProjectShow={handleProjectShow}
+          />
           <Row>
             <Col xs={1} lg={2}>
               {" "}
@@ -89,6 +98,7 @@ function Dashboard({
                 currentUser={currentUser}
                 handleClose={handleClose}
                 show={show}
+                userList={userList}
               />
               {loading ? (
                 <Spinner />

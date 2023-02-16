@@ -2,6 +2,7 @@ import Table from "react-bootstrap/Table";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import EditProjectModal from "./EditProjectModal";
+import RemoveProjectModal from "./RemoveProjectModal";
 
 function ProjectTable({ projects, setProjectData }) {
   if (!projects.length) {
@@ -38,10 +39,11 @@ function ProjectTable({ projects, setProjectData }) {
                   projects={projects}
                   setProjectData={setProjectData}
                 />
-                <Link>
-                  {" "}
-                  <MDBIcon far icon="trash-alt" />{" "}
-                </Link>
+                <RemoveProjectModal
+                  project={project}
+                  projects={projects}
+                  setProjectData={setProjectData}
+                  />
               </td>
             </tr>
           ))}

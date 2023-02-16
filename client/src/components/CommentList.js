@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { REMOVE_COMMENT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-function CommentList({ ticketId, comments, commentData, setCommentData }) {
+function CommentList({ ticketId, comments, commentData, setCommentData, commentCreatedAt }) {
   console.log(comments);
 
   // Function to remove comment and update state
@@ -40,7 +40,7 @@ function CommentList({ ticketId, comments, commentData, setCommentData }) {
           commentId={comment._id}
           commentText={comment.commentText}
           commentAuthor={comment.commentAuthor}
-          commentCreatedAt={comment.createdAt}
+          commentCreatedAt={commentCreatedAt}
           removeComment={removeComment}
           setCommentData={setCommentData}
           // editComment={editComment}

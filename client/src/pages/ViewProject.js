@@ -10,6 +10,7 @@ import { QUERY_SINGLE_PROJECT } from "../utils/queries";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import ProjectModal from "../components/ProjectModal";
+import TicketModal from "../components/TicketModal";
 import { useState } from "react";
 import ProjectTickets from  "../components/ProjectTickets";
 import AuthService from "../utils/auth";
@@ -31,7 +32,7 @@ const styles = {
 
 const auth = AuthService;
 
-const ViewProject = ({ handleClose, handleShow, show, handle }) => {
+const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleProjectClose, showProject}) => {
   const { projectId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
@@ -60,13 +61,16 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
 
   const [projectData, setProjectData] = useState([]);
 
+  const [dashData, setDashData] = useState([]);
+
   const currentUser = auth.getProfile().data;
+  
 
   return (
     <>
       {auth.loggedIn() ? (
         <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow} />
+          <Sidebar handleShow={handleShow} handleProjectShow={handleProjectShow}/>
           <Row>
             <Col xs={1} lg={3}>
               {" "}
@@ -121,12 +125,19 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
           <ProtectPage />
         </div>
       )}
+      <TicketModal
+        dashData={dashData}
+        setDashData={setDashData}
+        currentUser={currentUser}
+        handleClose={handleClose}
+        show={show}
+      />
       <ProjectModal
         projectData={projectData}
         setProjectData={setProjectData}
         currentUser={currentUser}
-        handleClose={handleClose}
-        show={show}
+        handleProjectClose={handleProjectClose}
+        showProject={showProject}
       />
     </>
   );

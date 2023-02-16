@@ -52,6 +52,7 @@ const typeDefs = gql`
     ticket(ticketId: ID!): Ticket
     projects: [Project]
     project(projectId: ID!): Project
+    users: [User]
   }
 
   type Mutation {
@@ -64,6 +65,7 @@ const typeDefs = gql`
       ticketStatus: String!
       ticketPriority: String!
       ticketAuthor: String!
+      ticketAssignee: String
     ): Ticket
     updateTicket(
       ticketId: ID!
@@ -84,7 +86,8 @@ const typeDefs = gql`
 
     removeTicket(ticketId: ID!): Ticket
     removeComment(ticketId: ID!, commentId: ID!): Ticket
-
+    removeProject(projectId: ID!): Project
+    
     addProject(
       projectTitle: String!
       projectDescription: String!

@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Login from "./pages/Login.js";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
@@ -127,7 +127,10 @@ function App() {
                     <ViewProject
                       handleClose={handleClose}
                       handleShow={handleShow}
+                      handleProjectShow={handleProjectShow}
+                      handleProjectClose={handleProjectClose}
                       show={show}
+                      showProject={showProject}
                     />
                   }
                 />
