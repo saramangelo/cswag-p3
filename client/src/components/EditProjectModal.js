@@ -31,7 +31,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
       setProjectType(data.project.projectType);
       setProjectStatus(data.project.projectStatus);
     }
-  }, [data?.ticket]);
+  }, [data?.project]);
 
   const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
 
@@ -177,7 +177,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
                 Cancel
               </Button>
               <Button variant="dark" onClick={handleSubmit}>
-                Submit ticket
+                Submit Project
               </Button>
             </Modal.Footer>
           </Modal>
