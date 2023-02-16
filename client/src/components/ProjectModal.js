@@ -8,10 +8,9 @@ import { ADD_PROJECT } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function ProjectModal({
-  projects,
   projectData,
   setProjectData,
-  projectManager,
+  currentUser,
   handleProjectClose,
   showProject,
 }) {
@@ -21,6 +20,7 @@ function ProjectModal({
   const [projectStatus, setProjectStatus] = useState("");
 
   const [addProject, { error }] = useMutation(ADD_PROJECT);
+  const projectManager = currentUser.username;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,13 +29,13 @@ function ProjectModal({
         variables: {
           projectTitle,
           projectDescription,
+          projectManager,
           projectType,
           projectStatus,
-          projectManager,
         },
       });
       console.log("data:", data.addProject);
-      setProjectData([...projectData, data.addProject]);
+      setProjectData([data.addProject, ...projectData]);
     } catch (err) {
       console.error(err);
     }
@@ -88,7 +88,7 @@ function ProjectModal({
                 <Form.Group className="mb-3" controlId="formBasicTitle">
                   <Form.Label>Project Title</Form.Label>
                   <Form.Control
-                    value={projects.projectTitle}
+                    value={projectTitle}
                     onChange={handleChange}
                     name="title"
                     type="title"
@@ -104,7 +104,7 @@ function ProjectModal({
                 >
                   <Form.Label>Description</Form.Label>
                   <Form.Control
-                    value={projects.projectDescription}
+                    value={projectDescription}
                     onChange={handleChange}
                     name="description"
                     as="textarea"
@@ -120,7 +120,7 @@ function ProjectModal({
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
                   <Form.Select
-                    value={projects.projectStatus}
+                    value={projectStatus}
                     onChange={handleChange}
                     name="status"
                     aria-label="Default select example"
@@ -137,9 +137,9 @@ function ProjectModal({
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Type</Form.Label>
                   <Form.Select
-                    value={projects.projectType}
+                    value={projectType}
                     onChange={handleChange}
-                    name="status"
+                    name="type"
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>

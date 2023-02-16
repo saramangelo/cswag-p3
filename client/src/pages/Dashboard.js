@@ -76,9 +76,9 @@ function Dashboard({
               </Card>
 
               <ProjectModal
-                projects={projectData}
+                projectData={projectData}
                 setProjectData={setProjectData}
-                projectManager={currentUser}
+                currentUser={currentUser}
                 handleProjectClose={handleProjectClose}
                 showProject={showProject}
               />
