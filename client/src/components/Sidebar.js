@@ -25,14 +25,13 @@ function Sidebar({ handleShow, handleProjectShow }) {
               <NavDropdown title="Projects" active="false" className="nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Project 1</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Project 2</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Project 3</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleProjectShow}>New Project</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Tickets" active="false" className="nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">My Tickets</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">All Tickets</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Ticket 3</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShow}>New Ticket</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link onClick={handleShow}>New Ticket</Nav.Link>
               <Nav.Link onClick={handleProjectShow}>New Project</Nav.Link>
             </Nav>
           </Navbar.Collapse>

@@ -88,66 +88,88 @@ const ViewTicket = ({
   return (
     <>
       {auth.loggedIn() ? (
-        <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow} />
-          <Row>
-            <Col xs={1} lg={3}>
-              {" "}
-            </Col>
-            <Col xs={10} lg={8}>
-              <Card className="text-center detail-card">
-                <Card.Header>Ticket Details</Card.Header>
-                <Card.Body>
-                  {loading ? (
-                    <Spinner />
-                  ) : (
-                    <>
-                      <ListGroup>
-                        <ListGroup.Item>
-                          Title: {ticket.ticketTitle}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Description: {ticket.ticketDescription}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Submitter: {ticket.ticketAuthor}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Status: {ticket.ticketStatus}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Priority: {ticket.ticketPriority}
-                        </ListGroup.Item>
-                        <ListGroup.Item>Created at: {createdAt}</ListGroup.Item>
-                        <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
-                      </ListGroup>
-                    </>
-                  )}
-                </Card.Body>
-                <Card.Footer className="text-muted"></Card.Footer>
-              </Card>
+        loading ? (
+          <Spinner />
+        ) : (
+          <Container fluid className="body-container">
+            <Sidebar handleShow={handleShow} />
+            <Row>
+              <Col xs={1} lg={3}>
+                {" "}
+              </Col>
+              <Col xs={10} lg={8}>
+                <Card className="text-center ticket-detail-card">
+                  <Card.Header className="ticket-detail-header">
+                    <Card.Title className="ticket-detail-title">
+                      {ticket.ticketTitle}
+                    </Card.Title>
+                    <Card.Text className="ticket-detail-submission">
+                      Submitted by {ticket.ticketAuthor}
+                    </Card.Text>
+                  </Card.Header>
+                  <Card.Body>
+                    {loading ? (
+                      <Spinner />
+                    ) : (
+                      <>
+                        <ListGroup>
+                          <ListGroup.Item>
+                            Title: {ticket.ticketTitle}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Description: {ticket.ticketDescription}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Submitter: {ticket.ticketAuthor}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Status: {ticket.ticketStatus}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Priority: {ticket.ticketPriority}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Created at: {createdAt}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Updated at: {updatedAt}
+                          </ListGroup.Item>
+                        </ListGroup>
+                      </>
+                    )}
+                  </Card.Body>
+                  <Card.Footer className="text-muted"></Card.Footer>
+                </Card>
 
-              <CommentList
-                ticketId={ticketId}
-                comments={commentData}
-                setCommentData={setCommentData}
-                commentData={commentData}
-              />
-            </Col>
-          </Row>
-        </Container>
+                <CommentList
+                  ticketId={ticketId}
+                  comments={commentData}
+                  setCommentData={setCommentData}
+                  commentData={commentData}
+                />
+              </Col>
+            </Row>
+            <TicketModal
+              dashData={dashData}
+              setDashData={setDashData}
+              currentUser={currentUser}
+              handleClose={handleClose}
+              show={show}
+            />
+            <ProjectModal
+              projectData={projectData}
+              setProjectData={setProjectData}
+              currentUser={currentUser}
+              handleProjectClose={handleProjectClose}
+              showProject={showProject}
+            />
+          </Container>
+        )
       ) : (
         <div>
           <ProtectPage />
         </div>
       )}
-      <TicketModal
-        dashData={dashData}
-        setDashData={setDashData}
-        currentUser={currentUser}
-        handleClose={handleClose}
-        show={show}
-      />
     </>
   );
 };
