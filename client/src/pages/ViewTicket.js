@@ -61,38 +61,35 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
               {" "}
             </Col>
             <Col xs={10} lg={8}>
-              <Card className="text-center detail-card">
-                <Card.Header>Ticket Details</Card.Header>
-                <Card.Body>
-                  {loading ? (
-                    <Spinner />
+            {loading ? (
+              <Spinner />
                   ) : (
-                    <>
+              <Card className="text-center ticket-detail-card">
+                <Card.Header className="ticket-detail-header">
+                  <Card.Title className="ticket-detail-title">{ticket.ticketTitle}</Card.Title>
+                  <Card.Text className="ticket-detail-submission">
+                    Submitted by {ticket.ticketAuthor}
+                    <br></br>{createdAt.split(", ")[0]} at {createdAt.split(", ")[1].slice(0,5)}{createdAt.split(", ")[1].slice(8)}
+                  </Card.Text>
+                </Card.Header>
+                <Card.Body>
                       <ListGroup>
-                        <ListGroup.Item>
-                          Title: {ticket.ticketTitle}
+                        <ListGroup.Item className="ticket-detail-description">
+                          {ticket.ticketDescription}
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                          Description: {ticket.ticketDescription}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Submitter: {ticket.ticketAuthor}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
+
+                        <ListGroup.Item className="ticket-detail-status">
                           Status: {ticket.ticketStatus}
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item className="ticket-detail-priority">
                           Priority: {ticket.ticketPriority}
                         </ListGroup.Item>
-                        <ListGroup.Item>Created at: {createdAt}</ListGroup.Item>
                         <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
                       </ListGroup>
-                    </>
-                  )}
                 </Card.Body>
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
-
+            )}
               <CommentList />
             </Col>
           </Row>

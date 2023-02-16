@@ -95,7 +95,6 @@ function App() {
                 <Route path="/" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard handleClose={handleClose} handleShow={handleShow} show={show}/>} />
                 <Route path="/viewticket/:ticketId" element={<ViewTicket handleClose={handleClose} handleShow={handleShow} show={show}/>} />
-
                 <Route path="*" element={<NotFound />}></Route>
               </Routes>
             </div>

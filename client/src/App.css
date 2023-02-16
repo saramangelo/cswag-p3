@@ -53,14 +53,38 @@ body{
     padding: 0px !important;
 }
 
-.detail-card{
-    margin-top:50px;
+.ticket-detail-card{
+    width: 90%;
+    margin: 50px auto;
+}
+
+.ticket-detail-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-detail-title{
+    font-weight: bolder;
+}
+
+.ticket-detail-submission{
+    text-align: right;
+    text-decoration: wavy;
+}
+
+.login-card{
+    width: 700px;
+    margin: 0px auto;
+
+}
+
+.login-signup-btn{
+    background-color: #777 !important;
 }
 
 .navbar-toggler{
     float: left;
 }
-
 
 .dashboard-table-links{
     white-space: nowrap;
@@ -158,6 +182,9 @@ body{
     }
     .welcome-card{
         margin-top: 20px;
+    }
+    .login-card{
+        width: auto;
     }
     
   }
