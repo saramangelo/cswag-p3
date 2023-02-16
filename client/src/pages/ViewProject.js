@@ -11,9 +11,10 @@ import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import ProjectModal from "../components/ProjectModal";
 import { useState } from "react";
-
+import ProjectTickets from  "../components/ProjectTickets";
 import AuthService from "../utils/auth";
-import CommentList from "../components/CommentList";
+// ICEBOXED COMMENT LIST
+// import CommentList from "../components/CommentList";
 
 const auth = AuthService;
 
@@ -86,6 +87,12 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
                 </Card.Body>
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
+
+
+              <ProjectTickets/>
+                      {/* ICEBOX */}
+              {/* <CommentList /> */}
+
             </Col>
           </Row>
         </Container>
