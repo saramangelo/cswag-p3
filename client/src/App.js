@@ -127,7 +127,10 @@ function App() {
                     <ViewProject
                       handleClose={handleClose}
                       handleShow={handleShow}
+                      handleProjectShow={handleProjectShow}
+                      handleProjectClose={handleProjectClose}
                       show={show}
+                      showProject={showProject}
                     />
                   }
                 />
