@@ -167,6 +167,17 @@ body{
     height: 300px;
 }
 
+/* ==== ProjectTickets.js ==== */
+
+.project-ticket-table {
+    margin-top: 25px;
+}
+
+.project-ticket-header {
+    color: black !important;
+    text-align: center;
+}
+
 
 /* ==== DARK MODE ==== */
 
