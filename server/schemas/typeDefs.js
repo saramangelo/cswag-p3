@@ -103,7 +103,6 @@ const typeDefs = gql`
       projectId: ID!
       projectTitle: String!
       projectDescription: String!
-      projectManager: String!
       projectType: String!
       projectStatus: String!
     ): Project

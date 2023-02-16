@@ -19,8 +19,6 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
     console.log("err");
   }
 
-  //while(loading){ };
-
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
