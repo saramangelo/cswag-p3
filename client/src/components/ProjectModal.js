@@ -29,9 +29,9 @@ function ProjectModal({
         variables: {
           projectTitle,
           projectDescription,
-          projectManager,
           projectType,
           projectStatus,
+          projectManager,
         },
       });
       console.log("data:", data.addProject);
@@ -143,12 +143,12 @@ function ProjectModal({
                     aria-label="Default select example"
                   >
                     <option>Select Type</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
                     <option value="New">New</option>
+                    <option value="Development">Development</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Archived">Archived</option>
                   </Form.Select>
                 </Form.Group>
               </Form>
