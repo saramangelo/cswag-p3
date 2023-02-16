@@ -10,7 +10,7 @@ function ProjectTickets() {
     <>
       <Card className="project-ticket-table">
         <Card>
-          <header className="project-ticket-header">Ticket for this Project</header>
+          <header className="project-ticket-header">Tickets for this Project</header>
         </Card>
         <Table striped bordered hover variant="light">
           <thead>

@@ -105,7 +105,7 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
                     variant="dark"
                     onClick={handleShow}
                   >
-                    Create a Ticket
+                    Create a Ticket for this project
                   </Button>
               <AddTicketToProjectModal/>
 

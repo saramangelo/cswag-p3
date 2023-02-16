@@ -10,6 +10,7 @@ function CommentList({ ticketId, comments, commentData, setCommentData }) {
   // Function to remove comment and update state
   const [removeComment, { error }] = useMutation(REMOVE_COMMENT);
 
+  // ICEBOX
   // Function to edit the comment
   // const editComment = (itemId, newValue) => {
   //   // Make sure that the value isn't empty
