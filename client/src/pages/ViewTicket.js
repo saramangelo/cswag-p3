@@ -18,10 +18,15 @@ import CommentList from "../components/CommentList";
 const auth = AuthService;
 
 const ViewTicket = ({ handleClose, handleShow, show }) => {
+  // Get Ticket data for page
+
   const { ticketId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
     variables: { ticketId },
+    onCompleted: () => {
+      setCommentData(data.ticket.comments);
+    },
   });
 
   const ticket = data?.ticket || [];
@@ -48,7 +53,9 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
   // const [open, setOpen] = useState(false);
 
   const [dashData, setDashData] = useState([]);
+  const [commentData, setCommentData] = useState([]);
 
+  // current user data to send to Ticket Modal
   const currentUser = auth.getProfile().data;
 
   return (
@@ -93,7 +100,12 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
 
-              <CommentList />
+              <CommentList
+                ticketId={ticketId}
+                comments={commentData}
+                setCommentData={setCommentData}
+                commentData={commentData}
+              />
             </Col>
           </Row>
         </Container>

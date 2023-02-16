@@ -104,13 +104,17 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addComment: async (parent, { ticketId, commentText }, context) => {
+
+    addComment: async (parent, { ticketId, commentText, commentAuthor }, context) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
           { _id: ticketId },
           {
             $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
+              comments: {
+                commentText: commentText,
+                commentAuthor: commentAuthor,
+              },
             },
           },
           {
@@ -121,6 +125,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
     removeTicket: async (parent, { ticketId }, context) => {
       console.log("deleting tickets!");
       if (context.user) {
@@ -146,7 +151,6 @@ const resolvers = {
             $pull: {
               comments: {
                 _id: commentId,
-                commentAuthor: context.user.username,
               },
             },
           },

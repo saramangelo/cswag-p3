@@ -81,14 +81,16 @@ export const UPDATE_TICKET = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      ticketTitle
-      ticketDescription
-      ticketType
-      ticketStatus
-      ticketPriority
+  mutation addComment(
+    $ticketId: ID!
+    $commentText: String!
+    $commentAuthor: String!
+  ) {
+    addComment(
+      commentText: $commentText
+      commentAuthor: $commentAuthor
+      ticketId: $ticketId
+    ) {
       comments {
         _id
         commentText
@@ -98,6 +100,20 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+
+export const REMOVE_COMMENT = gql`
+mutation removeComment($ticketId: ID!, $commentId: ID!) {
+  removeComment(ticketId: $ticketId, commentId: $commentId) {
+    comments {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+    }
+  }
+}
+`
 
 export const REMOVE_TICKET = gql`
   mutation removeTicket($ticketId: ID!) {

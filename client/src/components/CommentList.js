@@ -1,44 +1,50 @@
 import React, { useState } from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
+import { REMOVE_COMMENT } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
-function CommentList() {
-  const [comment, setComment] = useState([]);
-
-  // Function to add a comment
-  const addComment = (item) => {
-    setComment([...comment, item]);
-  };
+function CommentList({ ticketId, comments, commentData, setCommentData }) {
+  console.log(comments);
 
   // Function to remove comment and update state
-  const removeComment = (id) => {
-    let updatedComment = comment.filter((item) => item.id !== id);
-
-    setComment(updatedComment);
-  };
+  const [removeComment, { error }] = useMutation(REMOVE_COMMENT);
 
   // Function to edit the comment
-  const editComment = (itemId, newValue) => {
-    // Make sure that the value isn't empty
-    if (!newValue.text) {
-      return;
-    }
+  // const editComment = (itemId, newValue) => {
+  //   // Make sure that the value isn't empty
+  //   if (!newValue.text) {
+  //     return;
+  //   }
 
-    // We use the "prev" argument provided with the useState hook to map through our list of items
-    // We then check to see if the item ID matches the id of the item that was clicked and if so, we set it to a new value
-    setComment((prev) =>
-      prev.map((item) => (item.id === itemId ? newValue : item))
-    );
-  };
+  //   // We use the "prev" argument provided with the useState hook to map through our list of items
+  //   // We then check to see if the item ID matches the id of the item that was clicked and if so, we set it to a new value
+  //   setComment((prev) => {
+  //     console.log(prev);
+  //     prev.map((item) => (item.id === itemId ? newValue : item));
+  //   });
+  // };
 
   return (
     <div>
-      <CommentForm onSubmit={addComment} />
-      <Comment
-        comment={comment}
-        removeComment={removeComment}
-        editComment={editComment}
+      <CommentForm
+        ticketId={ticketId}
+        commentData={commentData}
+        setCommentData={setCommentData}
       />
+      {comments.map((comment) => (
+        <Comment
+          key={comment._id}
+          ticketId={ticketId}
+          commentId={comment._id}
+          commentText={comment.commentText}
+          commentAuthor={comment.commentAuthor}
+          commentCreatedAt={comment.createdAt}
+          removeComment={removeComment}
+          setCommentData={setCommentData}
+          // editComment={editComment}
+        />
+      ))}
     </div>
   );
 }
