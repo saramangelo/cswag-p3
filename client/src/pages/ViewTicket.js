@@ -86,6 +86,9 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
   return (
     <>
       {auth.loggedIn() ? (
+        loading ? (
+          <Spinner />
+          ) : (
         <Container fluid className="body-container">
           <Sidebar handleShow={handleShow} handleProjectShow={handleProjectShow} />
           <Row>
@@ -93,9 +96,6 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
               {" "}
             </Col>
             <Col xs={10} lg={8}>
-            {loading ? (
-              <Spinner />
-                  ) : (
               <Card className="text-center ticket-detail-card">
                 <Card.Header className="ticket-detail-header">
                   <Card.Title className="ticket-detail-title">{ticket.ticketTitle}</Card.Title>
@@ -129,29 +129,28 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
               />
             </Col>
           </Row>
+          <TicketModal
+            dashData={dashData}
+            setDashData={setDashData}
+            currentUser={currentUser}
+            handleClose={handleClose}
+            show={show}
+          />
+          <ProjectModal
+            projectData={projectData}
+            setProjectData={setProjectData}
+            currentUser={currentUser}
+            handleProjectClose={handleProjectClose}
+            showProject={showProject}
+          />
         </Container>
-      ) : (
+      )) : (
         <div>
           <ProtectPage />
         </div>
       )}
-      
-      <TicketModal
-        dashData={dashData}
-        setDashData={setDashData}
-        currentUser={currentUser}
-        handleClose={handleClose}
-        show={show}
-      />
-      <ProjectModal
-        projectData={projectData}
-        setProjectData={setProjectData}
-        currentUser={currentUser}
-        handleProjectClose={handleProjectClose}
-        showProject={showProject}
-      />
     </>
-  );
+  )
 };
 
 export default ViewTicket;
