@@ -142,7 +142,7 @@ function ProjectModal({
                     name="type"
                     aria-label="Default select example"
                   >
-                    <option>Select Status</option>
+                    <option>Select Type</option>
                     <option value="Archived">Archived</option>
                     <option value="Resolved">Resolved</option>
                     <option value="Testing">Testing</option>

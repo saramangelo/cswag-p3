@@ -35,7 +35,7 @@ function ProjectTable({ projects, setProjectData }) {
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
                 <EditProjectModal
-                  project={project}
+                  projectId={project._id}
                   projects={projects}
                   setProjectData={setProjectData}
                 />

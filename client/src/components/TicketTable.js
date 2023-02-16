@@ -35,7 +35,6 @@ function TicketTable({ tickets, setDashData }) {
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
                 <EditTicketModal
-                  ticket={ticket}
                   ticketId={ticket._id}
                   tickets={tickets}
                   setDashData={setDashData}

@@ -10,26 +10,22 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditTicketModal({ tickets, setDashData, ticketId }) {
-
+function EditTicketModal({ ticketId, tickets, setDashData }) {
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
-    variables: { ticketId }
+    variables: { ticketId },
   });
 
- if(data == null){
-  console.log('err');
- }
+  if (data == null) {
+    console.log("err");
+  }
 
   //while(loading){ };
-
-
 
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
   const [ticketPriority, setPriority] = useState("");
   const [ticketStatus, setStatus] = useState("");
-
 
   useEffect(() => {
     if (data?.ticket) {
@@ -56,15 +52,13 @@ function EditTicketModal({ tickets, setDashData, ticketId }) {
         },
       });
 
-      const updatedTickets = tickets.map(
-        (ticket) => {
-          if(ticket._id !== data.updateTicket._id){
-            return data.updateTicket;
-          }else{
-            return ticket;
-          }
+      const updatedTickets = tickets.map((ticket) => {
+        if (ticket._id !== data.updateTicket._id) {
+          return data.updateTicket;
+        } else {
+          return ticket;
         }
-      );
+      });
       setDashData(updatedTickets);
     } catch (err) {
       console.error(err);
@@ -104,9 +98,9 @@ function EditTicketModal({ tickets, setDashData, ticketId }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p> */}
+          </p>
           <Link variant="dark" onClick={handleShow}>
             <MDBIcon fas icon="pencil-alt" />
           </Link>
