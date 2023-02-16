@@ -16,6 +16,9 @@ const resolvers = {
     project: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId });
     },
+    users: async () => {
+      return User.find();
+    },
   },
 
   Mutation: {
@@ -50,6 +53,7 @@ const resolvers = {
         ticketStatus,
         ticketPriority,
         ticketAuthor,
+        ticketAssignee,
       },
       context
     ) => {
@@ -61,6 +65,7 @@ const resolvers = {
           ticketStatus,
           ticketPriority,
           ticketAuthor,
+          ticketAssignee,
         });
 
         await User.findOneAndUpdate(
