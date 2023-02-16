@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import EditProjectModal from "./EditProjectModal";
 
 function ProjectTable({ projects, setProjectData }) {
+  console.log(projects)
   if (!projects.length) {
     return <h3>No Projects Yet</h3>;
   }
@@ -33,7 +34,7 @@ function ProjectTable({ projects, setProjectData }) {
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
                 <EditProjectModal
-                  project={project}
+                  // project={project}
                   projectId={project._id}
                   projects={projects}
                   setProjectData={setProjectData}
