@@ -93,7 +93,7 @@ function SignUpForm({ setUser }) {
           onClick={handleViewLoginCard}
           type="submit"
         >
-          Back to login
+          Log In Instead
         </Button>
       </Form>
     </Container>

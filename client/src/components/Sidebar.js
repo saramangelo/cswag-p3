@@ -6,6 +6,9 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import buggin from './assets/buggin.png';
+import AuthService from '../utils/auth';
+
+const auth = AuthService;
 
 function Sidebar({ handleShow, handleProjectShow }) {
 
@@ -16,15 +19,15 @@ function Sidebar({ handleShow, handleProjectShow }) {
         <Navbar collapseOnSelect expand="lg" variant="dark" className="nav-box">
           <Navbar.Brand as="div" className="sidebar-title">
             <Image src={buggin} className="buggin-logo"/>
-            <div className="buggin-title">Buggin' Out</div>
+            <div className="buggin-title">DBUG</div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto flex-column sidebar-list">
               <Nav.Link href="/dashboard">Dashboard</Nav.Link>
               <NavDropdown title="Projects" active="false" className="nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Project 1</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Project 2</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.1">My Projects</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">All Projects</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleProjectShow}>New Project</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Tickets" active="false" className="nav-dropdown">
@@ -32,7 +35,7 @@ function Sidebar({ handleShow, handleProjectShow }) {
                 <NavDropdown.Item href="#action/3.2">All Tickets</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleShow}>New Ticket</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link onClick={handleProjectShow}>New Project</Nav.Link>
+              <Nav.Link onClick={auth.logout}>Log Out</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
