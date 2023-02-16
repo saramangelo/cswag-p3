@@ -8,15 +8,18 @@ import { ADD_PROJECT } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function ProjectModal({
-  projectId,
-  project,
+  projects,
   projectData,
   setProjectData,
   currentUser,
   handleClose,
   show,
 }) {
-  const [formData, setFormData] = useState({});
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [projectStatus, setProjectStatus] = useState("");
+
   const projectManager = currentUser.username;
 
   const [addProject, { error }] = useMutation(ADD_PROJECT);
@@ -26,7 +29,10 @@ function ProjectModal({
     try {
       const { data } = await addProject({
         variables: {
-          ...formData,
+          projectTitle,
+          projectDescription,
+          projectType,
+          projectStatus,
           projectManager,
         },
       });
@@ -35,23 +41,46 @@ function ProjectModal({
     } catch (err) {
       console.error(err);
     }
-    setFormData();
+    setProjectTitle("");
+    setProjectDescription("");
+    setProjectType("");
+    setProjectStatus("");
     handleClose();
   };
 
   // handle change
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData();
+
+    if (name === "title") {
+      console.log("title:", value);
+      setProjectTitle(value);
+      console.log(projectTitle);
+    }
+    if (name === "description") {
+      console.log("description:", value);
+      setProjectDescription(value);
+      console.log(projectDescription);
+    }
+    if (name === "type") {
+      console.log("type:", value);
+      setProjectType(value);
+      console.log(projectType);
+    }
+    if (name === "status") {
+      console.log("status:", value);
+      setProjectStatus(value);
+      console.log(projectStatus);
+    }
   };
 
   return (
     <>
       {Auth.loggedIn() ? (
         <>
-          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p> */}
+          </p>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>New Project</Modal.Title>
@@ -61,7 +90,7 @@ function ProjectModal({
                 <Form.Group className="mb-3" controlId="formBasicTitle">
                   <Form.Label>Project Title</Form.Label>
                   <Form.Control
-                    value={project.title}
+                    value={projects.projectTitle}
                     onChange={handleChange}
                     name="title"
                     type="title"
@@ -77,7 +106,7 @@ function ProjectModal({
                 >
                   <Form.Label>Description</Form.Label>
                   <Form.Control
-                    value={project.description}
+                    value={projects.projectDescription}
                     onChange={handleChange}
                     name="description"
                     as="textarea"
@@ -92,7 +121,7 @@ function ProjectModal({
                 <Form.Group className="mb-3" controlId="formBasicStatus">
                   <Form.Label>Project Manager</Form.Label>
                   <Form.Select
-                    value={project.projectManager}
+                    value={projects.projectManager}
                     onChange={handleChange}
                     name="type"
                     aria-label="Default select example"
@@ -105,7 +134,7 @@ function ProjectModal({
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
                   <Form.Select
-                    value={project.status}
+                    value={projects.projectStatus}
                     onChange={handleChange}
                     name="status"
                     aria-label="Default select example"

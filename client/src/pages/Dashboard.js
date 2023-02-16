@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TicketTable from "../components/TicketTable";
 import { useQuery } from "@apollo/client";
-import { QUERY_TICKETS } from "../utils/queries";
+import { QUERY_TICKETS, QUERY_PROJECTS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -35,7 +35,11 @@ function Dashboard({ handleShow, handleClose, show }) {
     },
   });
 
-  // const { loading, data } = useQuery(QUERY_PROJECTS)
+  const projectQuery = useQuery(QUERY_PROJECTS, {
+    onCompleted: () => {
+      setProjectData(projectQuery.data.projects);
+    },
+  });
 
   const [dashData, setDashData] = useState([]);
   const [projectData, setProjectData] = useState([]);
@@ -43,7 +47,7 @@ function Dashboard({ handleShow, handleClose, show }) {
   let currentUser;
 
   // TicketAuthor from getProfile (current user)
-  if(auth.loggedIn()){
+  if (auth.loggedIn()) {
     currentUser = auth.getProfile().data;
   }
   //console.log(currentUser);
