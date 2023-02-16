@@ -15,8 +15,6 @@ import { useEffect, useState } from "react";
 import AuthService from "../utils/auth";
 import CommentList from "../components/CommentList";
 
-const dayjs = require('dayjs');
-
 const auth = AuthService;
 
 
@@ -96,9 +94,6 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
       setFlairColor("#f288d6");
     }
   },[ticket?.ticketPriority]);
-
-
-  const created = dayjs(createdAt).format(`MM/DD/YYYY`)+ " [" + dayjs(createdAt).format(`h:mm A]`);
 
   return (
     <>
