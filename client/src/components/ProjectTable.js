@@ -7,7 +7,7 @@ function ProjectTable({ projects, setProjectData }) {
   if (!projects.length) {
     return <h3>No Projects Yet</h3>;
   }
-  console.log(projects);
+
   return (
     <Table striped bordered hover variant="light">
       <thead>
