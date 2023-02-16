@@ -88,9 +88,11 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
 
+
               <ProjectTickets/>
                       {/* ICEBOX */}
               {/* <CommentList /> */}
+
             </Col>
           </Row>
         </Container>

@@ -75,11 +75,7 @@ function LoginForm({ setUser }) {
           >
             Log in
           </Button>
-          <Button
-            onClick={handleViewLoginCard}
-            className="mb-2"
-            type="submit"
-          >
+          <Button onClick={handleViewLoginCard} className="mb-2" type="submit">
             Sign Up Instead
           </Button>
         </Container>

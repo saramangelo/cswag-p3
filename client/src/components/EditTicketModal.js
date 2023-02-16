@@ -47,7 +47,8 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
       });
 
       const updatedTickets = tickets.map((ticket) => {
-        if (ticket._id !== data.updateTicket._id) {
+        if (ticket._id == data.updateTicket._id) {
+          console.log(data.updateTicket);
           return data.updateTicket;
         } else {
           return ticket;

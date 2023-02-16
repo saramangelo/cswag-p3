@@ -98,7 +98,10 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
             <Col xs={10} lg={8}>
               <Card className="text-center ticket-detail-card">
                 <Card.Header className="ticket-detail-header">
-                  <Card.Title className="ticket-detail-title">{ticket.ticketTitle}</Card.Title>
+                  <div className="ticket-detail-header-left">
+                    <Card.Title className="ticket-detail-title">{ticket.ticketTitle}</Card.Title>
+                    <div className="ticket-detail-type">{ticket.ticketType}</div>
+                  </div>
                   <Card.Text className="ticket-detail-submission">
                     Submitted by {ticket.ticketAuthor}
                   </Card.Text>

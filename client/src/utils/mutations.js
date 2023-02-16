@@ -74,6 +74,7 @@ export const UPDATE_TICKET = gql`
       ticketTitle
       ticketDescription
       ticketType
+      ticketAuthor
       ticketStatus
       ticketPriority
     }
@@ -101,19 +102,18 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-
 export const REMOVE_COMMENT = gql`
-mutation removeComment($ticketId: ID!, $commentId: ID!) {
-  removeComment(ticketId: $ticketId, commentId: $commentId) {
-    comments {
-      _id
-      commentAuthor
-      commentText
-      createdAt
+  mutation removeComment($ticketId: ID!, $commentId: ID!) {
+    removeComment(ticketId: $ticketId, commentId: $commentId) {
+      comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
+      }
     }
   }
-}
-`
+`;
 
 export const REMOVE_TICKET = gql`
   mutation removeTicket($ticketId: ID!) {
@@ -138,7 +138,6 @@ export const ADD_PROJECT = gql`
       projectStatus: $projectStatus
       projectManager: $projectManager
     ) {
-
       projectTitle
       projectDescription
       projectType
@@ -156,12 +155,12 @@ export const ADD_PROJECT = gql`
 
 export const UPDATE_PROJECT = gql`
   mutation updateProject(
-    $projectId: ID!
-    $projectTitle: String!
-    $projectDescription: String!
-    $projectType: String!
-    $projectStatus: String!
-    $projectManager: String!
+    $projectId: ID
+    $projectTitle: String
+    $projectDescription: String
+    $projectType: String
+    $projectStatus: String
+    $projectManager: String
   ) {
     updateProject(
       projectId: $projectId
