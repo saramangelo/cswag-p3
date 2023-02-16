@@ -72,6 +72,9 @@ export const QUERY_PROJECTS = gql`
       _id
       projectTitle
       projectDescription
+      projectManager
+      projectType
+      projectStatus
       tickets {
         _id
       }
