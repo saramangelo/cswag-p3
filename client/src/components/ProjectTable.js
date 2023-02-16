@@ -12,10 +12,9 @@ function ProjectTable({ projects, setProjectData }) {
     <Table striped bordered hover variant="light">
       <thead>
         <tr>
-          <th>Project</th>
-          <th>End Date</th>
-          <th>Progress</th>
+          <th>Project Title</th>
           <th>Project Manager</th>
+          <th>Type</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -25,9 +24,8 @@ function ProjectTable({ projects, setProjectData }) {
           projects.map((project, i) => (
             <tr key={i}>
               <td>{project.projectTitle}</td>
-              <td>{project.projectEndDate}</td>
-              <td>{project.projectProgress}</td>
               <td>{project.projectProjectManager}</td>
+              <td>{project.projectType}</td>
               <td>{project.projectStatus}</td>
               <td>
                 <Link to={`/viewproject/${project._id}`}>
@@ -36,6 +34,7 @@ function ProjectTable({ projects, setProjectData }) {
                 </Link>
                 <EditProjectModal
                   project={project}
+                  projectId={project._id}
                   projects={projects}
                   setProjectData={setProjectData}
                 />
