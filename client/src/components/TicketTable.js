@@ -17,6 +17,7 @@ function TicketTable({ tickets, setDashData }) {
           <th>Type</th>
           <th>Priority</th>
           <th>Status</th>
+          <th>Assignee</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -29,6 +30,7 @@ function TicketTable({ tickets, setDashData }) {
               <td>{ticket.ticketType}</td>
               <td>{ticket.ticketPriority}</td>
               <td>{ticket.ticketStatus}</td>
+              <td>{ticket.ticketAssignee}</td>
               <td className="dashboard-table-links">
                 <Link to={`/viewticket/${ticket._id}`}>
                   {" "}

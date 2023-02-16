@@ -16,6 +16,9 @@ const resolvers = {
     project: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId });
     },
+    users: async () => {
+      return User.find();
+    },
   },
 
   Mutation: {
@@ -50,6 +53,7 @@ const resolvers = {
         ticketStatus,
         ticketPriority,
         ticketAuthor,
+        ticketAssignee,
       },
       context
     ) => {
@@ -61,6 +65,7 @@ const resolvers = {
           ticketStatus,
           ticketPriority,
           ticketAuthor,
+          ticketAssignee,
         });
 
         await User.findOneAndUpdate(
@@ -256,7 +261,24 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+  
+  removeProject: async (parent, { projectId }, context) => {
+    console.log("deleting projects!");
+    if (context.user) {
+      const project = await Project.findOneAndDelete({
+        _id: projectId,
+      });
+      console.log(project);
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { project: project._id } }
+      );
+
+      return project;
+    }
+    throw new AuthenticationError("You need to be logged in!");
   },
+},
 };
 
 module.exports = resolvers;

@@ -33,15 +33,26 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
 
   const ticket = data?.ticket || [];
 
-  // Date formatters for createdAt and updatedAt
-  const createdAt = new Intl.DateTimeFormat("en-US", {
+  // Date formatters for CreatedAt and updatedAt
+
+  const ticketCreatedAt = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-  }).format(ticket.createdAt);
+  }).format(ticket.ticketCreatedAt);
+
+  const commentCreatedAt = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(ticket.commentCreatedAt);
+
   const updatedAt = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -109,7 +120,8 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
                     <div className="ticket-detail-type">{ticket.ticketType}</div>
                   </div>
                   <Card.Text className="ticket-detail-submission">
-                    Submitted by {ticket.ticketAuthor}
+                    <p>Submitted by {ticket.ticketAuthor}</p>
+                    <p>Assigned to {ticket.ticketAssignee}</p>
                   </Card.Text>
                 </Card.Header>
                 <Card.Body>
@@ -126,8 +138,8 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
                   </div>
                 </Card.Body>
                 <Card.Footer className="ticket-detail-footer">
-                  {created}
-                 <br></br>{updatedAt===createdAt ? "" :  `  (Updated ${updatedAt.split(", ")[0]} [${updatedAt.split(", ")[1].slice(0,5)}${updatedAt.split(", ")[1].slice(8)}])` }
+                  {ticketCreatedAt.split(", ")[0]} [{ticketCreatedAt.split(", ")[1].slice(0,5)}{ticketCreatedAt.split(", ")[1].slice(8)}]
+                 <br></br>{updatedAt===ticketCreatedAt ? "" :  `  (Updated ${updatedAt.split(", ")[0]} [${updatedAt.split(", ")[1].slice(0,5)}${updatedAt.split(", ")[1].slice(8)}])` }
                 </Card.Footer>
               </Card>
               <CommentList
@@ -135,6 +147,7 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
                 comments={commentData}
                 setCommentData={setCommentData}
                 commentData={commentData}
+                commentCreatedAt={commentCreatedAt}
               />
             </Col>
           </Row>
