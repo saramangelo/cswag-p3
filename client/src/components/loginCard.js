@@ -6,7 +6,7 @@ import SignUpForm from "./SignUpForm";
 function LoginCard() {
   const [newUser, setNewUser] = useState(false);
   return (
-    <Card className="mt-5 login-card">
+    <Card className="login-card">
       {newUser ? (
         <SignUpForm setUser={setNewUser} />
       ) : (
