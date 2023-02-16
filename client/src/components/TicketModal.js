@@ -4,9 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-
 import { ADD_TICKET } from "../utils/mutations";
-
 import Auth from "../utils/auth";
 
 function TicketModal({

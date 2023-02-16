@@ -122,7 +122,6 @@ export const ADD_PROJECT = gql`
       projectType: $projectType
       projectStatus: $projectStatus
     ) {
-
       projectDescription
       projectManager
       projectStatus
@@ -143,7 +142,6 @@ export const UPDATE_PROJECT = gql`
     $projectId: ID!
     $projectTitle: String!
     $projectDescription: String!
-    $projectManager: String!
     $projectType: String!
     $projectStatus: String!
   ) {
@@ -151,13 +149,11 @@ export const UPDATE_PROJECT = gql`
       projectId: $projectId
       projectTitle: $projectTitle
       projectDescription: $projectDescription
-      projectManager: $projectManager
       projectType: $projectType
       projectStatus: $projectStatus
     ) {
       _id
       projectDescription
-      projectManager
       projectStatus
       projectTitle
       projectType
