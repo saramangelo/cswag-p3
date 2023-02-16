@@ -124,9 +124,10 @@ function TicketModal({
                     aria-label="Default select example"
                   >
                     <option>Select Type</option>
-                    <option value="Front End">Front End</option>
-                    <option value="API">API</option>
-                    <option value="Back End">Back End</option>
+                    <option value="New Feature">New Feature</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Task">Task</option>
+                    <option value="Improvement">Improvement</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicType">
@@ -153,12 +154,12 @@ function TicketModal({
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
                     <option value="New">New</option>
+                    <option value="Development">Development</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Archived">Archived</option>
                   </Form.Select>
                 </Form.Group>
               </Form>
@@ -175,7 +176,7 @@ function TicketModal({
         </>
       ) : (
         <p>
-          You need to be logged in to view your dashboard. Please{" "}
+          You need to be logged in to view your tickets. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
