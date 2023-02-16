@@ -134,9 +134,11 @@ function ProjectModal({
                     aria-label="Default select example"
                   >
                     <option>Select Type</option>
+
                     <option value="Application">Application</option>
                     <option value="Third Party">Third Party</option>
                     <option value="Feature">Feature</option>
+
                   </Form.Select>
                 </Form.Group>
               </Form>

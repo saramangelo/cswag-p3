@@ -10,30 +10,74 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_PROJECT } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditProjectModal({ project, projects, setProjectData }) {
-  const [formData, setFormData] = useState({});
+function EditProjectModal({ projectId, projects, setProjectData }) {
+  const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
+    variables: { projectId },
+  });
 
-  const projectId = project._id;
+  if (data == null) {
+    console.log("err");
+  }
+
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [projectStatus, setProjectStatus] = useState("");
+
+  useEffect(() => {
+    if (data?.project) {
+      setProjectTitle(data.project.projectTitle);
+      setProjectDescription(data.project.projectDescription);
+      setProjectType(data.project.projectType);
+      setProjectStatus(data.project.projectStatus);
+    }
+  }, [data?.ticket]);
 
   const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
 
-  // handle change
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("about to make request");
     try {
       const { data } = await updateProject({
-        variables: { ...formData },
+        variables: {
+          projectId,
+          projectTitle,
+          projectDescription,
+          projectType,
+          projectStatus,
+        },
       });
+
+      const updatedProjects = projects.map((project) => {
+        if (project._id !== data.updateProject._id) {
+          return data.updateProject;
+        } else {
+          return project;
+        }
+      });
+      setProjectData(updatedProjects);
     } catch (err) {
       console.error(err);
     }
+
     handleClose();
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "title") {
+      setProjectTitle(value);
+    }
+    if (name === "description") {
+      setProjectDescription(value);
+    }
+    if (name === "type") {
+      setProjectType(value);
+    }
+    if (name === "status") {
+      setProjectStatus(value);
+    }
   };
 
   // modal variable states
@@ -46,9 +90,9 @@ function EditProjectModal({ project, projects, setProjectData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p> */}
+          </p>
           <Link>
             <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
           </Link>
@@ -62,7 +106,7 @@ function EditProjectModal({ project, projects, setProjectData }) {
                 <Form.Group className="mb-3" controlId="formBasicTitle">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
-                    value={project.title}
+                    value={projectTitle}
                     onChange={handleChange}
                     name="title"
                     type="title"
@@ -78,7 +122,7 @@ function EditProjectModal({ project, projects, setProjectData }) {
                 >
                   <Form.Label>Description</Form.Label>
                   <Form.Control
-                    value={project.description}
+                    value={projectDescription}
                     onChange={handleChange}
                     name="description"
                     as="textarea"
@@ -90,28 +134,34 @@ function EditProjectModal({ project, projects, setProjectData }) {
                     Please give your project a brief description.
                   </Form.Text>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicStatus">
-                  <Form.Label>Project Manager</Form.Label>
-                  <Form.Select
-                    value={project.projectManager}
-                    onChange={handleChange}
-                    name="type"
-                    aria-label="Default select example"
-                  >
-                    <option>Select Project Manager</option>
-                    <option value=""></option>
-                  </Form.Select>
-                </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
                   <Form.Select
-                    value={project.status}
+                    value={projectStatus}
                     onChange={handleChange}
                     name="status"
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>
+                    <option value="Archived">Archived</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Development">Development</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="New">New</option>
+                  </Form.Select>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPriority">
+                  <Form.Label>Type</Form.Label>
+                  <Form.Select
+                    value={projectType}
+                    onChange={handleChange}
+                    name="type"
+                    aria-label="Default select example"
+                  >
+                    <option>Select Type</option>
                     <option value="Archived">Archived</option>
                     <option value="Resolved">Resolved</option>
                     <option value="Testing">Testing</option>

@@ -222,7 +222,6 @@ const resolvers = {
         projectId,
         projectTitle,
         projectDescription,
-        projectManager,
         projectType,
         projectStatus,
       },
@@ -235,7 +234,6 @@ const resolvers = {
             $set: {
               projectTitle: projectTitle,
               projectDescription: projectDescription,
-              projectManager: projectManager,
               projectType: projectType,
               projectStatus: projectStatus,
             },
