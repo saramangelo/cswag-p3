@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import EditProjectModal from "./EditProjectModal";
 
 function ProjectTable({ projects, setProjectData }) {
-  console.log(projects)
   if (!projects.length) {
     return <h3>No Projects Yet</h3>;
   }
