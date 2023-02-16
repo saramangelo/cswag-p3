@@ -206,3 +206,11 @@ export const ADD_PROJECT_TICKET = gql`
     }
   }
 `;
+
+export const REMOVE_PROJECT = gql`
+mutation removeProject($projectId: ID!) {
+    removeProject(projectId: $projectId) {
+      _id
+    }
+  }
+  `;

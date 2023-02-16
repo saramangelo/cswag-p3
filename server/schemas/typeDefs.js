@@ -86,7 +86,8 @@ const typeDefs = gql`
 
     removeTicket(ticketId: ID!): Ticket
     removeComment(ticketId: ID!, commentId: ID!): Ticket
-
+    removeProject(projectId: ID!): Project
+    
     addProject(
       projectTitle: String!
       projectDescription: String!
