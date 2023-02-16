@@ -5,13 +5,35 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import "../App.css";
 
-function Comment({ commentText, commentAuthor, commentCreatedAt, editComment, removeComment }) {
+function Comment({
+  commentId,
+  commentText,
+  commentAuthor,
+  commentCreatedAt,
+  editComment,
+  removeComment,
+  setCommentData,
+  ticketId,
+}) {
   const [edit, setEdit] = useState({
     id: null,
     value: "",
   });
-  console.log(commentText);
-  console.log(commentCreatedAt);
+
+  const handleDelete = async () => {
+    try {
+      const { data } = await removeComment({
+        variables: {
+          ticketId,
+          commentId,
+        },
+      });
+      console.log(data);
+      setCommentData(data.removeComment.comments);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const submitUpdate = (value) => {
     editComment(edit.id, value);
@@ -49,11 +71,7 @@ function Comment({ commentText, commentAuthor, commentCreatedAt, editComment, re
             <div className="delete-icon">
               <Link>
                 {" "}
-                <MDBIcon
-                  onClick={() => removeComment()}
-                  far
-                  icon="trash-alt"
-                />{" "}
+                <MDBIcon onClick={handleDelete} far icon="trash-alt" />{" "}
               </Link>
             </div>
           </div>

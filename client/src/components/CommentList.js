@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
+import { REMOVE_COMMENT } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 function CommentList({ ticketId, comments, commentData, setCommentData }) {
   console.log(comments);
 
   // Function to remove comment and update state
-  // const removeComment = (id) => {
-  //   let updatedComment = comment.filter((item) => item.id !== id);
-
-  //   setComment(updatedComment);
-  // };
+  const [removeComment, { error }] = useMutation(REMOVE_COMMENT);
 
   // Function to edit the comment
   // const editComment = (itemId, newValue) => {
@@ -34,16 +32,17 @@ function CommentList({ ticketId, comments, commentData, setCommentData }) {
         commentData={commentData}
         setCommentData={setCommentData}
       />
-      {/* <Comment
-        comment={comment}
-        // removeComment={removeComment}
-        // editComment={editComment}
-      /> */}
       {comments.map((comment) => (
         <Comment
+          key={comment._id}
+          ticketId={ticketId}
+          commentId={comment._id}
           commentText={comment.commentText}
           commentAuthor={comment.commentAuthor}
           commentCreatedAt={comment.createdAt}
+          removeComment={removeComment}
+          setCommentData={setCommentData}
+          // editComment={editComment}
         />
       ))}
     </div>

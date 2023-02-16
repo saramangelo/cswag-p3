@@ -99,3 +99,16 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const REMOVE_COMMENT = gql`
+mutation removeComment($ticketId: ID!, $commentId: ID!) {
+  removeComment(ticketId: $ticketId, commentId: $commentId) {
+    comments {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+    }
+  }
+}
+`
