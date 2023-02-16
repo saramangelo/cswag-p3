@@ -11,16 +11,14 @@ function ProjectModal({
   projects,
   projectData,
   setProjectData,
-  currentUser,
-  handleClose,
-  show,
+  projectManager,
+  handleProjectClose,
+  showProject,
 }) {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectType, setProjectType] = useState("");
   const [projectStatus, setProjectStatus] = useState("");
-
-  const projectManager = currentUser.username;
 
   const [addProject, { error }] = useMutation(ADD_PROJECT);
 
@@ -45,7 +43,7 @@ function ProjectModal({
     setProjectDescription("");
     setProjectType("");
     setProjectStatus("");
-    handleClose();
+    handleProjectClose();
   };
 
   // handle change
@@ -81,7 +79,7 @@ function ProjectModal({
           <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </p>
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={showProject} onHide={handleProjectClose}>
             <Modal.Header closeButton>
               <Modal.Title>New Project</Modal.Title>
             </Modal.Header>
@@ -118,18 +116,6 @@ function ProjectModal({
                     Please give your project a brief description.
                   </Form.Text>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicStatus">
-                  <Form.Label>Project Manager</Form.Label>
-                  <Form.Select
-                    value={projects.projectManager}
-                    onChange={handleChange}
-                    name="type"
-                    aria-label="Default select example"
-                  >
-                    <option>Select Project Manager</option>
-                    <option value=""></option>
-                  </Form.Select>
-                </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
@@ -148,14 +134,31 @@ function ProjectModal({
                     <option value="New">New</option>
                   </Form.Select>
                 </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPriority">
+                  <Form.Label>Type</Form.Label>
+                  <Form.Select
+                    value={projects.projectType}
+                    onChange={handleChange}
+                    name="status"
+                    aria-label="Default select example"
+                  >
+                    <option>Select Status</option>
+                    <option value="Archived">Archived</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Development">Development</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="New">New</option>
+                  </Form.Select>
+                </Form.Group>
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="dark" onClick={handleClose}>
+              <Button variant="dark" onClick={handleProjectClose}>
                 Cancel
               </Button>
               <Button variant="dark" onClick={handleSubmit}>
-                Submit ticket
+                Add Project
               </Button>
             </Modal.Footer>
           </Modal>

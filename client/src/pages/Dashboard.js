@@ -28,7 +28,14 @@ const styles = {
   },
 };
 
-function Dashboard({ handleShow, handleClose, show }) {
+function Dashboard({
+  handleShow,
+  handleClose,
+  handleProjectShow,
+  handleProjectClose,
+  show,
+  showProject,
+}) {
   const { loading, data } = useQuery(QUERY_TICKETS, {
     onCompleted: () => {
       setDashData(data.tickets);
@@ -68,16 +75,14 @@ function Dashboard({ handleShow, handleClose, show }) {
                 </header>
               </Card>
 
-              <Button style={styles.button} variant="dark" onClick={handleShow}>
-                Create a ticket
-              </Button>
               <ProjectModal
                 projects={projectData}
                 setProjectData={setProjectData}
-                currentUser={currentUser}
-                handleClose={handleClose}
-                show={show}
+                projectManager={currentUser}
+                handleProjectClose={handleProjectClose}
+                showProject={showProject}
               />
+
               <TicketModal
                 dashData={dashData}
                 setDashData={setDashData}
@@ -89,11 +94,25 @@ function Dashboard({ handleShow, handleClose, show }) {
                 <Spinner />
               ) : (
                 <div>
+                  <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleProjectShow}
+                  >
+                    Create a Project
+                  </Button>
                   <div style={styles.header}>Current Projects</div>
                   <ProjectTable
                     projects={projectData}
                     setProjectData={setProjectData}
                   />
+                  <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleShow}
+                  >
+                    Create a Ticket
+                  </Button>
                   <div style={styles.header}>Current Tickets</div>
                   <TicketTable tickets={dashData} setDashData={setDashData} />
                 </div>
