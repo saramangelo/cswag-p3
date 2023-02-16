@@ -107,9 +107,9 @@ function EditTicketModal({ ticket, tickets, setDashData, id }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p> */}
+          </span>
           <Link variant="dark" onClick={handleShow}>
             <MDBIcon fas icon="pencil-alt" />
           </Link>
