@@ -144,12 +144,12 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
                     <option value="New">New</option>
+                    <option value="Development">Development</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Archived">Archived</option>
                   </Form.Select>
                 </Form.Group>
 
@@ -162,12 +162,9 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
                     aria-label="Default select example"
                   >
                     <option>Select Type</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
-                    <option value="New">New</option>
+                    <option value="Application">Application</option>
+                    <option value="Third Party">Third Party</option>
+                    <option value="Feature">Feature</option>
                   </Form.Select>
                 </Form.Group>
               </Form>
