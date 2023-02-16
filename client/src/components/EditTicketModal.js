@@ -15,10 +15,6 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
     variables: { ticketId },
   });
 
-  if (data == null) {
-    console.log("err");
-  }
-
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
@@ -96,9 +92,9 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </span>
           <Link variant="dark" onClick={handleShow}>
             <MDBIcon fas icon="pencil-alt" />
           </Link>

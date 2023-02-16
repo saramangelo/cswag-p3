@@ -89,9 +89,8 @@ function SignUpForm({ setUser }) {
           Sign up
         </Button>
         <Button
-          className="mb-2"
+          className="mb-2 login-signup-btn"
           onClick={handleViewLoginCard}
-          variant="danger"
           type="submit"
         >
           Back to login

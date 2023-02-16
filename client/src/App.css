@@ -33,6 +33,7 @@ body{
 .welcome-card{
     margin-top: 50px;
     margin-bottom: 12px;
+    color: black !important;
 }
 
 .nav-dropdown > a:not(:hover){
@@ -49,25 +50,72 @@ body{
 }
 
 .body-container{
-    margin: 0px !important;
-    padding: 0px !important;
+    /* margin: 0px !important; */
+     padding: 0px !important; 
 }
 
-.detail-card{
-    margin-top:50px;
+.ticket-detail-card{
+    width: 90%;
+    margin: 50px auto;
+}
+
+.ticket-detail-title{
+    font-weight: bolder;
+}
+
+.ticket-detail-header{
+    display: flex;
+    justify-content: space-between;
+    color: black !important;
+}
+
+.ticket-detail-description{
+    text-align: left;
+    width: 100%;
+    border: #333;
+}
+
+.ticket-detail-flair{
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.ticket-detail-status, .ticket-detail-priority{
+    margin: 5px;
+    padding: 5px;
+    width: max(max-content, 200px);
+    height: 30px;
+    border-radius: 4px;
+    background-color: #eee;
+}
+
+.ticket-detail-footer{
+    text-align: left;
+    font-size: 13px;
+    color: black !important;
+}
+
+.login-card{
+    width: 700px;
+    margin: 0px auto;
+
+}
+
+.login-signup-btn{
+    background-color: #777 !important;
 }
 
 .navbar-toggler{
     float: left;
 }
 
-
 .dashboard-table-links{
     white-space: nowrap;
 }
 
 .dashboard-table-links>a{
-    padding: 11px;
+    padding: 17px;
 }
 
 .buggin-logo{
@@ -166,6 +214,9 @@ body{
     }
     .welcome-card{
         margin-top: 20px;
+    }
+    .login-card{
+        width: auto;
     }
     
   }

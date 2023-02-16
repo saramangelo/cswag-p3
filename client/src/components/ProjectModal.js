@@ -67,9 +67,9 @@ function ProjectModal({
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </span>
           <Modal show={showProject} onHide={handleProjectClose}>
             <Modal.Header closeButton>
               <Modal.Title>New Project</Modal.Title>

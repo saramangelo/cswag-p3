@@ -63,7 +63,7 @@ function Dashboard({
     <>
       {auth.loggedIn() ? (
         <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow} />
+          <Sidebar handleShow={handleShow} handleProjectShow={handleProjectShow}/>
           <Row>
             <Col xs={1} lg={2}>
               {" "}
