@@ -13,8 +13,21 @@ import ProjectModal from "../components/ProjectModal";
 import { useState } from "react";
 import ProjectTickets from  "../components/ProjectTickets";
 import AuthService from "../utils/auth";
+import AddTicketToProjectModal from "../components/AddTicketToProjectModal";
+import Button from "react-bootstrap/Button";
 // ICEBOXED COMMENT LIST
 // import CommentList from "../components/CommentList";
+
+const styles = {
+  header: {
+    fontFamily: "Rubik Mono One, sans-serif",
+    fontSize: "30px",
+  },
+  button: {
+    fontFamily: "Rubik Mono One, sans-serif",
+  },
+};
+
 
 const auth = AuthService;
 
@@ -87,7 +100,14 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
                 </Card.Body>
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
-
+              <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleShow}
+                  >
+                    Create a Ticket
+                  </Button>
+              <AddTicketToProjectModal/>
 
               <ProjectTickets/>
                       {/* ICEBOX */}
