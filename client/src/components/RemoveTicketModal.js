@@ -37,9 +37,9 @@ function RemoveTicketModal({ ticket, tickets, setDashData }) {
         <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </span>
           <Link >
             <MDBIcon onClick={handleShow} far icon="trash-alt" />
           </Link> 
@@ -64,7 +64,7 @@ function RemoveTicketModal({ ticket, tickets, setDashData }) {
           </>
     ): (
         <p>
-          You need to be logged in to share your thoughts. Please{" "}
+          You need to be logged in to view this. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}

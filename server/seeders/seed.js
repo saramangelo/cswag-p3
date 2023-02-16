@@ -3,7 +3,7 @@ const { User, Ticket, Project } = require('../models');
 const { faker } = require('@faker-js/faker');
 
 const statuses = ['Archived', 'Resolved', 'Testing', 'Development', 'Unassigned', 'New'];
-const priorities = ['Urgent','High','Med','Low'];
+const priorities = ['Urgent','High','Medium','Low'];
 const types = ['Front End','API','Back End'];
 
 const randomElement = (arr) => {

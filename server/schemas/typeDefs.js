@@ -35,9 +35,9 @@ const typeDefs = gql`
     _id: ID
     projectTitle: String!
     projectDescription: String!
-    projectManager: String!
     projectType: String!
     projectStatus: String!
+    projectManager: String!
     users: [User]
     tickets: [Ticket]
   }
@@ -88,9 +88,9 @@ const typeDefs = gql`
     addProject(
       projectTitle: String!
       projectDescription: String!
-      projectManager: String!
       projectType: String!
       projectStatus: String!
+      projectManager: String!
       users: [ID]
       tickets: [ID]
     ): Project

@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import buggin from './assets/buggin.png';
 
-function Sidebar({ handleShow }) {
+function Sidebar({ handleShow, handleProjectShow }) {
 
 
   return (
@@ -33,6 +33,7 @@ function Sidebar({ handleShow }) {
                 <NavDropdown.Item href="#action/3.3">Ticket 3</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link onClick={handleShow}>New Ticket</Nav.Link>
+              <Nav.Link onClick={handleProjectShow}>New Project</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

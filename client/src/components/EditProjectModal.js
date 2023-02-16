@@ -31,7 +31,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
       setProjectType(data.project.projectType);
       setProjectStatus(data.project.projectStatus);
     }
-  }, [data?.ticket]);
+  }, [data?.project]);
 
   const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
 
@@ -90,9 +90,9 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </span>
           <Link>
             <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
           </Link>
@@ -104,7 +104,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
             <Modal.Body>
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicTitle">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Project Title</Form.Label>
                   <Form.Control
                     value={projectTitle}
                     onChange={handleChange}
@@ -144,12 +144,12 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
                     <option value="New">New</option>
+                    <option value="Development">Development</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Archived">Archived</option>
                   </Form.Select>
                 </Form.Group>
 
@@ -162,12 +162,9 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
                     aria-label="Default select example"
                   >
                     <option>Select Type</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
-                    <option value="New">New</option>
+                    <option value="Application">Application</option>
+                    <option value="Third Party">Third Party</option>
+                    <option value="Feature">Feature</option>
                   </Form.Select>
                 </Form.Group>
               </Form>
@@ -177,7 +174,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
                 Cancel
               </Button>
               <Button variant="dark" onClick={handleSubmit}>
-                Submit ticket
+                Submit Project
               </Button>
             </Modal.Footer>
           </Modal>
