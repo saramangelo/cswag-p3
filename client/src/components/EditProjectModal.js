@@ -3,40 +3,38 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useQuery } from "@apollo/client";
-// import { QUERY_SINGLE_PROJECT } from "../utils/queries";
+import { QUERY_SINGLE_PROJECT } from "../utils/queries";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { MDBIcon } from "mdb-react-ui-kit";
-// import { UPDATE_PROJECT } from "../utils/mutations";
+import { UPDATE_PROJECT } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function EditProjectModal({ project, projects, setProjectData }) {
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({});
 
   const projectId = project._id;
 
-  // const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
-  
+  const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
+
   // handle change
   const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFormData({ ...formData, [name]: value });
-    };
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const handleSubmit = async (event) => {
-      // event.preventDefault();
-      // console.log("about to make request");
-      // try {
-      //   const { data } = await updateProject({
-      //     variables: { ...formData},
-      //   });
-       
-      // } catch (err) {
-      //   console.error(err);
-      // }
-  
-      // handleClose();
-    };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("about to make request");
+    try {
+      const { data } = await updateProject({
+        variables: { ...formData },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    handleClose();
+  };
 
   // modal variable states
   const [show, setShow] = useState(false);
@@ -51,7 +49,7 @@ function EditProjectModal({ project, projects, setProjectData }) {
           {/* <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </p> */}
-          <Link >
+          <Link>
             <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
           </Link>
 
@@ -104,7 +102,7 @@ function EditProjectModal({ project, projects, setProjectData }) {
                     <option value=""></option>
                   </Form.Select>
                 </Form.Group>
-                
+
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
                   <Form.Select

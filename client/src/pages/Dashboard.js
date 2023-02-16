@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TicketTable from "../components/TicketTable";
 import { useQuery } from "@apollo/client";
-import { QUERY_TICKETS } from "../utils/queries";
+import { QUERY_TICKETS, QUERY_PROJECTS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -28,14 +28,25 @@ const styles = {
   },
 };
 
-function Dashboard({ handleShow, handleClose, show }) {
+function Dashboard({
+  handleShow,
+  handleClose,
+  handleProjectShow,
+  handleProjectClose,
+  show,
+  showProject,
+}) {
   const { loading, data } = useQuery(QUERY_TICKETS, {
     onCompleted: () => {
       setDashData(data.tickets);
     },
   });
 
-  // const { loading, data } = useQuery(QUERY_PROJECTS)
+  const projectQuery = useQuery(QUERY_PROJECTS, {
+    onCompleted: () => {
+      setProjectData(projectQuery.data.projects);
+    },
+  });
 
   const [dashData, setDashData] = useState([]);
   const [projectData, setProjectData] = useState([]);
@@ -43,7 +54,7 @@ function Dashboard({ handleShow, handleClose, show }) {
   let currentUser;
 
   // TicketAuthor from getProfile (current user)
-  if(auth.loggedIn()){
+  if (auth.loggedIn()) {
     currentUser = auth.getProfile().data;
   }
   //console.log(currentUser);
@@ -64,16 +75,14 @@ function Dashboard({ handleShow, handleClose, show }) {
                 </header>
               </Card>
 
-              <Button style={styles.button} variant="dark" onClick={handleShow}>
-                Create a ticket
-              </Button>
               <ProjectModal
-                projects={projectData}
+                projectData={projectData}
                 setProjectData={setProjectData}
                 currentUser={currentUser}
-                handleClose={handleClose}
-                show={show}
+                handleProjectClose={handleProjectClose}
+                showProject={showProject}
               />
+
               <TicketModal
                 dashData={dashData}
                 setDashData={setDashData}
@@ -85,11 +94,25 @@ function Dashboard({ handleShow, handleClose, show }) {
                 <Spinner />
               ) : (
                 <div>
+                  <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleProjectShow}
+                  >
+                    Create a Project
+                  </Button>
                   <div style={styles.header}>Current Projects</div>
                   <ProjectTable
                     projects={projectData}
                     setProjectData={setProjectData}
                   />
+                  <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleShow}
+                  >
+                    Create a Ticket
+                  </Button>
                   <div style={styles.header}>Current Tickets</div>
                   <TicketTable tickets={dashData} setDashData={setDashData} />
                 </div>

@@ -12,12 +12,12 @@ const typeDefs = gql`
 
   type Ticket {
     _id: ID
-    ticketTitle: String
-    ticketDescription: String
-    ticketAuthor: String
-    ticketStatus: String
-    ticketType: String
-    ticketPriority: String
+    ticketTitle: String!
+    ticketDescription: String!
+    ticketAuthor: String!
+    ticketStatus: String!
+    ticketType: String!
+    ticketPriority: String!
     ticketAssignee: String
     createdAt: String
     updatedAt: String
@@ -34,7 +34,10 @@ const typeDefs = gql`
   type Project {
     _id: ID
     projectTitle: String!
-    projectDescription: String
+    projectDescription: String!
+    projectManager: String!
+    projectType: String!
+    projectStatus: String!
     users: [User]
     tickets: [Ticket]
   }
@@ -48,7 +51,7 @@ const typeDefs = gql`
     tickets: [Ticket]
     ticket(ticketId: ID!): Ticket
     projects: [Project]
-    project(ticketId: ID!): Project
+    project(projectId: ID!): Project
   }
 
   type Mutation {
@@ -71,32 +74,39 @@ const typeDefs = gql`
       ticketPriority: String!
     ): Ticket
 
-    addComment(ticketId: ID!,
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String): Ticket
+    addComment(
+      ticketId: ID!
+      _id: ID
+      commentText: String
+      commentAuthor: String
+      createdAt: String
+    ): Ticket
 
     removeTicket(ticketId: ID!): Ticket
     removeComment(ticketId: ID!, commentId: ID!): Ticket
 
     addProject(
       projectTitle: String!
-      projectDescription: String
+      projectDescription: String!
+      projectManager: String!
+      projectType: String!
+      projectStatus: String!
       users: [ID]
       tickets: [ID]
     ): Project
 
-    addProjectUser(
-      projectId: ID!
-      userId: ID!
-    ): Project
+    addProjectUser(projectId: ID!, userId: ID!): Project
 
-    addProjectTicket(
-      projectId: ID!
-      ticketId: ID!
-    ): Project
+    addProjectTicket(projectId: ID!, ticketId: ID!): Project
 
+    updateProject(
+      projectId: ID!
+      projectTitle: String!
+      projectDescription: String!
+      projectManager: String!
+      projectType: String!
+      projectStatus: String!
+    ): Project
   }
 `;
 
