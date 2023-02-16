@@ -34,6 +34,7 @@ export const QUERY_TICKETS = gql`
       ticketTitle
       ticketType
       ticketAuthor
+      ticketAssignee
     }
   }
 `;
@@ -50,6 +51,7 @@ export const QUERY_SINGLE_TICKET = gql`
       createdAt
       updatedAt
       ticketAuthor
+      ticketAssignee
       comments {
         _id
         commentText
