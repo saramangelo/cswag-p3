@@ -8,7 +8,6 @@ function TicketTable({ tickets, setDashData }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;
   }
-  console.log(tickets);
   return (
     <Table striped bordered hover variant="light">
       <thead>
@@ -37,14 +36,14 @@ function TicketTable({ tickets, setDashData }) {
                 </Link>
                 <EditTicketModal
                   ticket={ticket}
-                  id={ticket._id}
+                  ticketId={ticket._id}
                   tickets={tickets}
                   setDashData={setDashData}
                 />
                 <RemoveTicketModal
-                ticket={ticket}
-                tickets={tickets}
-                setDashData={setDashData}
+                  ticket={ticket}
+                  tickets={tickets}
+                  setDashData={setDashData}
                 />
               </td>
             </tr>

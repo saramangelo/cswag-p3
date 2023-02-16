@@ -122,6 +122,7 @@ export const ADD_PROJECT = gql`
       projectType: $projectType
       projectStatus: $projectStatus
     ) {
+
       projectDescription
       projectManager
       projectStatus
