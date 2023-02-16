@@ -126,6 +126,8 @@ function TicketModal({
                     <option value="Bug">Bug</option>
                     <option value="Task">Task</option>
                     <option value="Improvement">Improvement</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Story">Story</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicType">
