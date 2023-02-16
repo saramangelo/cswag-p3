@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import EditTicketModal from "./EditTicketModal";
 import RemoveTicketModal from "./RemoveTicketModal";
 
-function DashboardTable({ tickets, setDashData }) {
+function TicketTable({ tickets, setDashData }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;
   }
-  console.log(tickets);
   return (
     <Table striped bordered hover variant="light">
       <thead>
@@ -36,15 +35,14 @@ function DashboardTable({ tickets, setDashData }) {
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
                 <EditTicketModal
-                  ticket={ticket}
-                  id={ticket._id}
+                  ticketId={ticket._id}
                   tickets={tickets}
                   setDashData={setDashData}
                 />
                 <RemoveTicketModal
-                ticket={ticket}
-                tickets={tickets}
-                setDashData={setDashData}
+                  ticket={ticket}
+                  tickets={tickets}
+                  setDashData={setDashData}
                 />
               </td>
             </tr>
@@ -54,4 +52,4 @@ function DashboardTable({ tickets, setDashData }) {
   );
 }
 
-export default DashboardTable;
+export default TicketTable;

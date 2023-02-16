@@ -3,61 +3,59 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_TICKET } from "../utils/queries";
+import { QUERY_SINGLE_PROJECT } from "../utils/queries";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { MDBIcon } from "mdb-react-ui-kit";
-import { UPDATE_TICKET } from "../utils/mutations";
+import { UPDATE_PROJECT } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditTicketModal({ ticketId, tickets, setDashData }) {
-  const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
-    variables: { ticketId },
+function EditProjectModal({ projectId, projects, setProjectData }) {
+  const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {
+    variables: { projectId },
   });
 
   if (data == null) {
     console.log("err");
   }
 
-  const [ticketTitle, setTitle] = useState("");
-  const [ticketDescription, setDescription] = useState("");
-  const [ticketType, setType] = useState("");
-  const [ticketPriority, setPriority] = useState("");
-  const [ticketStatus, setStatus] = useState("");
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [projectStatus, setProjectStatus] = useState("");
 
   useEffect(() => {
-    if (data?.ticket) {
-      setTitle(data.ticket.ticketTitle);
-      setDescription(data.ticket.ticketDescription);
-      setType(data.ticket.ticketType);
-      setPriority(data.ticket.ticketPriority);
-      setStatus(data.ticket.ticketStatus);
+    if (data?.project) {
+      setProjectTitle(data.project.projectTitle);
+      setProjectDescription(data.project.projectDescription);
+      setProjectType(data.project.projectType);
+      setProjectStatus(data.project.projectStatus);
     }
   }, [data?.ticket]);
 
-  const [updateTicket, { error }] = useMutation(UPDATE_TICKET);
+  const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await updateTicket({
+      const { data } = await updateProject({
         variables: {
-          ticketId,
-          ticketTitle,
-          ticketDescription,
-          ticketType,
-          ticketStatus,
-          ticketPriority,
+          projectId,
+          projectTitle,
+          projectDescription,
+          projectType,
+          projectStatus,
         },
       });
 
-      const updatedTickets = tickets.map((ticket) => {
-        if (ticket._id !== data.updateTicket._id) {
-          return data.updateTicket;
+      const updatedProjects = projects.map((project) => {
+        if (project._id !== data.updateProject._id) {
+          return data.updateProject;
         } else {
-          return ticket;
+          return project;
         }
       });
-      setDashData(updatedTickets);
+      setProjectData(updatedProjects);
     } catch (err) {
       console.error(err);
     }
@@ -65,24 +63,20 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
     handleClose();
   };
 
-  // handle change
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     if (name === "title") {
-      setTitle(value);
+      setProjectTitle(value);
     }
     if (name === "description") {
-      setDescription(value);
+      setProjectDescription(value);
     }
     if (name === "type") {
-      setType(value);
-    }
-    if (name === "priority") {
-      setPriority(value);
+      setProjectType(value);
     }
     if (name === "status") {
-      setStatus(value);
+      setProjectStatus(value);
     }
   };
 
@@ -96,30 +90,30 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <span className={`m-0 ${error ? "text-danger" : ""}`}>
+          <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </span>
-          <Link variant="dark" onClick={handleShow}>
-            <MDBIcon fas icon="pencil-alt" />
+          </p>
+          <Link>
+            <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
           </Link>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>New Ticket</Modal.Title>
+              <Modal.Title>Edit Project</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicTitle">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
-                    value={ticketTitle}
+                    value={projectTitle}
                     onChange={handleChange}
                     name="title"
                     type="title"
-                    placeholder="Enter ticket title"
+                    placeholder="Enter project title"
                   />
                   <Form.Text className="text-muted">
-                    Please give your ticket a title.
+                    Please give your project a title.
                   </Form.Text>
                 </Form.Group>
                 <Form.Group
@@ -128,56 +122,46 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
                 >
                   <Form.Label>Description</Form.Label>
                   <Form.Control
-                    value={ticketDescription}
+                    value={projectDescription}
                     onChange={handleChange}
                     name="description"
                     as="textarea"
                     rows={3}
                     type=""
-                    placeholder="Ticket Description"
+                    placeholder="Project Description"
                   />
                   <Form.Text className="text-muted">
-                    Please give your ticket a brief description.
+                    Please give your project a brief description.
                   </Form.Text>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicStatus">
-                  <Form.Label>Type</Form.Label>
-                  <Form.Select
-                    value={ticketType}
-                    onChange={handleChange}
-                    name="type"
-                    aria-label="Default select example"
-                  >
-                    <option>Select Type</option>
-                    <option value="Front End">Front End</option>
-                    <option value="API">API</option>
-                    <option value="Back End">Back End</option>
-                  </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicType">
-                  <Form.Label>Priority</Form.Label>
-                  <Form.Select
-                    value={ticketPriority}
-                    onChange={handleChange}
-                    name="priority"
-                    aria-label="Default select example"
-                  >
-                    <option>Select Priority</option>
-                    <option value="Urgent">Urgent</option>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                  </Form.Select>
-                </Form.Group>
+
                 <Form.Group className="mb-3" controlId="formBasicPriority">
                   <Form.Label>Status</Form.Label>
                   <Form.Select
-                    value={ticketStatus}
+                    value={projectStatus}
                     onChange={handleChange}
                     name="status"
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>
+                    <option value="Archived">Archived</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Development">Development</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="New">New</option>
+                  </Form.Select>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPriority">
+                  <Form.Label>Type</Form.Label>
+                  <Form.Select
+                    value={projectType}
+                    onChange={handleChange}
+                    name="type"
+                    aria-label="Default select example"
+                  >
+                    <option>Select Type</option>
                     <option value="Archived">Archived</option>
                     <option value="Resolved">Resolved</option>
                     <option value="Testing">Testing</option>
@@ -200,7 +184,7 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
         </>
       ) : (
         <p>
-          You need to be logged in to share your thoughts. Please{" "}
+          You need to be logged in to view your projects. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
@@ -208,4 +192,4 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
   );
 }
 
-export default EditTicketModal;
+export default EditProjectModal;

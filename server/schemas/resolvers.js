@@ -13,10 +13,9 @@ const resolvers = {
     projects: async () => {
       return Project.find().sort({ createdAt: -1 });
     },
-    project: async (parent, {projectId}) => {
-      return Project.findOne({ _id: projectId});
+    project: async (parent, { projectId }) => {
+      return Project.findOne({ _id: projectId });
     },
-
   },
 
   Mutation: {
@@ -123,13 +122,13 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     removeTicket: async (parent, { ticketId }, context) => {
-      console.log("deleting tickets!")
+      console.log("deleting tickets!");
       if (context.user) {
         const ticket = await Ticket.findOneAndDelete({
           _id: ticketId,
           // ticketAuthor: context.user.username,
         });
-console.log(ticket);
+        console.log(ticket);
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { ticket: ticket._id } }
@@ -157,49 +156,96 @@ console.log(ticket);
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addProject: async (parent, { projectTitle, projectDescription, users, tickets }, context) => {
+    addProject: async (
+      parent,
+      {
+        projectTitle,
+        projectDescription,
+        projectManager,
+        projectType,
+        projectStatus,
+        users,
+        tickets,
+      },
+      context
+    ) => {
       //users = [...users, context.user._id];
       if (context.user) {
         const project = await Project.create({
           projectTitle,
           projectDescription,
+          projectManager,
+          projectType,
+          projectStatus,
           users,
-          tickets
+          tickets,
         });
-        await User.updateMany({_id: {$in: project.users}},
-          {$addToSet: {projects: project._id}});
+        await User.updateMany(
+          { _id: { $in: project.users } },
+          { $addToSet: { projects: project._id } }
+        );
         return project;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addProjectUser: async ( parent, { projectId, userId }, context ) => {
-      if(context.user) {
+    addProjectUser: async (parent, { projectId, userId }, context) => {
+      if (context.user) {
         const project = await Project.findOneAndUpdate(
           { _id: projectId },
-          { $addToSet: {users: userId} },
+          { $addToSet: { users: userId } },
           { new: true }
         );
-        await User.findOneAndUpdate({_id: userId},
-          {$addToSet: {projects: projectId}});
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { projects: projectId } }
+        );
         return project;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addProjectTicket: async ( parent, { projectId, ticketId }, context ) => {
-      if(context.user) {
+    addProjectTicket: async (parent, { projectId, ticketId }, context) => {
+      if (context.user) {
         return Project.findOneAndUpdate(
           { _id: projectId },
-          { $addToSet: {tickets: ticketId} },
+          { $addToSet: { tickets: ticketId } },
           { new: true }
         );
       }
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    
-
+    updateProject: async (
+      parent,
+      {
+        projectId,
+        projectTitle,
+        projectDescription,
+        projectType,
+        projectStatus,
+      },
+      context
+    ) => {
+      if (context.user) {
+        return Project.findOneAndUpdate(
+          { _id: projectId },
+          {
+            $set: {
+              projectTitle: projectTitle,
+              projectDescription: projectDescription,
+              projectType: projectType,
+              projectStatus: projectStatus,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 

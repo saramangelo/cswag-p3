@@ -12,7 +12,6 @@ import Auth from "../utils/auth";
 function RemoveTicketModal({ ticket, tickets, setDashData }) {
     const [removeTicket, {error}] = useMutation(REMOVE_TICKET);
     const handleRemove = async (ticket) => {
-        console.log(ticket._id);
         try {
             const {data} = await removeTicket({
                 variables: {ticketId: ticket._id}
@@ -26,7 +25,6 @@ function RemoveTicketModal({ ticket, tickets, setDashData }) {
         };
         handleClose();
     }
-    console.log(ticket);
 
 
 // modal variable states
