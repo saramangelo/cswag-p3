@@ -9,7 +9,13 @@ import { ADD_TICKET } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
-function TicketModal({ ticketId, dashData, setDashData, currentUser, handleClose, show }) {
+function TicketModal({
+  dashData,
+  setDashData,
+  currentUser,
+  handleClose,
+  show,
+}) {
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");

@@ -99,29 +99,92 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-
-export const REMOVE_TICKET = gql ` 
-  mutation RemoveTicket($ticketId: ID!) {
+export const REMOVE_TICKET = gql`
+  mutation removeTicket($ticketId: ID!) {
     removeTicket(ticketId: $ticketId) {
       _id
     }
-}
+  }
 `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($projectTitle: String!, $projectDescription: String!, $users: [ID], $tickets: [ID]) {
-    addProject(projectTitle: $projectTitle, projectDescription: $projectDescription, users: $users, tickets: $tickets) {
-      _id
-      projectTitle
+  mutation addProject(
+    $projectTitle: String!
+    $projectDescription: String!
+    $projectManager: String!
+    $projectType: String!
+    $projectStatus: String!
+  ) {
+    addProject(
+      projectTitle: $projectTitle
+      projectDescription: $projectDescription
+      projectManager: $projectManager
+      projectType: $projectType
+      projectStatus: $projectStatus
+    ) {
+
       projectDescription
-      users {
-        username
-        email
-      }
+      projectManager
+      projectStatus
+      projectTitle
+      projectType
       tickets {
-        ticketTitle
-        ticketDescription
+        _id
       }
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const UPDATE_PROJECT = gql`
+  mutation updateProject(
+    $projectId: ID!
+    $projectTitle: String!
+    $projectDescription: String!
+    $projectManager: String!
+    $projectType: String!
+    $projectStatus: String!
+  ) {
+    updateProject(
+      projectId: $projectId
+      projectTitle: $projectTitle
+      projectDescription: $projectDescription
+      projectManager: $projectManager
+      projectType: $projectType
+      projectStatus: $projectStatus
+    ) {
+      _id
+      projectDescription
+      projectManager
+      projectStatus
+      projectTitle
+      projectType
+      tickets {
+        _id
+      }
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const ADD_PROJECT_USER = gql`
+  mutation addProjectUser($projectId: ID!, $userId: ID!) {
+    addProjectUser(projectId: $projectId, userId: $userId) {
+      users {
+        _id
+      }
+    }
+  }
+`;
+
+export const ADD_PROJECT_TICKET = gql`
+  mutation addProjectTicket($projectId: ID!, $ticketId: ID!) {
+    addProjectTicket(projectId: $projectId, ticketId: $ticketId) {
+      _id
     }
   }
 `;
