@@ -87,7 +87,7 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
 
-              <CommentList />
+              {/* <CommentList /> */}
             </Col>
           </Row>
         </Container>
