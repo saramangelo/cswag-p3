@@ -65,6 +65,7 @@ const typeDefs = gql`
       ticketStatus: String!
       ticketPriority: String!
       ticketAuthor: String!
+      ticketAssignee: String
     ): Ticket
     updateTicket(
       ticketId: ID!

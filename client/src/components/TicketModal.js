@@ -37,6 +37,7 @@ function TicketModal({
           ticketStatus,
           ticketPriority,
           ticketAuthor,
+          ticketAssignee,
         },
       });
       setDashData([data.addTicket, ...dashData]);
@@ -177,7 +178,7 @@ function TicketModal({
                     name="assignee"
                     aria-label="Default select example"
                   >
-                    <option>Select an Assignee</option>
+                    <option></option>
                     {userList && userList.map((user) => (
                       <option key={user._id} value={user.username}>
                         {user.username}

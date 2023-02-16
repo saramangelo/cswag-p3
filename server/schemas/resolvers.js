@@ -53,6 +53,7 @@ const resolvers = {
         ticketStatus,
         ticketPriority,
         ticketAuthor,
+        ticketAssignee,
       },
       context
     ) => {
@@ -64,6 +65,7 @@ const resolvers = {
           ticketStatus,
           ticketPriority,
           ticketAuthor,
+          ticketAssignee,
         });
 
         await User.findOneAndUpdate(
