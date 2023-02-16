@@ -105,7 +105,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addComment: async (parent, { ticketId, commentText, commentAuthor }, context) => {
+    addComment: async (
+      parent,
+      { ticketId, commentText, commentAuthor },
+      context
+    ) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
           { _id: ticketId },
@@ -226,6 +230,7 @@ const resolvers = {
         projectId,
         projectTitle,
         projectDescription,
+        projectManager,
         projectType,
         projectStatus,
       },
@@ -240,6 +245,7 @@ const resolvers = {
               projectDescription: projectDescription,
               projectType: projectType,
               projectStatus: projectStatus,
+              projectManager: projectManager,
             },
           },
           {

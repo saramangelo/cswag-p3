@@ -56,6 +56,9 @@ export const QUERY_SINGLE_PROJECT = gql`
     project(projectId: $projectId) {
       projectTitle
       projectDescription
+      projectManager
+      projectStatus
+      projectType
       tickets {
         _id
       }

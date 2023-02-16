@@ -15,10 +15,6 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
     variables: { projectId },
   });
 
-  if (data == null) {
-    console.log("err");
-  }
-
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectType, setProjectType] = useState("");
@@ -32,6 +28,13 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
       setProjectStatus(data.project.projectStatus);
     }
   }, [data?.project]);
+
+  useEffect(() => {
+    console.log(projectTitle);
+    console.log(projectDescription);
+    console.log(projectType);
+    console.log(projectStatus);
+  }, [projectTitle, projectDescription, projectType, projectStatus]);
 
   const [updateProject, { error }] = useMutation(UPDATE_PROJECT);
 
@@ -49,7 +52,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
       });
 
       const updatedProjects = projects.map((project) => {
-        if (project._id !== data.updateProject._id) {
+        if (project._id == data.updateProject._id) {
           return data.updateProject;
         } else {
           return project;

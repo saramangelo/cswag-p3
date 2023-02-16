@@ -100,11 +100,12 @@ const typeDefs = gql`
     addProjectTicket(projectId: ID!, ticketId: ID!): Project
 
     updateProject(
-      projectId: ID!
-      projectTitle: String!
-      projectDescription: String!
-      projectType: String!
-      projectStatus: String!
+      projectId: ID
+      projectTitle: String
+      projectDescription: String
+      projectManager: String
+      projectType: String
+      projectStatus: String
     ): Project
   }
 `;
