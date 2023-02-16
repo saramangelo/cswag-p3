@@ -104,7 +104,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
             <Modal.Body>
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicTitle">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Project Title</Form.Label>
                   <Form.Control
                     value={projectTitle}
                     onChange={handleChange}
