@@ -18,11 +18,16 @@ import CommentList from "../components/CommentList";
 
 const auth = AuthService;
 
+
 const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectShow, handleProjectClose }) => {
+
   const { ticketId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
     variables: { ticketId },
+    onCompleted: () => {
+      setCommentData(data.ticket.comments);
+    },
   });
 
   const ticket = data?.ticket || [];
@@ -49,8 +54,13 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
   // const [open, setOpen] = useState(false);
 
   const [dashData, setDashData] = useState([]);
+
   const [projectData, setProjectData] = useState([]);
 
+  const [commentData, setCommentData] = useState([]);
+
+
+  // current user data to send to Ticket Modal
   const currentUser = auth.getProfile().data;
 
 
@@ -111,8 +121,12 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
                  <br></br>{updatedAt===createdAt ? "" :  `  (Updated ${updatedAt.split(", ")[0]} [${updatedAt.split(", ")[1].slice(0,5)}${updatedAt.split(", ")[1].slice(8)}])` }
                 </Card.Footer>
               </Card>
-            )}
-              <CommentList />
+              <CommentList
+                ticketId={ticketId}
+                comments={commentData}
+                setCommentData={setCommentData}
+                commentData={commentData}
+              />
             </Col>
           </Row>
         </Container>

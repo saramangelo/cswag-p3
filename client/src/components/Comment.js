@@ -3,18 +3,40 @@ import CommentForm from "./CommentForm";
 import Card from "react-bootstrap/Card";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-import '../App.css';
+import "../App.css";
 
-function Comment(props) {
+function Comment({
+  commentId,
+  commentText,
+  commentAuthor,
+  commentCreatedAt,
+  editComment,
+  removeComment,
+  setCommentData,
+  ticketId,
+}) {
   const [edit, setEdit] = useState({
     id: null,
     value: "",
   });
 
-  console.log(props.comment);
+  const handleDelete = async () => {
+    try {
+      const { data } = await removeComment({
+        variables: {
+          ticketId,
+          commentId,
+        },
+      });
+      console.log(data);
+      setCommentData(data.removeComment.comments);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const submitUpdate = (value) => {
-    props.editComment(edit.id, value);
+    editComment(edit.id, value);
     setEdit({ id: null, value: "" });
   };
 
@@ -22,43 +44,41 @@ function Comment(props) {
     return <CommentForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return props.comment.map((item, i) => (
+  return (
     <>
       <Card className="comment-list">
-        <div  key={i}>
-          <div  key={item.id}>{item.text}</div>
+        <div>
+          <div>{commentText}</div>
+          <div>{commentAuthor}</div>
+          <div>{commentCreatedAt}</div>
 
           <div className="icons">
-           <div className="edit-icon">
-            <Link>
-              {" "}
-              <MDBIcon
-                onClick={() =>
-                  setEdit({
-                    id: item.id,
-                    value: item.text,
-                  })
-                }
-                fas
-                icon="pencil-alt"
-              />
-            </Link>
+            <div className="edit-icon">
+              <Link>
+                {" "}
+                <MDBIcon
+                  onClick={() =>
+                    setEdit({
+                      // id: item.id,
+                      // value: item.text,
+                    })
+                  }
+                  fas
+                  icon="pencil-alt"
+                />
+              </Link>
             </div>
             <div className="delete-icon">
-            <Link>
-              {" "}
-              <MDBIcon
-                onClick={() => props.removeComment(item.id)}
-                far
-                icon="trash-alt"
-              />{" "}
-            </Link>
-          </div>
+              <Link>
+                {" "}
+                <MDBIcon onClick={handleDelete} far icon="trash-alt" />{" "}
+              </Link>
+            </div>
           </div>
         </div>
       </Card>
     </>
-  ));
+  );
 }
 
 export default Comment;
