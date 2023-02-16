@@ -27,7 +27,7 @@ function ProjectTable({ projects, setProjectData }) {
               <td>{project.projectProjectManager}</td>
               <td>{project.projectType}</td>
               <td>{project.projectStatus}</td>
-              <td>
+              <td className="dashboard-table-links">
                 <Link to={`/viewproject/${project._id}`}>
                   {" "}
                   <MDBIcon fas icon="eye" />{" "}

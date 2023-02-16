@@ -10,7 +10,7 @@ import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import TicketModal from "../components/TicketModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AuthService from "../utils/auth";
 import CommentList from "../components/CommentList";
@@ -51,6 +51,29 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
 
   const currentUser = auth.getProfile().data;
 
+  let styles;
+
+  useEffect(()=>{
+
+    if(ticket.ticketPriority==="Low"){
+      styles = {
+        "backgroundColor" : "green"
+      }
+    }else if(ticket.ticketPriority==="Medium"){
+      styles = {
+        "backgroundColor" : "yellow"
+      }
+    }else if(ticket.ticketPriority==="High"){
+      styles = {
+        "backgroundColor" : "red"
+      }
+    }else{ 
+      styles = {
+        "backgroundColor" : "black"
+      }
+    }
+  },[ticket?.ticketPriority]);
+
   return (
     <>
       {auth.loggedIn() ? (
@@ -69,25 +92,25 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
                   <Card.Title className="ticket-detail-title">{ticket.ticketTitle}</Card.Title>
                   <Card.Text className="ticket-detail-submission">
                     Submitted by {ticket.ticketAuthor}
-                    <br></br>{createdAt.split(", ")[0]} at {createdAt.split(", ")[1].slice(0,5)}{createdAt.split(", ")[1].slice(8)}
                   </Card.Text>
                 </Card.Header>
                 <Card.Body>
-                      <ListGroup>
-                        <ListGroup.Item className="ticket-detail-description">
-                          {ticket.ticketDescription}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="ticket-detail-status">
-                          Status: {ticket.ticketStatus}
-                        </ListGroup.Item>
-                        <ListGroup.Item className="ticket-detail-priority">
-                          Priority: {ticket.ticketPriority}
-                        </ListGroup.Item>
-                        <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
-                      </ListGroup>
+                  <Card.Text className="ticket-detail-description">
+                    {ticket.ticketDescription}
+                  </Card.Text>
+                  <div className="ticket-detail-flair">
+                    <Card.Text className="ticket-detail-status">
+                      {ticket.ticketStatus}
+                    </Card.Text>
+                    <Card.Text className="ticket-detail-priority" style={styles}>
+                      {ticket.ticketPriority} Priority
+                    </Card.Text>
+                  </div>
+                  <Card.Text>Updated at: {updatedAt}</Card.Text>
                 </Card.Body>
-                <Card.Footer className="text-muted"></Card.Footer>
+                <Card.Footer className="ticket-detail-footer">
+                  Submitted on {createdAt.split(", ")[0]} at {createdAt.split(", ")[1].slice(0,5)}{createdAt.split(", ")[1].slice(8)}
+                </Card.Footer>
               </Card>
             )}
               <CommentList />
