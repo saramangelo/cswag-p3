@@ -17,7 +17,7 @@ import CommentList from "../components/CommentList";
 
 const auth = AuthService;
 
-const ViewProject = ({ handleClose, handleShow, show }) => {
+const ViewProject = ({ handleClose, handleShow, show, handle }) => {
   const { projectId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_PROJECT, {

@@ -15,10 +15,6 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
     variables: { ticketId },
   });
 
-  if (data == null) {
-    console.log("err");
-  }
-
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");

@@ -10,6 +10,7 @@ import { QUERY_SINGLE_TICKET } from "../utils/queries";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import TicketModal from "../components/TicketModal";
+import ProjectModal from "../components/ProjectModal";
 import { useEffect, useState } from "react";
 
 import AuthService from "../utils/auth";
@@ -17,7 +18,7 @@ import CommentList from "../components/CommentList";
 
 const auth = AuthService;
 
-const ViewTicket = ({ handleClose, handleShow, show }) => {
+const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectShow, handleProjectClose }) => {
   const { ticketId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
@@ -48,29 +49,27 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
   // const [open, setOpen] = useState(false);
 
   const [dashData, setDashData] = useState([]);
+  const [projectData, setProjectData] = useState([]);
 
   const currentUser = auth.getProfile().data;
 
-  let styles;
+
+  const [flairColor, setFlairColor] = useState("grey");
+
+  let styles = {
+    "backgroundColor": flairColor 
+  };
 
   useEffect(()=>{
 
-    if(ticket.ticketPriority==="Low"){
-      styles = {
-        "backgroundColor" : "green"
-      }
-    }else if(ticket.ticketPriority==="Medium"){
-      styles = {
-        "backgroundColor" : "yellow"
-      }
-    }else if(ticket.ticketPriority==="High"){
-      styles = {
-        "backgroundColor" : "red"
-      }
+    if(ticket?.ticketPriority==="Low"){
+      setFlairColor("#a5db95");
+    }else if(ticket?.ticketPriority==="Medium"){
+      setFlairColor("#f7f374");
+    }else if(ticket?.ticketPriority==="High"){
+      setFlairColor("#e88e82");
     }else{ 
-      styles = {
-        "backgroundColor" : "black"
-      }
+      setFlairColor("#f288d6");
     }
   },[ticket?.ticketPriority]);
 
@@ -78,7 +77,7 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
     <>
       {auth.loggedIn() ? (
         <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow} />
+          <Sidebar handleShow={handleShow} handleProjectShow={handleProjectShow} />
           <Row>
             <Col xs={1} lg={3}>
               {" "}
@@ -106,10 +105,10 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
                       {ticket.ticketPriority} Priority
                     </Card.Text>
                   </div>
-                  <Card.Text>Updated at: {updatedAt}</Card.Text>
                 </Card.Body>
                 <Card.Footer className="ticket-detail-footer">
-                  Submitted on {createdAt.split(", ")[0]} at {createdAt.split(", ")[1].slice(0,5)}{createdAt.split(", ")[1].slice(8)}
+                  {createdAt.split(", ")[0]} [{createdAt.split(", ")[1].slice(0,5)}{createdAt.split(", ")[1].slice(8)}]
+                 <br></br>{updatedAt===createdAt ? "" :  `  (Updated ${updatedAt.split(", ")[0]} [${updatedAt.split(", ")[1].slice(0,5)}${updatedAt.split(", ")[1].slice(8)}])` }
                 </Card.Footer>
               </Card>
             )}
@@ -122,12 +121,20 @@ const ViewTicket = ({ handleClose, handleShow, show }) => {
           <ProtectPage />
         </div>
       )}
+      
       <TicketModal
         dashData={dashData}
         setDashData={setDashData}
         currentUser={currentUser}
         handleClose={handleClose}
         show={show}
+      />
+      <ProjectModal
+        projectData={projectData}
+        setProjectData={setProjectData}
+        currentUser={currentUser}
+        handleProjectClose={handleProjectClose}
+        showProject={showProject}
       />
     </>
   );
