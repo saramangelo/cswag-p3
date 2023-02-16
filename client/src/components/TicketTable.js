@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import EditTicketModal from "./EditTicketModal";
 import RemoveTicketModal from "./RemoveTicketModal";
 
-function DashboardTable({ tickets, setDashData }) {
+function TicketTable({ tickets, setDashData }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;
   }
@@ -53,4 +53,4 @@ function DashboardTable({ tickets, setDashData }) {
   );
 }
 
-export default DashboardTable;
+export default TicketTable;
