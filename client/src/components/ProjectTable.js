@@ -34,6 +34,7 @@ function ProjectTable({ projects, setProjectData }) {
                 </Link>
                 <EditProjectModal
                   project={project}
+                  projectId={project._id}
                   projects={projects}
                   setProjectData={setProjectData}
                 />
