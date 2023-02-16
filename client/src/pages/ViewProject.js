@@ -67,16 +67,13 @@ const ViewProject = ({ handleClose, handleShow, show, handle }) => {
                     <>
                       <ListGroup>
                         <ListGroup.Item>
-                          Title: {project.title}
+                          Title: {project.projectTitle}
                         </ListGroup.Item>
                         <ListGroup.Item>
-                          Description: {project.description}
+                          Description: {project.projectDescription}
                         </ListGroup.Item>
                         <ListGroup.Item>
-                          Submitter: {project.projectAuthor}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Status: {project.status}
+                          Status: {project.projectStatus}
                         </ListGroup.Item>
                         <ListGroup.Item>
                           Project Manager: {project.projectManager}

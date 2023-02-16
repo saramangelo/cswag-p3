@@ -24,7 +24,7 @@ function ProjectTable({ projects, setProjectData }) {
           projects.map((project, i) => (
             <tr key={i}>
               <td>{project.projectTitle}</td>
-              <td>{project.projectProjectManager}</td>
+              <td>{project.projectManager}</td>
               <td>{project.projectType}</td>
               <td>{project.projectStatus}</td>
               <td className="dashboard-table-links">

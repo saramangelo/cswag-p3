@@ -138,7 +138,6 @@ function ProjectModal({
                     <option value="Application">Application</option>
                     <option value="Third Party">Third Party</option>
                     <option value="Feature">Feature</option>
-
                   </Form.Select>
                 </Form.Group>
               </Form>
