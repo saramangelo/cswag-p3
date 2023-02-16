@@ -13,12 +13,15 @@ function TicketModal({
   currentUser,
   handleClose,
   show,
+  userList,
 }) {
+  console.log(userList);
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
   const [ticketPriority, setPriority] = useState("");
   const [ticketStatus, setStatus] = useState("");
+  const [ticketAssignee, setAssignee] = useState("");
   const ticketAuthor = currentUser.username;
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
@@ -45,6 +48,7 @@ function TicketModal({
     setType("");
     setPriority("");
     setStatus("");
+    setAssignee("");
     handleClose();
   };
 
@@ -66,6 +70,9 @@ function TicketModal({
     }
     if (name === "status") {
       setStatus(value);
+    }
+    if (name === "assignee") {
+      setAssignee(value);
     }
   };
 
@@ -160,6 +167,22 @@ function TicketModal({
                     <option value="Unassigned">Unassigned</option>
                     <option value="Resolved">Resolved</option>
                     <option value="Archived">Archived</option>
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicAssignee">
+                  <Form.Label>Assignee</Form.Label>
+                  <Form.Select
+                    value={ticketAssignee}
+                    onChange={handleChange}
+                    name="assignee"
+                    aria-label="Default select example"
+                  >
+                    <option>Select an Assignee</option>
+                    {userList && userList.map((user) => (
+                      <option key={user._id} value={user.username}>
+                        {user.username}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Form.Group>
               </Form>

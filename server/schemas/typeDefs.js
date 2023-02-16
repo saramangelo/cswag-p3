@@ -52,6 +52,7 @@ const typeDefs = gql`
     ticket(ticketId: ID!): Ticket
     projects: [Project]
     project(projectId: ID!): Project
+    users: [User]
   }
 
   type Mutation {

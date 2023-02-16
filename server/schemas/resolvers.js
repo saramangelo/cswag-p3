@@ -16,6 +16,9 @@ const resolvers = {
     project: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId });
     },
+    users: async () => {
+      return User.find();
+    },
   },
 
   Mutation: {
@@ -105,7 +108,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addComment: async (parent, { ticketId, commentText, commentAuthor }, context) => {
+    addComment: async (
+      parent,
+      { ticketId, commentText, commentAuthor },
+      context
+    ) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
           { _id: ticketId },
