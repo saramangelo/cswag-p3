@@ -34,6 +34,22 @@ function ProjectTickets() {
               <td>{}</td>
               <td className="dashboard-table-links"></td>
             </tr>
+            <tr>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td className="dashboard-table-links"></td>
+            </tr>
+            <tr>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{}</td>
+              <td className="dashboard-table-links"></td>
+            </tr>
             {/* ))} */}
           </tbody>
         </Table>
