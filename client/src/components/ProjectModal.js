@@ -18,9 +18,9 @@ function ProjectModal({
   const [projectDescription, setProjectDescription] = useState("");
   const [projectType, setProjectType] = useState("");
   const [projectStatus, setProjectStatus] = useState("");
+  const projectManager = currentUser.username;
 
   const [addProject, { error }] = useMutation(ADD_PROJECT);
-  const projectManager = currentUser.username;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +34,6 @@ function ProjectModal({
           projectManager,
         },
       });
-      console.log("data:", data.addProject);
       setProjectData([data.addProject, ...projectData]);
     } catch (err) {
       console.error(err);
@@ -51,24 +50,16 @@ function ProjectModal({
     const { name, value } = event.target;
 
     if (name === "title") {
-      console.log("title:", value);
       setProjectTitle(value);
-      console.log(projectTitle);
     }
     if (name === "description") {
-      console.log("description:", value);
       setProjectDescription(value);
-      console.log(projectDescription);
     }
     if (name === "type") {
-      console.log("type:", value);
       setProjectType(value);
-      console.log(projectType);
     }
     if (name === "status") {
-      console.log("status:", value);
       setProjectStatus(value);
-      console.log(projectStatus);
     }
   };
 
@@ -126,12 +117,12 @@ function ProjectModal({
                     aria-label="Default select example"
                   >
                     <option>Select Status</option>
-                    <option value="Archived">Archived</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Development">Development</option>
-                    <option value="Unassigned">Unassigned</option>
                     <option value="New">New</option>
+                    <option value="Development">Development</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Unassigned">Unassigned</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Archived">Archived</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPriority">
@@ -142,13 +133,10 @@ function ProjectModal({
                     name="type"
                     aria-label="Default select example"
                   >
-                    <option>Select Status</option>
-                    <option value="New">New</option>
-                    <option value="Development">Development</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Unassigned">Unassigned</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Archived">Archived</option>
+                    <option>Select Type</option>
+                    <option value="Application">Application</option>
+                    <option value="Third Party">Third Party</option>
+                    <option value="Feature">Feature</option>
                   </Form.Select>
                 </Form.Group>
               </Form>

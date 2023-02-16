@@ -46,8 +46,8 @@ export const ADD_TICKET = gql`
       ticketTitle
       ticketDescription
       ticketType
-      ticketPriority
       ticketStatus
+      ticketPriority
       ticketAuthor
     }
   }
@@ -71,11 +71,11 @@ export const UPDATE_TICKET = gql`
       ticketPriority: $ticketPriority
     ) {
       _id
-      ticketDescription
       ticketTitle
-      ticketPriority
-      ticketStatus
+      ticketDescription
       ticketType
+      ticketStatus
+      ticketPriority
     }
   }
 `;
@@ -87,8 +87,8 @@ export const ADD_COMMENT = gql`
       ticketTitle
       ticketDescription
       ticketType
-      ticketPriority
       ticketStatus
+      ticketPriority
       comments {
         _id
         commentText
@@ -111,23 +111,23 @@ export const ADD_PROJECT = gql`
   mutation addProject(
     $projectTitle: String!
     $projectDescription: String!
-    $projectManager: String!
     $projectType: String!
     $projectStatus: String!
+    $projectManager: String!
   ) {
     addProject(
       projectTitle: $projectTitle
       projectDescription: $projectDescription
-      projectManager: $projectManager
       projectType: $projectType
       projectStatus: $projectStatus
+      projectManager: $projectManager
     ) {
 
-      projectDescription
-      projectManager
-      projectStatus
       projectTitle
+      projectDescription
       projectType
+      projectStatus
+      projectManager
       tickets {
         _id
       }
@@ -143,24 +143,24 @@ export const UPDATE_PROJECT = gql`
     $projectId: ID!
     $projectTitle: String!
     $projectDescription: String!
-    $projectManager: String!
     $projectType: String!
     $projectStatus: String!
+    $projectManager: String!
   ) {
     updateProject(
       projectId: $projectId
       projectTitle: $projectTitle
       projectDescription: $projectDescription
-      projectManager: $projectManager
       projectType: $projectType
       projectStatus: $projectStatus
+      projectManager: $projectManager
     ) {
       _id
-      projectDescription
-      projectManager
-      projectStatus
       projectTitle
+      projectDescription
       projectType
+      projectStatus
+      projectManager
       tickets {
         _id
       }

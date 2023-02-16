@@ -4,9 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-
 import { ADD_TICKET } from "../utils/mutations";
-
 import Auth from "../utils/auth";
 
 function TicketModal({
@@ -128,6 +126,8 @@ function TicketModal({
                     <option value="Bug">Bug</option>
                     <option value="Task">Task</option>
                     <option value="Improvement">Improvement</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Story">Story</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicType">
