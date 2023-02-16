@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { REMOVE_COMMENT } from "../utils/mutations";

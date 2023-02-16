@@ -256,7 +256,24 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+  
+  removeProject: async (parent, { projectId }, context) => {
+    console.log("deleting projects!");
+    if (context.user) {
+      const project = await Project.findOneAndDelete({
+        _id: projectId,
+      });
+      console.log(project);
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { project: project._id } }
+      );
+
+      return project;
+    }
+    throw new AuthenticationError("You need to be logged in!");
   },
+},
 };
 
 module.exports = resolvers;

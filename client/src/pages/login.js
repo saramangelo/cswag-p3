@@ -1,5 +1,5 @@
 import React from "react";
-import LoginCard from "../components/LoginCard";
+import LoginCard from "../components/LoginCard.js";
 import Container from "react-bootstrap/Container";
 // import background from "../images/BackgroundLog.jpg";
 
