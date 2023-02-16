@@ -10,7 +10,7 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { UPDATE_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function EditTicketModal({ ticket, tickets, setDashData, ticketId }) {
+function EditTicketModal({ tickets, setDashData, ticketId }) {
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
     variables: { ticketId }
@@ -24,22 +24,22 @@ function EditTicketModal({ ticket, tickets, setDashData, ticketId }) {
 
 
 
-  const [ticketTitle, setTitle] = useState(data.ticket.ticketTitle);
-  const [ticketDescription, setDescription] = useState(data.ticket.ticketDescription);
-  const [ticketType, setType] = useState(data.ticket.ticketType);
-  const [ticketPriority, setPriority] = useState(data.ticket.ticketPriority);
-  const [ticketStatus, setStatus] = useState(data.ticket.ticketStatus);
+  const [ticketTitle, setTitle] = useState("");
+  const [ticketDescription, setDescription] = useState("");
+  const [ticketType, setType] = useState("");
+  const [ticketPriority, setPriority] = useState("");
+  const [ticketStatus, setStatus] = useState("");
 
 
-  // useEffect(() => {
-  //   if (ticket) {
-  //     setTitle(ticket.ticketTitle);
-  //     setDescription(ticket.ticketDescription);
-  //     setType(ticket.ticketType);
-  //     setPriority(ticket.ticketPriority);
-  //     setStatus(ticket.ticketStatus);
-  //   }
-  // }, [ticket]);
+  useEffect(() => {
+    if (data?.ticket) {
+      setTitle(data.ticket.ticketTitle);
+      setDescription(data.ticket.ticketDescription);
+      setType(data.ticket.ticketType);
+      setPriority(data.ticket.ticketPriority);
+      setStatus(data.ticket.ticketStatus);
+    }
+  }, [data?.ticket]);
 
   const [updateTicket, { error }] = useMutation(UPDATE_TICKET);
   const handleSubmit = async (event) => {
