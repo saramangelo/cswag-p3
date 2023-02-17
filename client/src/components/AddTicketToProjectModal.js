@@ -12,7 +12,7 @@ import Auth from "../utils/auth";
 function AddTicketToProjectModal({
   dashData,
   setDashData,
-  // currentUser,
+  currentUser,
   handleClose,
   show,
 }) {
