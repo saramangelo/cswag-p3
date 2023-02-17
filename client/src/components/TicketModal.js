@@ -81,9 +81,9 @@ function TicketModal({
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </span>
           <Modal show={show} onHide={handleClose} className="create-ticket-modal">
             <Modal.Header closeButton>
               <Modal.Title>New Ticket</Modal.Title>

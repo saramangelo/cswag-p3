@@ -100,7 +100,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
             <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
           </Link>
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
               <Modal.Title>Edit Project</Modal.Title>
             </Modal.Header>

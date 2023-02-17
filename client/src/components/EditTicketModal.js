@@ -100,7 +100,7 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
             <MDBIcon fas icon="pencil-alt" />
           </Link>
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
               <Modal.Title>New Ticket</Modal.Title>
             </Modal.Header>

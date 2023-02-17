@@ -115,6 +115,7 @@ function Dashboard({
                   <ProjectTable
                     projects={projectData}
                     setProjectData={setProjectData}
+                    currentUser={currentUser}
                   />
                   <Button
                     style={styles.button}
@@ -124,7 +125,7 @@ function Dashboard({
                     Create a Ticket
                   </Button>
                   <div style={styles.header}>Current Tickets</div>
-                  <TicketTable tickets={dashData} setDashData={setDashData} />
+                  <TicketTable tickets={dashData} setDashData={setDashData} currentUser={currentUser}/>
                 </div>
               )}
             </Col>

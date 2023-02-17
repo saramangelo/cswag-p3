@@ -192,10 +192,9 @@ body{
     text-align: center;
 }
 
-
 /* === MODALS === */
 
-.create-ticket-modal, .create-project-modal {
+.black-text {
     color: black !important
 }
 
