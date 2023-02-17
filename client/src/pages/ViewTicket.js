@@ -115,8 +115,8 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
                     <div className="ticket-detail-type">{ticket.ticketType}</div>
                   </div>
                   <Card.Text className="ticket-detail-submission">
-                    <p>Submitted by {ticket.ticketAuthor}</p>
-                    <p>Assigned to {ticket.ticketAssignee}</p>
+                    <div>Submitted by {ticket.ticketAuthor}</div>
+                    <div>Assigned to {ticket.ticketAssignee}</div>
                   </Card.Text>
                 </Card.Header>
                 <Card.Body>
