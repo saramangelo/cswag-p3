@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import "../App.css";
-const dayjs = require('dayjs');
+// const dayjs = require('dayjs');
 
 function Comment({
   commentId,
@@ -44,14 +44,14 @@ function Comment({
     return <CommentForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  const dateTime = dayjs(commentCreatedAt).format(`MM/DD/YYYY`)+ " [" + dayjs(commentCreatedAt).format(`h:mm A]`);
+  // const dateTime = dayjs(commentCreatedAt).format(`MM/DD/YYYY`)+ " [" + dayjs(commentCreatedAt).format(`h:mm A]`);
 
   return (
     <>
       <Card className="comment-list">
         
           <Card.Header className="comment-detail-header">
-            {dateTime}
+            {/* {dateTime} */}
             <div className="delete-icon">
               <Link>
                 {" "}
