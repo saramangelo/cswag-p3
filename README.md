@@ -4,7 +4,9 @@
 
 ## Description
 
-*INSERT NAME HERE* is a Bug Tracking and Ticketing System designed to help users experiencing bugs to create a ticket and log it within the system for other users of a higher status in order to assist them, or for themselves to recall at a later date. The application is designed to provide status, priority level and in depth descriptions about the bugs so that users may receive assistance on bugs from other users.
+DBUG is a content management system designed to help users keep track of their projects, and the bugs that they are running into when working on said projects. The application is designed to provide status, priority level and in depth descriptions about the bugs so that users may receive assistance on bugs from other users.
+
+Users have the ability to create, edit and delete tickets to receive support from the rest of their team, with full interactivity from user assigned team members as well as comment functionality to allow for transparent dialogue surrounding bugs within the user’s workflow. 
 
 ![]()
 
@@ -25,11 +27,19 @@
 
 Go to [app page](https:) and follow the prompts.
 
+Upon copying the repo, type `npm i`, `npm run roots` and then `npm run develop` into the root folder to get the developmental version of the site.
+
 ## Usage
 
-- Click on the `login` button on the homepage to sign up for a new profile, or login to your existing profile.
+- When entering the site you will be greeted on the landing page. Click on the `login` button on the homepage to sign up for a new profile, or login to your existing profile.
 
-- When you're directed to the Dashboard page, you'll be able to view your dashboard information in the form of a table with ticket information and be able to create a new ticket. 
+- When you're directed to the Dashboard page, you'll be able to view your dashboard information in the form of two tables with project and ticket information and be able to create a new project or ticket. 
+
+- When you have items within the table, you can click to view, edit or delete tickets, or view projects.
+
+- When viewing a ticket or project, you can leave comments on tickets of any status, allowing for notation from any team member who can view it.
+
+- When completed on DBUG, click on the `Log Out` button on the left naviagtion bar on the screen.
 
 ## Credits
 
