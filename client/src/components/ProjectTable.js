@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import EditProjectModal from "./EditProjectModal";
 import RemoveProjectModal from "./RemoveProjectModal";
 
-function ProjectTable({ projects, setProjectData }) {
+function ProjectTable({ projects, setProjectData, currentUser }) {
   if (!projects.length) {
     return <h3>No Projects Yet</h3>;
   }
@@ -31,19 +31,27 @@ function ProjectTable({ projects, setProjectData }) {
               <td className="dashboard-table-links">
                 <Link to={`/viewproject/${project._id}`}>
                   {" "}
-                  <MDBIcon fas icon="eye" />{" "}
+                <MDBIcon fas icon="eye" />{" "}
                 </Link>
-                <EditProjectModal
-                  // project={project}
-                  projectId={project._id}
-                  projects={projects}
-                  setProjectData={setProjectData}
-                />
-                <RemoveProjectModal
-                  project={project}
-                  projects={projects}
-                  setProjectData={setProjectData}
+                {currentUser.username===project.projectManager ? (
+                <>
+                  <EditProjectModal
+                    // project={project}
+                    projectId={project._id}
+                    projects={projects}
+                    setProjectData={setProjectData}
                   />
+                  <RemoveProjectModal
+                    project={project}
+                    projects={projects}
+                    setProjectData={setProjectData}
+                  />
+                </>
+                ) : (
+                  <>
+                  </>
+                )
+              }
               </td>
             </tr>
           ))}

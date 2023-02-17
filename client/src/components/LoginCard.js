@@ -6,7 +6,7 @@ import SignUpForm from "./SignUpForm";
 function LoginCard() {
   const [newUser, setNewUser] = useState(false);
   return (
-    <Card className="login-card">
+    <Card className="login-card black-text">
       {newUser ? (
         <SignUpForm setUser={setNewUser} />
       ) : (
