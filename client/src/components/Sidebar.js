@@ -26,13 +26,13 @@ function Sidebar({ handleShow, handleProjectShow }) {
             <Nav className="me-auto flex-column sidebar-list">
               <Nav.Link href="/dashboard">Dashboard</Nav.Link>
               <NavDropdown title="Projects" active="false" className="nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">My Projects</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">All Projects</NavDropdown.Item>
+                {/* <NavDropdown.Item href="#action/3.1">My Projects</NavDropdown.Item> */}
+                <NavDropdown.Item href="/dashboard">All Projects</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleProjectShow}>New Project</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Tickets" active="false" className="nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">My Tickets</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">All Tickets</NavDropdown.Item>
+                {/* <NavDropdown.Item href="#action/3.1">My Tickets</NavDropdown.Item> */}
+                <NavDropdown.Item href="/dashboard">All Tickets</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleShow}>New Ticket</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link onClick={auth.logout}>Log Out</Nav.Link>
