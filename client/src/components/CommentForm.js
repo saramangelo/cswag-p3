@@ -22,13 +22,13 @@ function CommentForm(props) {
      commentAuthor = auth.getProfile().data.username;
      commentAuthorId = auth.getProfile().data._id;
   }
-  console.log(commentAuthor);
+
 
   const ticketId = props.ticketId;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(commentAuthor, " | ", ticketId, " | ", commentText);
+
     try {
       const { data } = await addComment({
         variables: {
@@ -37,7 +37,7 @@ function CommentForm(props) {
           commentAuthor,
         },
       });
-      console.log("data: ", data);
+
       props.setCommentData(data.addComment.comments)
     } catch (err) {
       console.error(err);

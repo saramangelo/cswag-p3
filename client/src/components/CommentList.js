@@ -5,7 +5,7 @@ import { REMOVE_COMMENT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 function CommentList({ ticketId, comments, commentData, setCommentData, commentCreatedAt }) {
-  console.log(comments);
+
 
   // Function to remove comment and update state
   const [removeComment, { error }] = useMutation(REMOVE_COMMENT);
@@ -21,7 +21,6 @@ function CommentList({ ticketId, comments, commentData, setCommentData, commentC
   //   // We use the "prev" argument provided with the useState hook to map through our list of items
   //   // We then check to see if the item ID matches the id of the item that was clicked and if so, we set it to a new value
   //   setComment((prev) => {
-  //     console.log(prev);
   //     prev.map((item) => (item.id === itemId ? newValue : item));
   //   });
   // };

@@ -15,7 +15,7 @@ function TicketModal({
   show,
   userList,
 }) {
-  console.log(userList);
+
   const [ticketTitle, setTitle] = useState("");
   const [ticketDescription, setDescription] = useState("");
   const [ticketType, setType] = useState("");
