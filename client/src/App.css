@@ -54,16 +54,18 @@ body{
      padding: 0px !important; 
 }
 
-.ticket-detail-card{
+.ticket-detail-card {
     width: 90%;
     margin: 50px auto;
 }
 
-.ticket-detail-title{
-    font-weight: bolder;
+.project-detail-card{
+    margin: 50px auto;
 }
 
-.ticket-detail-header{
+
+
+.ticket-detail-header, .project-detail-header{
     display: flex;
     justify-content: space-between;
     color: black !important;
@@ -74,19 +76,19 @@ body{
     line-height: 7px;
 }
 
-.ticket-detail-description{
+.ticket-detail-description, .project-detail-description{
     text-align: left;
     width: 100%;
     border: #333;
 }
 
-.ticket-detail-flair{
+.ticket-detail-flair, .project-detail-flair{
     display: flex;
     justify-content: flex-start;
     
 }
 
-.ticket-detail-status, .ticket-detail-priority{
+.ticket-detail-status, .ticket-detail-priority, .project-detail-status{
     margin: 5px;
     padding: 5px;
     width: max(max-content, 200px);

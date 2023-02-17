@@ -65,6 +65,8 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
 
   const currentUser = auth.getProfile().data;
   
+// {project.projectTitle}, {createdAt}, {updatedAt}
+
 
   return (
     <>
@@ -76,29 +78,24 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
               {" "}
             </Col>
             <Col xs={10} lg={8}>
-              <Card className="text-center detail-card">
-                <Card.Header>Project Details</Card.Header>
+              <Card className="text-center project-detail-card">
+                <Card.Header className="project-detail-header">
+                  <Card.Title className="project-detail-title">{project.projectTitle}</Card.Title>
+                  <Card.Text>Manager: {project.projectManager}</Card.Text>
+                </Card.Header>
                 <Card.Body>
                   {loading ? (
                     <Spinner />
                   ) : (
                     <>
-                      <ListGroup>
-                        <ListGroup.Item>
-                          Title: {project.projectTitle}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Description: {project.projectDescription}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Status: {project.projectStatus}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Project Manager: {project.projectManager}
-                        </ListGroup.Item>
-                        <ListGroup.Item>Created at: {createdAt}</ListGroup.Item>
-                        <ListGroup.Item>Updated at: {updatedAt}</ListGroup.Item>
-                      </ListGroup>
+                      <Card.Text className="project-detail-description">
+                        {project.projectDescription}
+                      </Card.Text>
+                      <div className="project-detail-flair">
+                        <Card.Text className="project-detail-status">
+                          {project.projectStatus}
+                        </Card.Text>
+                    </div>
                     </>
                   )}
                 </Card.Body>
@@ -113,7 +110,7 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
                   </Button>
               <AddTicketToProjectModal/>
 
-              <ProjectTickets/>
+              <ProjectTickets project={project}/>
                       {/* ICEBOX */}
               {/* <CommentList /> */}
 
