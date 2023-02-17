@@ -120,7 +120,7 @@ const ViewProject = ({
                       </div>
                     </>
 
-                  )}
+                  
                 </Card.Body>
                 <Card.Footer className="text-muted"></Card.Footer>
               </Card>
