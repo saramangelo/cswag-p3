@@ -46,7 +46,7 @@ function RemoveProjectModal({ project, projects, setProjectData }) {
           <Modal show={show} onHide={handleClose} class="black-text">
             <Modal.Header closeButton>
               <Modal.Title>
-                Are you sure you want to remove this Project?
+                Are you sure you want to remove this project?
               </Modal.Title>
             </Modal.Header>
             {/* Modal Body Content */}

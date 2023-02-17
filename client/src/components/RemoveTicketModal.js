@@ -46,7 +46,7 @@ function RemoveTicketModal({ ticket, tickets, setDashData }) {
             {/* Content Here */}
             <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
-              <Modal.Title>Are you sure you want to remove this Ticket?</Modal.Title>
+              <Modal.Title>Are you sure you want to remove this ticket?</Modal.Title>
             </Modal.Header>
             {/* Modal Body Content */}
             <Modal.Body>
