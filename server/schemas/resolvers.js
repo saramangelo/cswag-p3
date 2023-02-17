@@ -136,13 +136,13 @@ const resolvers = {
     },
 
     removeTicket: async (parent, { ticketId }, context) => {
-      console.log("deleting tickets!");
+   
       if (context.user) {
         const ticket = await Ticket.findOneAndDelete({
           _id: ticketId,
           // ticketAuthor: context.user.username,
         });
-        console.log(ticket);
+     
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { ticket: ticket._id } }
@@ -263,12 +263,12 @@ const resolvers = {
     },
   
   removeProject: async (parent, { projectId }, context) => {
-    console.log("deleting projects!");
+
     if (context.user) {
       const project = await Project.findOneAndDelete({
         _id: projectId,
       });
-      console.log(project);
+
       await User.findOneAndUpdate(
         { _id: context.user._id },
         { $pull: { project: project._id } }

@@ -30,10 +30,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
   }, [data?.project]);
 
   useEffect(() => {
-    console.log(projectTitle);
-    console.log(projectDescription);
-    console.log(projectType);
-    console.log(projectStatus);
+
   }, [projectTitle, projectDescription, projectType, projectStatus]);
 
   const [updateProject, { error }] = useMutation(UPDATE_PROJECT);

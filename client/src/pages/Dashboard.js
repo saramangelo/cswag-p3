@@ -63,7 +63,7 @@ function Dashboard({
   if (auth.loggedIn()) {
     currentUser = auth.getProfile().data;
   }
-  //console.log(currentUser);
+
 
   return (
     <>
