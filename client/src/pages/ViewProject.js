@@ -147,8 +147,8 @@ const ViewProject = ({
               show={show}
             />
             <ProjectModal
-              projectData={projectData}
-              setProjectData={setProjectData}
+              projectData={dashData}
+              setProjectData={setDashData}
               currentUser={currentUser}
               handleProjectClose={handleProjectClose}
               showProject={showProject}
