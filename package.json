@@ -1,5 +1,5 @@
 {
-  "name": "programming-thoughts",
+  "name": "cswag-p3",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -9,6 +9,9 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
+  },
+  "engines": {
+    "node": "16.0.0"
   },
   "keywords": [],
   "author": "",
