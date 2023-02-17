@@ -36,14 +36,14 @@ function RemoveProjectModal({ project, projects, setProjectData }) {
     <>
       {Auth.loggedIn() ? (
         <>
-          <p className={`m-0 ${error ? "text-danger" : ""}`}>
+          <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
-          </p>
+          </span>
           <Link>
             <MDBIcon onClick={handleShow} far icon="trash-alt" />
           </Link>
           {/* Content Here */}
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} class="black-text">
             <Modal.Header closeButton>
               <Modal.Title>
                 Are you sure you want to remove this project?

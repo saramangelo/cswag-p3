@@ -44,7 +44,7 @@ function RemoveTicketModal({ ticket, tickets, setDashData }) {
             <MDBIcon onClick={handleShow} far icon="trash-alt" />
           </Link> 
             {/* Content Here */}
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
               <Modal.Title>Are you sure you want to remove this ticket?</Modal.Title>
             </Modal.Header>

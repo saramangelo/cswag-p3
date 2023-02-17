@@ -70,12 +70,12 @@ function LoginForm({ setUser }) {
           <Button
             onClick={handleSubmit}
             className="mr-1 mb-2"
-            variant="dark"
+            variant="black"
             type="submit"
           >
             Log in
           </Button>
-          <Button onClick={handleViewLoginCard} className="mb-2" type="submit">
+          <Button onClick={handleViewLoginCard} className="mb-2" type="submit" variant="light">
             Sign Up Instead
           </Button>
         </Container>

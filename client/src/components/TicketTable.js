@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import EditTicketModal from "./EditTicketModal";
 import RemoveTicketModal from "./RemoveTicketModal";
 
-function TicketTable({ tickets, setDashData }) {
+function TicketTable({ tickets, setDashData, currentUser }) {
   if (!tickets.length) {
     return <h3>No Tickets Yet</h3>;
   }
@@ -36,16 +36,22 @@ function TicketTable({ tickets, setDashData }) {
                   {" "}
                   <MDBIcon fas icon="eye" />{" "}
                 </Link>
-                <EditTicketModal
-                  ticketId={ticket._id}
-                  tickets={tickets}
-                  setDashData={setDashData}
-                />
-                <RemoveTicketModal
-                  ticket={ticket}
-                  tickets={tickets}
-                  setDashData={setDashData}
-                />
+                {currentUser.username===ticket.ticketAuthor ? (
+                <>
+                  <EditTicketModal
+                    ticketId={ticket._id}
+                    tickets={tickets}
+                    setDashData={setDashData}
+                  />
+                  <RemoveTicketModal
+                    ticket={ticket}
+                    tickets={tickets}
+                    setDashData={setDashData}
+                  />
+                </>
+                ) : (
+                  <></>
+                )}
               </td>
             </tr>
           ))}

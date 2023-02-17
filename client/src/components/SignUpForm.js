@@ -92,6 +92,7 @@ function SignUpForm({ setUser }) {
           className="mb-2 login-signup-btn"
           onClick={handleViewLoginCard}
           type="submit"
+          variant="light"
         >
           Log In Instead
         </Button>
