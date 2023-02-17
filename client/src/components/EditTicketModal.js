@@ -102,7 +102,7 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
 
           <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
-              <Modal.Title>New Ticket</Modal.Title>
+              <Modal.Title>Edit Ticket</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
