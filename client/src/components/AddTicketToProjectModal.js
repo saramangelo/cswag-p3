@@ -79,7 +79,7 @@ function AddTicketToProjectModal({
           <p className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </p>
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
               <Modal.Title>New Ticket</Modal.Title>
             </Modal.Header>
