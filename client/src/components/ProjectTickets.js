@@ -1,11 +1,20 @@
 import Table from "react-bootstrap/Table";
 import Card from "react-bootstrap/Card";
+import { MDBIcon } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
+import EditTicketModal from "./EditTicketModal";
+import RemoveTicketModal from "./RemoveTicketModal";
 import "../App.css";
 
-function ProjectTickets({project}) {
+
+function ProjectTickets({project, currentUser, projectTicketDash, setProjectTicketDash}) {
   // if (!tickets.length) {
   //   return <h3>No Tickets Yet</h3>;
   // }
+
+  
+
+  const projectTickets = project.tickets;
   return (
     <>
       <Card className="project-ticket-table">
@@ -24,33 +33,38 @@ function ProjectTickets({project}) {
             </tr>
           </thead>
           <tbody>
-            {/* {tickets &&
-            tickets.map((ticket, i) => ( */}
-            <tr>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td className="dashboard-table-links"></td>
+          {projectTickets &&
+          projectTickets.map((projectTicket, i) => (
+            <tr key={i}>
+              <td>{projectTicket.ticketTitle}</td>
+              <td>{projectTicket.ticketAuthor}</td>
+              <td>{projectTicket.ticketType}</td>
+              <td>{projectTicket.ticketPriority}</td>
+              <td>{projectTicket.ticketStatus}</td>
+              <td className="dashboard-table-links">
+                <Link to={`/viewticket/${projectTicket._id}`}>
+                  {" "}
+                  <MDBIcon fas icon="eye" />{" "}
+                </Link>
+                {currentUser.username===projectTicket.ticketAuthor ? (
+                <>
+                  <EditTicketModal
+                    ticketId={projectTicket._id}
+                    tickets={projectTicketDash}
+                    setDashData={setProjectTicketDash}
+                  />
+                  <RemoveTicketModal
+                    ticket={projectTicket}
+                    tickets={projectTicketDash}
+                    setDashData={setProjectTicketDash}
+                  />
+                </>
+                ) : (
+                  <></>
+                )}
+              </td>
             </tr>
-            <tr>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td className="dashboard-table-links"></td>
-            </tr>
-            <tr>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{}</td>
-              <td className="dashboard-table-links"></td>
-            </tr>
-            {/* ))} */}
+          ))}
           </tbody>
         </Table>
       </Card>

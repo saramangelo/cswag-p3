@@ -14,10 +14,12 @@ import TicketModal from "../components/TicketModal";
 import { useState } from "react";
 import ProjectTickets from  "../components/ProjectTickets";
 import AuthService from "../utils/auth";
-import AddTicketToProjectModal from "../components/AddTicketToProjectModal";
+import ProjectTicketModal from "../components/ProjectTicketModal";
 import Button from "react-bootstrap/Button";
 // ICEBOXED COMMENT LIST
 // import CommentList from "../components/CommentList";
+// import ProjectTable from "../components/ProjectTable";
+
 
 const styles = {
   header: {
@@ -59,7 +61,7 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
     second: "2-digit",
   }).format(project.updatedAt);
 
-  const [projectData, setProjectData] = useState([]);
+  const [projectTicketDash, setProjectTicketDash] = useState([]);
 
   const [dashData, setDashData] = useState([]);
 
@@ -108,9 +110,9 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
                   >
                     Create a Ticket for this project
                   </Button>
-              <AddTicketToProjectModal/>
+              <ProjectTicketModal handleClose={handleClose} show={show} projectId={project._id} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
 
-              <ProjectTickets project={project}/>
+              <ProjectTickets project={project} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
                       {/* ICEBOX */}
               {/* <CommentList /> */}
 
@@ -130,8 +132,8 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
         show={show}
       />
       <ProjectModal
-        projectData={projectData}
-        setProjectData={setProjectData}
+        projectData={dashData}
+        setProjectData={setDashData}
         currentUser={currentUser}
         handleProjectClose={handleProjectClose}
         showProject={showProject}
