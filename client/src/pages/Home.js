@@ -20,7 +20,7 @@ function Home() {
         <header style={styles.header}>Welcome to DBUG!</header>
         <div style={{}}>
           With DBUG, you can easily organize and manage all the issues related to any
-          collaberative project. Our ticketing system allows users to document problems
+          collaborative project. Our ticketing system allows users to document problems
           that need fixing, assign priority levels, and track progress as they are
           resolved. Create an account and get ready to DBUG!
         </div>
