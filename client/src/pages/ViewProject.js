@@ -20,7 +20,6 @@ import Button from "react-bootstrap/Button";
 // import CommentList from "../components/CommentList";
 // import ProjectTable from "../components/ProjectTable";
 
-
 const styles = {
   header: {
     fontFamily: "Rubik Mono One, sans-serif",
@@ -42,6 +41,10 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
   });
 
   const project = data?.project || [];
+
+  const [showProjectTicket, setShowProjectTicket] = useState(false);
+  const handleProjectTicketClose = () => setShowProjectTicket(false);
+  const handleProjectTicketShow = () => setShowProjectTicket(true);
 
   // Date formatters for createdAt and updatedAt
   const createdAt = new Intl.DateTimeFormat("en-US", {
@@ -106,11 +109,11 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
               <Button
                     style={styles.button}
                     variant="dark"
-                    onClick={handleShow}
+                    onClick={handleProjectTicketShow}
                   >
                     Create a Ticket for this project
                   </Button>
-              <ProjectTicketModal handleClose={handleClose} show={show} projectId={project._id} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
+              <ProjectTicketModal handleClose={handleProjectTicketClose} show={showProjectTicket} projectId={project._id} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
 
               <ProjectTickets project={project} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
                       {/* ICEBOX */}

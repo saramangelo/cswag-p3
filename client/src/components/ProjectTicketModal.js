@@ -4,8 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { ADD_TICKET } from "../utils/mutations";
-// import { ADD_PROJECT_TICKET } from "../utils/mutations";
+import { ADD_TICKET  } from "../utils/mutations";
+import { ADD_PROJECT_TICKET } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 
@@ -25,12 +25,13 @@ function ProjectTicketModal({
   const ticketAuthor = currentUser.username;
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
+  const [addProjectTicket, { error2 }] = useMutation(ADD_PROJECT_TICKET);
   // const [addProjectTicket, { error2 }] = useMutation(ADD_PROJECT_TICKET)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("hello!");
+    console.log(projectId);
 
     try {
       const { data } = await addTicket({
@@ -40,11 +41,19 @@ function ProjectTicketModal({
           ticketDescription,
           ticketType,
           ticketStatus,
-          ticketPriority,
-          projectId
+          ticketPriority
         },
       });
-      console.log(data);
+
+      const ticketId = data.addTicket._id;
+
+      const { data2 } = await addProjectTicket({
+        variables: {
+          ticketId,
+          projectId
+        }
+      });
+      console.log(data2);
       setProjectTicketDash([data.addTicket, ...projectTicketDash]);
     } catch (err) {
       console.error(err);
@@ -87,7 +96,7 @@ function ProjectTicketModal({
           </p>
           <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
-              <Modal.Title>New Ticket</Modal.Title>
+              <Modal.Title>New Project Ticket</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
@@ -177,7 +186,7 @@ function ProjectTicketModal({
               <Button variant="dark" onClick={handleClose}>
                 Cancel
               </Button>
-              <Button variant="dark" onClick={handleClose}>
+              <Button variant="dark" onClick={handleSubmit}>
                 Submit ticket
               </Button>
             </Modal.Footer>
