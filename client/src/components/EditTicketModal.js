@@ -146,9 +146,12 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
                     aria-label="Default select example"
                   >
                     <option>Select Type</option>
-                    <option value="Front End">Front End</option>
-                    <option value="API">API</option>
-                    <option value="Back End">Back End</option>
+                    <option value="New Feature">New Feature</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Task">Task</option>
+                    <option value="Improvement">Improvement</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Story">Story</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicType">
