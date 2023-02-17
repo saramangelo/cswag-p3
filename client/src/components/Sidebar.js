@@ -19,7 +19,7 @@ function Sidebar({ handleShow, handleProjectShow }) {
         <Navbar collapseOnSelect expand="lg" variant="dark" className="nav-box">
           <Navbar.Brand as="div" className="sidebar-title">
             <Image src={buggin} className="buggin-logo"/>
-            <div className="buggin-title">Buggin' Out</div>
+            <div className="buggin-title">DBUG</div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

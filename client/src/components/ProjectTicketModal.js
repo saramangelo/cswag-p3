@@ -25,7 +25,6 @@ function ProjectTicketModal({
   const ticketAuthor = currentUser.username;
 
   const [addTicket, { error }] = useMutation(ADD_TICKET);
-  const [addProjectTicket, { error2 }] = useMutation(ADD_PROJECT_TICKET);
   // const [addProjectTicket, { error2 }] = useMutation(ADD_PROJECT_TICKET)
 
   const handleSubmit = async (event) => {
@@ -41,19 +40,21 @@ function ProjectTicketModal({
           ticketDescription,
           ticketType,
           ticketStatus,
-          ticketPriority
+          ticketPriority,
+          projectId
         },
       });
 
-      const ticketId = data.addTicket._id;
+      // const ticketId = data.addTicket._id;
 
-      const { data2 } = await addProjectTicket({
-        variables: {
-          ticketId,
-          projectId
-        }
-      });
-      console.log(data2);
+      // const { data2 } = await addProjectTicket({
+      //   variables: {
+      //     ticketId,
+      //     projectId
+      //   }
+      // });
+      // console.log(data2);
+
       setProjectTicketDash([data.addTicket, ...projectTicketDash]);
     } catch (err) {
       console.error(err);

@@ -11,7 +11,7 @@ import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import ProjectModal from "../components/ProjectModal";
 import TicketModal from "../components/TicketModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectTickets from  "../components/ProjectTickets";
 import AuthService from "../utils/auth";
 import ProjectTicketModal from "../components/ProjectTicketModal";
@@ -69,9 +69,14 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
   const [dashData, setDashData] = useState([]);
 
   const currentUser = auth.getProfile().data;
-  
-// {project.projectTitle}, {createdAt}, {updatedAt}
 
+  useEffect(() => {
+    if(project.tickets){
+      setProjectTicketDash(project.tickets);
+    }
+  }, [project?.tickets]);
+
+// {project.projectTitle}, {createdAt}, {updatedAt}
 
   return (
     <>
@@ -113,7 +118,7 @@ const ViewProject = ({ handleClose, handleShow, show, handleProjectShow, handleP
                   >
                     Create a Ticket for this project
                   </Button>
-              <ProjectTicketModal handleClose={handleProjectTicketClose} show={showProjectTicket} projectId={project._id} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
+              <ProjectTicketModal handleClose={handleProjectTicketClose} show={showProjectTicket} projectId={projectId} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
 
               <ProjectTickets project={project} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
                       {/* ICEBOX */}

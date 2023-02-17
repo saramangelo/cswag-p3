@@ -12,9 +12,9 @@ function ProjectTickets({project, currentUser, projectTicketDash, setProjectTick
   //   return <h3>No Tickets Yet</h3>;
   // }
 
-  
 
-  const projectTickets = project.tickets;
+  const projectTickets = projectTicketDash;
+  
   return (
     <>
       <Card className="project-ticket-table">

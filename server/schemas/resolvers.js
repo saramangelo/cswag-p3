@@ -53,7 +53,8 @@ const resolvers = {
         ticketStatus,
         ticketPriority,
         ticketAuthor,
-        ticketAssignee
+        ticketAssignee,
+        projectId
       },
       context
     ) => {
@@ -73,12 +74,12 @@ const resolvers = {
         //   { $addToSet: { tickets: ticket._id } }
         // );
 
-        // if(projectId){
-        //   await Project.findOneAndUpdate(
-        //     {_id: projectId},
-        //     { $addToSet: { tickets: ticket._id } }
-        //   );
-        // }
+        if(projectId){
+          await Project.findOneAndUpdate(
+            {_id: projectId},
+            { $addToSet: { tickets: ticket._id } }
+          );
+        }
 
         return ticket;
       }
