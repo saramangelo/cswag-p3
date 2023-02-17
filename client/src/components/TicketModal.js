@@ -84,7 +84,7 @@ function TicketModal({
           <span className={`m-0 ${error ? "text-danger" : ""}`}>
             {error && <span className="ml-2">{error.message}</span>}
           </span>
-          <Modal show={show} onHide={handleClose} className="create-ticket-modal">
+          <Modal show={show} onHide={handleClose} className="black-text">
             <Modal.Header closeButton>
               <Modal.Title>New Ticket</Modal.Title>
             </Modal.Header>

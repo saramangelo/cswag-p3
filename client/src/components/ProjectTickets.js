@@ -2,7 +2,7 @@ import Table from "react-bootstrap/Table";
 import Card from "react-bootstrap/Card";
 import "../App.css";
 
-function ProjectTickets() {
+function ProjectTickets({project}) {
   // if (!tickets.length) {
   //   return <h3>No Tickets Yet</h3>;
   // }
@@ -10,7 +10,7 @@ function ProjectTickets() {
     <>
       <Card className="project-ticket-table">
         <Card>
-          <header className="project-ticket-header">Tickets for this Project</header>
+          <header className="project-ticket-header">Tickets for '{project.projectTitle}'</header>
         </Card>
         <Table striped bordered hover variant="light">
           <thead>
