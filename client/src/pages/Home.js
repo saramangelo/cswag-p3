@@ -16,7 +16,7 @@ const styles = {
 function Home() {
   return (
     <>
-      <Card body className="home-card">
+      <Card body className="home-card black-text">
         <header style={styles.header}>Welcome to DBUG!</header>
         <div style={{}}>
           With DBUG, you can easily organize and manage all the issues related to any
@@ -24,9 +24,11 @@ function Home() {
           that need fixing, assign priority levels, and track progress as they are
           resolved. Create an account and get ready to DBUG!
         </div>
-        <Button href="/login" style={{ width: "max-content", float: "center"}}>
+        <div className="login-btn-wrapper">
+        <Button href="/login" variant="dark" className="login-btn">
           Log In
-        </Button>{" "}
+        </Button>
+        </div>
       </Card>
     </>
   );

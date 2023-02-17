@@ -18,6 +18,16 @@ body{
     width: 100%;
 }
 
+.login-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-btn{
+    display: inline-block;
+}
+
 .sidebar-list>a{
     float: left;
     padding-left: 0px;
