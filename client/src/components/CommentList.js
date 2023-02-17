@@ -39,7 +39,7 @@ function CommentList({ ticketId, comments, commentData, setCommentData, commentC
           commentId={comment._id}
           commentText={comment.commentText}
           commentAuthor={comment.commentAuthor}
-          commentCreatedAt={commentCreatedAt}
+          commentCreatedAt={comment.createdAt}
           removeComment={removeComment}
           setCommentData={setCommentData}
           // editComment={editComment}

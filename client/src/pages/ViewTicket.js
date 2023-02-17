@@ -17,9 +17,20 @@ import CommentList from "../components/CommentList";
 
 const auth = AuthService;
 
+const ViewTicket = ({
+  show,
+  handleShow,
+  handleClose,
+  showProject,
+  handleProjectShow,
+  handleProjectClose,
+}) => {
+  const [dashData, setDashData] = useState([]);
 
-const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectShow, handleProjectClose }) => {
+  const [projectData, setProjectData] = useState([]);
 
+  const [commentData, setCommentData] = useState([]);
+  
   const { ticketId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
@@ -32,7 +43,6 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
   const ticket = data?.ticket || [];
 
   // Date formatters for CreatedAt and updatedAt
-
   const ticketCreatedAt = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -40,16 +50,7 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-  }).format(ticket.ticketCreatedAt);
-
-  const commentCreatedAt = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  }).format(ticket.commentCreatedAt);
+  }).format(ticket.createdAt);
 
   const updatedAt = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -63,111 +64,115 @@ const ViewTicket = ({ show, handleShow, handleClose, showProject, handleProjectS
   // state variable for comment button collapse
   // const [open, setOpen] = useState(false);
 
-  const [dashData, setDashData] = useState([]);
-
-  const [projectData, setProjectData] = useState([]);
-
-  const [commentData, setCommentData] = useState([]);
-
-  
-
-
   // current user data to send to Ticket Modal
   const currentUser = auth.getProfile().data;
-
 
   const [flairColor, setFlairColor] = useState("grey");
 
   let styles = {
-    "backgroundColor": flairColor 
+    backgroundColor: flairColor,
   };
 
-  useEffect(()=>{
-
-    if(ticket?.ticketPriority==="Low"){
+  useEffect(() => {
+    if (ticket?.ticketPriority === "Low") {
       setFlairColor("#a5db95");
-    }else if(ticket?.ticketPriority==="Medium"){
+    } else if (ticket?.ticketPriority === "Medium") {
       setFlairColor("#f7f374");
-    }else if(ticket?.ticketPriority==="High"){
+    } else if (ticket?.ticketPriority === "High") {
       setFlairColor("#e88e82");
-    }else{ 
+    } else {
       setFlairColor("#f288d6");
     }
-  },[ticket?.ticketPriority]);
+  }, [ticket?.ticketPriority]);
 
   return (
     <>
       {auth.loggedIn() ? (
         loading ? (
           <Spinner />
-          ) : (
-        <Container fluid className="body-container">
-          <Sidebar handleShow={handleShow} handleProjectShow={handleProjectShow} />
-          <Row>
-            <Col xs={1} lg={3}>
-              {" "}
-            </Col>
-            <Col xs={10} lg={8}>
-              <Card className="text-center ticket-detail-card">
-                <Card.Header className="ticket-detail-header">
-                  <div className="ticket-detail-header-left">
-                    <Card.Title className="ticket-detail-title">{ticket.ticketTitle}</Card.Title>
-                    <div className="ticket-detail-type">{ticket.ticketType}</div>
-                  </div>
-                  <Card.Text className="ticket-detail-submission">
-                    <div>Submitted by {ticket.ticketAuthor}</div>
-                    <div>Assigned to {ticket.ticketAssignee}</div>
-                  </Card.Text>
-                </Card.Header>
-                <Card.Body>
-                  <Card.Text className="ticket-detail-description">
-                    {ticket.ticketDescription}
-                  </Card.Text>
-                  <div className="ticket-detail-flair">
-                    <Card.Text className="ticket-detail-status">
-                      {ticket.ticketStatus}
+        ) : (
+          <Container fluid className="body-container">
+            <Sidebar
+              handleShow={handleShow}
+              handleProjectShow={handleProjectShow}
+            />
+            <Row>
+              <Col xs={1} lg={3}>
+                {" "}
+              </Col>
+              <Col xs={10} lg={8}>
+                <Card className="text-center ticket-detail-card">
+                  <Card.Header className="ticket-detail-header">
+                    <div className="ticket-detail-header-left">
+                      <Card.Title className="ticket-detail-title">
+                        {ticket.ticketTitle}
+                      </Card.Title>
+                      <div className="ticket-detail-type">
+                        {ticket.ticketType}
+                      </div>
+                    </div>
+                    <Card.Text className="ticket-detail-submission">
+                      <div>Submitted by {ticket.ticketAuthor}</div>
+                      <div>Assigned to {ticket.ticketAssignee}</div>
                     </Card.Text>
-                    <Card.Text className="ticket-detail-priority" style={styles}>
-                      {ticket.ticketPriority} Priority
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text className="ticket-detail-description">
+                      {ticket.ticketDescription}
                     </Card.Text>
-                  </div>
-                </Card.Body>
-                <Card.Footer className="ticket-detail-footer">
-                  {ticketCreatedAt.split(", ")[0]} [{ticketCreatedAt.split(", ")[1].slice(0,5)}{ticketCreatedAt.split(", ")[1].slice(8)}]
-                 <br></br>{updatedAt===ticketCreatedAt ? "" :  `  (Updated ${updatedAt.split(", ")[0]} [${updatedAt.split(", ")[1].slice(0,5)}${updatedAt.split(", ")[1].slice(8)}])` }
-                </Card.Footer>
-              </Card>
-              <CommentList
-                ticketId={ticketId}
-                comments={commentData}
-                setCommentData={setCommentData}
-                commentData={commentData}
-                commentCreatedAt={commentCreatedAt}
-              />
-            </Col>
-          </Row>
-          <TicketModal
-            dashData={dashData}
-            setDashData={setDashData}
-            currentUser={currentUser}
-            handleClose={handleClose}
-            show={show}
-          />
-          <ProjectModal
-            projectData={projectData}
-            setProjectData={setProjectData}
-            currentUser={currentUser}
-            handleProjectClose={handleProjectClose}
-            showProject={showProject}
-          />
-        </Container>
-      )) : (
+                    <div className="ticket-detail-flair">
+                      <Card.Text className="ticket-detail-status">
+                        {ticket.ticketStatus}
+                      </Card.Text>
+                      <Card.Text
+                        className="ticket-detail-priority"
+                        style={styles}
+                      >
+                        {ticket.ticketPriority} Priority
+                      </Card.Text>
+                    </div>
+                  </Card.Body>
+                  <Card.Footer className="ticket-detail-footer">
+                    {ticketCreatedAt.split(", ")[0]} [
+                    {ticketCreatedAt.split(", ")[1].slice(0, 5)}
+                    {ticketCreatedAt.split(", ")[1].slice(8)}]<br></br>
+                    {updatedAt === ticketCreatedAt
+                      ? ""
+                      : `  (Updated ${updatedAt.split(", ")[0]} [${updatedAt
+                          .split(", ")[1]
+                          .slice(0, 5)}${updatedAt.split(", ")[1].slice(8)}])`}
+                  </Card.Footer>
+                </Card>
+                <CommentList
+                  ticketId={ticketId}
+                  comments={commentData}
+                  setCommentData={setCommentData}
+                />
+              </Col>
+            </Row>
+            <TicketModal
+              dashData={dashData}
+              setDashData={setDashData}
+              currentUser={currentUser}
+              handleClose={handleClose}
+              show={show}
+            />
+            <ProjectModal
+              projectData={projectData}
+              setProjectData={setProjectData}
+              currentUser={currentUser}
+              handleProjectClose={handleProjectClose}
+              showProject={showProject}
+            />
+          </Container>
+        )
+      ) : (
         <div>
           <ProtectPage />
         </div>
       )}
     </>
-  )
+  );
 };
 
 export default ViewTicket;
