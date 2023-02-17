@@ -72,6 +72,12 @@ export const QUERY_SINGLE_PROJECT = gql`
       projectType
       tickets {
         _id
+        ticketTitle
+        ticketAuthor
+        ticketDescription
+        ticketPriority
+        ticketStatus
+        ticketType
       }
       users {
         _id

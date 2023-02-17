@@ -11,13 +11,14 @@ import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import ProjectModal from "../components/ProjectModal";
 import TicketModal from "../components/TicketModal";
-import { useState } from "react";
-import ProjectTickets from "../components/ProjectTickets";
+import { useEffect, useState } from "react";
+import ProjectTickets from  "../components/ProjectTickets";
 import AuthService from "../utils/auth";
-import AddTicketToProjectModal from "../components/AddTicketToProjectModal";
+import ProjectTicketModal from "../components/ProjectTicketModal";
 import Button from "react-bootstrap/Button";
 // ICEBOXED COMMENT LIST
 // import CommentList from "../components/CommentList";
+// import ProjectTable from "../components/ProjectTable";
 
 const styles = {
   header: {
@@ -47,6 +48,10 @@ const ViewProject = ({
 
   const project = data?.project || [];
 
+  const [showProjectTicket, setShowProjectTicket] = useState(false);
+  const handleProjectTicketClose = () => setShowProjectTicket(false);
+  const handleProjectTicketShow = () => setShowProjectTicket(true);
+
   // Date formatters for createdAt and updatedAt
   const createdAt = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -65,13 +70,20 @@ const ViewProject = ({
     second: "2-digit",
   }).format(project.updatedAt);
 
-  const [projectData, setProjectData] = useState([]);
+  const [projectTicketDash, setProjectTicketDash] = useState([]);
 
   const [dashData, setDashData] = useState([]);
 
   const currentUser = auth.getProfile().data;
 
-  // {project.projectTitle}, {createdAt}, {updatedAt}
+  useEffect(() => {
+    if(project.tickets){
+      setProjectTicketDash(project.tickets);
+    }
+  }, [project?.tickets]);
+
+// {project.projectTitle}, {createdAt}, {updatedAt}
+
 
   return (
     <>
@@ -107,21 +119,24 @@ const ViewProject = ({
                         </Card.Text>
                       </div>
                     </>
-                  </Card.Body>
-                  <Card.Footer className="text-muted"></Card.Footer>
-                </Card>
-                <Button
-                  style={styles.button}
-                  variant="dark"
-                  onClick={handleShow}
-                >
-                  Create a Ticket for this project
-                </Button>
-                <AddTicketToProjectModal />
 
-                <ProjectTickets project={project} />
-                {/* ICEBOX */}
-                {/* <CommentList /> */}
+                  
+                </Card.Body>
+                <Card.Footer className="text-muted"></Card.Footer>
+              </Card>
+              <Button
+                    style={styles.button}
+                    variant="dark"
+                    onClick={handleProjectTicketShow}
+                  >
+                    Create a Ticket for this project
+                  </Button>
+              <ProjectTicketModal handleClose={handleProjectTicketClose} show={showProjectTicket} projectId={projectId} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
+
+              <ProjectTickets project={project} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
+                      {/* ICEBOX */}
+              {/* <CommentList /> */}
+
               </Col>
             </Row>
             <TicketModal
@@ -145,6 +160,22 @@ const ViewProject = ({
           <ProtectPage />
         </div>
       )}
+
+      <TicketModal
+        dashData={dashData}
+        setDashData={setDashData}
+        currentUser={currentUser}
+        handleClose={handleClose}
+        show={show}
+      />
+      <ProjectModal
+        projectData={dashData}
+        setProjectData={setDashData}
+        currentUser={currentUser}
+        handleProjectClose={handleProjectClose}
+        showProject={showProject}
+      />
+
     </>
   );
 };

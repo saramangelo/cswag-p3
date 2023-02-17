@@ -14,7 +14,7 @@ const resolvers = {
       return Project.find().sort({ createdAt: -1 });
     },
     project: async (parent, { projectId }) => {
-      return Project.findOne({ _id: projectId });
+      return Project.findOne({ _id: projectId }).populate('tickets');
     },
     users: async () => {
       return User.find();
@@ -54,6 +54,7 @@ const resolvers = {
         ticketPriority,
         ticketAuthor,
         ticketAssignee,
+        projectId
       },
       context
     ) => {
@@ -68,10 +69,17 @@ const resolvers = {
           ticketAssignee,
         });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { tickets: ticket._id } }
-        );
+        // await User.findOneAndUpdate(
+        //   { _id: context.user._id },
+        //   { $addToSet: { tickets: ticket._id } }
+        // );
+
+        if(projectId){
+          await Project.findOneAndUpdate(
+            {_id: projectId},
+            { $addToSet: { tickets: ticket._id } }
+          );
+        }
 
         return ticket;
       }

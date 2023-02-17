@@ -132,6 +132,8 @@ body{
 
 .dashboard-table-links{
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
 }
 
 .dashboard-table-links>a{
