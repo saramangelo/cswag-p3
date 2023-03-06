@@ -25,7 +25,7 @@ Users have the ability to create, edit and delete tickets to receive support fro
 
 ## Installation
 
-Go to [app page](https:) and follow the prompts.
+Go to [this link](https://pacific-tundra-20033.herokuapp.com/) and follow the prompts.
 
 Upon copying the repo, type `npm i`, `npm run roots` and then `npm run develop` into the root folder to get the developmental version of the site.
 
