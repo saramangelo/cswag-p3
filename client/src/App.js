@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
 import ViewProject from "./pages/ViewProject";
+import MyTickets from "./pages/MyTickets";
 import Form from "react-bootstrap/Form";
 import "./App.css";
 
@@ -125,6 +126,19 @@ function App() {
                   path="/viewproject/:projectId"
                   element={
                     <ViewProject
+                      handleClose={handleClose}
+                      handleShow={handleShow}
+                      handleProjectShow={handleProjectShow}
+                      handleProjectClose={handleProjectClose}
+                      show={show}
+                      showProject={showProject}
+                    />
+                  }
+                />
+                <Route
+                  path="/mytickets"
+                  element={
+                    <MyTickets
                       handleClose={handleClose}
                       handleShow={handleShow}
                       handleProjectShow={handleProjectShow}
