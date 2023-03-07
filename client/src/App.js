@@ -89,7 +89,7 @@ function App() {
                 />
               </Form> */}
                 <Form onClick={toggleTheme} className="toggle-button">
-                  <Form.Switch id="custom-switch" label={label} checked={theme==="dark"}/>
+                  <Form.Switch id="custom-switch" label={label} defaultChecked={theme==="dark"}/>
                 </Form>
               </div>
               <Routes>
