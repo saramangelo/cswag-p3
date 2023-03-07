@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TicketTable from "../components/TicketTable";
+import MyTicketTable from "../components/MyTicketTable";
 import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS, QUERY_PROJECTS, QUERY_USERS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
@@ -101,7 +101,7 @@ function MyTickets({
                     Create a Ticket
                   </Button>
   
-                  <TicketTable tickets={dashData} setDashData={setDashData} currentUser={currentUser}/>
+                  <MyTicketTable tickets={dashData} setDashData={setDashData} currentUser={currentUser}/>
                 </div>
               )}
             </Col>
