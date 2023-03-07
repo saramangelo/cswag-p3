@@ -13,6 +13,10 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
 import ViewProject from "./pages/ViewProject";
+import MyTickets from "./pages/MyTickets";
+import MyProjects from "./pages/MyProjects";
+import ProjectTable from "./components/ProjectTable";
+import TicketTable from "./components/TicketTable";
 import Form from "react-bootstrap/Form";
 import "./App.css";
 
@@ -90,6 +94,7 @@ function App() {
               </Form> */}
                 <Form onClick={toggleTheme} className="toggle-button">
                   <Form.Switch id="custom-switch" label={label} defaultChecked={theme==="dark"}/>
+
                 </Form>
               </div>
               <Routes>
@@ -134,6 +139,22 @@ function App() {
                     />
                   }
                 />
+                <Route path="/mytickets" element={<MyTickets />} />
+                <Route path="/myprojects" element={<MyProjects />} />
+                {/* <Route
+                  path="/allprojects"
+                  element={
+                    <ProjectTable
+                    />
+                  }
+                />
+                <Route
+                  path="/alltickets"
+                  element={
+                    <TicketTable
+                    />
+                  }
+                /> */}
 
                 <Route path="*" element={<NotFound />}></Route>
               </Routes>
