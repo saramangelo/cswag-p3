@@ -90,6 +90,9 @@ function ProjectTicketModal({
     if (name === "status") {
       setStatus(value);
     }
+    if (name === "assignee") {
+      setAssignee(value);
+    }
   };
 
   return (
