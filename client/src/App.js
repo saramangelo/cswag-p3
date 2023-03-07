@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import ViewTicket from "./pages/ViewTicket";
 import ViewProject from "./pages/ViewProject";
 import MyTickets from "./pages/MyTickets";
+import MyProjects from "./pages/MyProjects";
 import Form from "react-bootstrap/Form";
 import "./App.css";
 
@@ -139,12 +140,25 @@ function App() {
                   path="/mytickets"
                   element={
                     <MyTickets
-                      handleClose={handleClose}
-                      handleShow={handleShow}
-                      handleProjectShow={handleProjectShow}
-                      handleProjectClose={handleProjectClose}
-                      show={show}
-                      showProject={showProject}
+                      // handleClose={handleClose}
+                      // handleShow={handleShow}
+                      // handleProjectShow={handleProjectShow}
+                      // handleProjectClose={handleProjectClose}
+                      // show={show}
+                      // showProject={showProject}
+                    />
+                  }
+                />
+                <Route
+                  path="/myprojects"
+                  element={
+                    <MyProjects
+                      // handleClose={handleClose}
+                      // handleShow={handleShow}
+                      // handleProjectShow={handleProjectShow}
+                      // handleProjectClose={handleProjectClose}
+                      // show={show}
+                      // showProject={showProject}
                     />
                   }
                 />
