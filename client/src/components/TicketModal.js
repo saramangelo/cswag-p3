@@ -13,7 +13,7 @@ function TicketModal({
   currentUser,
   handleClose,
   show,
-  userList,
+  userList
 }) {
 
   const [ticketTitle, setTitle] = useState("");
