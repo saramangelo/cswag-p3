@@ -93,7 +93,11 @@ function App() {
                 />
               </Form> */}
                 <Form onClick={toggleTheme} className="toggle-button">
-                  <Form.Switch id="custom-switch" label={label} checked={theme==="dark"}/>
+                  <Form.Switch
+                    id="custom-switch"
+                    label={label}
+                    checked={theme === "dark"}
+                  />
                 </Form>
               </div>
               <Routes>
@@ -138,42 +142,12 @@ function App() {
                     />
                   }
                 />
-                <Route
-                  path="/mytickets"
-                  element={
-                    <MyTickets
-                      // handleClose={handleClose}
-                      // handleShow={handleShow}
-                      // handleProjectShow={handleProjectShow}
-                      // handleProjectClose={handleProjectClose}
-                      // show={show}
-                      // showProject={showProject}
-                    />
-                  }
-                />
-                <Route
-                  path="/myprojects"
-                  element={
-                    <MyProjects
-                      // handleClose={handleClose}
-                      // handleShow={handleShow}
-                      // handleProjectShow={handleProjectShow}
-                      // handleProjectClose={handleProjectClose}
-                      // show={show}
-                      // showProject={showProject}
-                    />
-                  }
-                />
-                <Route
+                <Route path="/mytickets" element={<MyTickets />} />
+                <Route path="/myprojects" element={<MyProjects />} />
+                {/* <Route
                   path="/allprojects"
                   element={
                     <ProjectTable
-                      // handleClose={handleClose}
-                      // handleShow={handleShow}
-                      // handleProjectShow={handleProjectShow}
-                      // handleProjectClose={handleProjectClose}
-                      // show={show}
-                      // showProject={showProject}
                     />
                   }
                 />
@@ -181,15 +155,9 @@ function App() {
                   path="/alltickets"
                   element={
                     <TicketTable
-                      // handleClose={handleClose}
-                      // handleShow={handleShow}
-                      // handleProjectShow={handleProjectShow}
-                      // handleProjectClose={handleProjectClose}
-                      // show={show}
-                      // showProject={showProject}
                     />
                   }
-                />
+                /> */}
 
                 <Route path="*" element={<NotFound />}></Route>
               </Routes>
