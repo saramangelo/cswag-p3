@@ -196,8 +196,8 @@ body{
     transform: scale(1.2);
 }
 
-.disabled-icon{
-    cursor: default;
+.disabled-link{
+    cursor: default !important;
 }
 
 /* ==== CommentForm.js ==== */

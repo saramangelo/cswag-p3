@@ -51,11 +51,11 @@ function TicketTable({ tickets, setDashData, currentUser }) {
                 </>
                 ) : (
                   <>
-                    <Link variant="light">
-                      <MDBIcon fas icon="pencil-alt" color="muted" className="diabledIcon"/>
+                    <Link variant="light" className="disabled-link">
+                      <MDBIcon fas icon="pencil-alt" color="muted"/>
                     </Link>
-                    <Link>
-                      <MDBIcon far icon="trash-alt" color="muted" className="disabledIcon"/>
+                    <Link className="disabled-link">
+                      <MDBIcon far icon="trash-alt" color="muted"/>
                     </Link> 
                   </>
                 )}
