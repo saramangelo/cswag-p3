@@ -97,7 +97,7 @@ function EditTicketModal({ ticketId, tickets, setDashData }) {
             {error && <span className="ml-2">{error.message}</span>}
           </span>
           <Link variant="dark" onClick={handleShow}>
-            <MDBIcon fas icon="pencil-alt" />
+            <MDBIcon fas icon="pencil-alt" className="icon-hover"/>
           </Link>
 
           <Modal show={show} onHide={handleClose} className="black-text">

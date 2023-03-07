@@ -34,7 +34,7 @@ function TicketTable({ tickets, setDashData, currentUser }) {
               <td className="dashboard-table-links">
                 <Link to={`/viewticket/${ticket._id}`}>
                   {" "}
-                  <MDBIcon fas icon="eye" />{" "}
+                  <MDBIcon fas icon="eye" className="icon-hover"/>{" "}
                 </Link>
                 {currentUser.username===ticket.ticketAuthor ? (
                 <>
@@ -50,7 +50,14 @@ function TicketTable({ tickets, setDashData, currentUser }) {
                   />
                 </>
                 ) : (
-                  <></>
+                  <>
+                    <Link variant="light" className="disabled-link">
+                      <MDBIcon fas icon="pencil-alt" color="muted"/>
+                    </Link>
+                    <Link className="disabled-link">
+                      <MDBIcon far icon="trash-alt" color="muted"/>
+                    </Link> 
+                  </>
                 )}
               </td>
             </tr>

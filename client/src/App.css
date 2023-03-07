@@ -188,6 +188,18 @@ body{
     width: 90%;
 }
 
+.icon-hover{
+    transition: .1s ease;
+}
+
+.icon-hover:hover{
+    transform: scale(1.2);
+}
+
+.disabled-link{
+    cursor: default !important;
+}
+
 /* ==== CommentForm.js ==== */
 
 .comment-input {

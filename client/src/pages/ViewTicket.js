@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Sidebar from "../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { QUERY_SINGLE_TICKET } from "../utils/queries";
+import { QUERY_SINGLE_TICKET, QUERY_USERS } from "../utils/queries";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import TicketModal from "../components/TicketModal";
@@ -41,6 +41,13 @@ const ViewTicket = ({
   });
 
   const ticket = data?.ticket || [];
+
+  const usersQuery = useQuery(QUERY_USERS, {
+    onCompleted: () => {
+      setUserList(usersQuery.data.users);
+    },
+  });
+  const [userList, setUserList] = useState([]);
 
   // Date formatters for CreatedAt and updatedAt
   const ticketCreatedAt = new Intl.DateTimeFormat("en-US", {
@@ -156,6 +163,7 @@ const ViewTicket = ({
               currentUser={currentUser}
               handleClose={handleClose}
               show={show}
+              userList={userList}
             />
             <ProjectModal
               projectData={projectData}

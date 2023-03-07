@@ -2,11 +2,10 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
 import Sidebar from "../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { QUERY_SINGLE_PROJECT } from "../utils/queries";
+import { QUERY_SINGLE_PROJECT, QUERY_USERS } from "../utils/queries";
 import Spinner from "../components/Spinner";
 import ProtectPage from "../components/ProtectPage";
 import ProjectModal from "../components/ProjectModal";
@@ -52,6 +51,13 @@ const ViewProject = ({
   const handleProjectTicketClose = () => setShowProjectTicket(false);
   const handleProjectTicketShow = () => setShowProjectTicket(true);
 
+  const usersQuery = useQuery(QUERY_USERS, {
+    onCompleted: () => {
+      setUserList(usersQuery.data.users);
+    },
+  });
+  const [userList, setUserList] = useState([]);
+
   // Date formatters for createdAt and updatedAt
   const createdAt = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -85,6 +91,7 @@ const ViewProject = ({
 // {project.projectTitle}, {createdAt}, {updatedAt}
 
 
+  console.log(userList);
   return (
     <>
       {auth.loggedIn() ? (
@@ -131,7 +138,7 @@ const ViewProject = ({
                   >
                     Create a Ticket for this project
                   </Button>
-              <ProjectTicketModal handleClose={handleProjectTicketClose} show={showProjectTicket} projectId={projectId} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
+              <ProjectTicketModal handleClose={handleProjectTicketClose} show={showProjectTicket} projectId={projectId} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash} userList={userList}/>
 
               <ProjectTickets project={project} currentUser={currentUser} projectTicketDash={projectTicketDash} setProjectTicketDash={setProjectTicketDash}/>
                       {/* ICEBOX */}
@@ -145,6 +152,7 @@ const ViewProject = ({
               currentUser={currentUser}
               handleClose={handleClose}
               show={show}
+              userList={userList}
             />
             <ProjectModal
               projectData={dashData}
@@ -160,22 +168,6 @@ const ViewProject = ({
           <ProtectPage />
         </div>
       )}
-
-      <TicketModal
-        dashData={dashData}
-        setDashData={setDashData}
-        currentUser={currentUser}
-        handleClose={handleClose}
-        show={show}
-      />
-      <ProjectModal
-        projectData={dashData}
-        setProjectData={setDashData}
-        currentUser={currentUser}
-        handleProjectClose={handleProjectClose}
-        showProject={showProject}
-      />
-
     </>
   );
 };
