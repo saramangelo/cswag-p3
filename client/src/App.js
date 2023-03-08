@@ -15,10 +15,10 @@ import ViewTicket from "./pages/ViewTicket";
 import ViewProject from "./pages/ViewProject";
 import MyTickets from "./pages/MyTickets";
 import MyProjects from "./pages/MyProjects";
-import ProjectTable from "./components/ProjectTable";
-import TicketTable from "./components/TicketTable";
 import Form from "react-bootstrap/Form";
 import "./App.css";
+import AllProjects from "./pages/AllProjects";
+import AllTickets from "./pages/AllTickets";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -141,20 +141,20 @@ function App() {
                 />
                 <Route path="/mytickets" element={<MyTickets />} />
                 <Route path="/myprojects" element={<MyProjects />} />
-                {/* <Route
+                <Route
                   path="/allprojects"
                   element={
-                    <ProjectTable
+                    <AllProjects
                     />
                   }
                 />
                 <Route
                   path="/alltickets"
                   element={
-                    <TicketTable
+                    <AllTickets
                     />
                   }
-                /> */}
+                />
 
                 <Route path="*" element={<NotFound />}></Route>
               </Routes>

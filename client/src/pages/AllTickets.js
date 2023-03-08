@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MyTicketTable from "../components/MyTicketTable";
+import TicketTable from "../components/TicketTable";
 import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS, QUERY_PROJECTS, QUERY_USERS } from "../utils/queries";
 import TicketModal from "../components/TicketModal";
@@ -26,7 +26,7 @@ const styles = {
   },
 };
 
-function MyTickets({
+function AllTickets({
   handleShow,
   handleClose,
   handleProjectShow,
@@ -77,7 +77,7 @@ function MyTickets({
             </Col>
             <Col xs={10} lg={9}>
               <Card body className="welcome-card">
-              <div style={styles.header}>{currentUser.username}'s Tickets</div>
+              <div style={styles.header}>Current Tickets</div>
               </Card>
 
               <TicketModal
@@ -101,7 +101,7 @@ function MyTickets({
                     Create a Ticket
                   </Button>
   
-                  <MyTicketTable tickets={dashData} setDashData={setDashData} currentUser={currentUser}/>
+                  <TicketTable tickets={dashData} setDashData={setDashData} currentUser={currentUser}/>
                 </div>
               )}
             </Col>
@@ -116,4 +116,4 @@ function MyTickets({
   );
 }
 
-export default MyTickets;
+export default AllTickets;

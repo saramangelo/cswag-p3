@@ -26,7 +26,7 @@ function Sidebar({ handleShow, handleProjectShow }) {
               <Nav.Link href="/dashboard">Dashboard</Nav.Link>
               <NavDropdown title="Projects" active="false" className="nav-dropdown">
                 {/* <NavDropdown.Item href="#action/3.1">My Projects</NavDropdown.Item> */}
-                <NavDropdown.Item href="/dashboard">All Projects</NavDropdown.Item>
+                <NavDropdown.Item href="/allprojects">All Projects</NavDropdown.Item>
 
                 <NavDropdown.Item href="/myprojects">My Projects</NavDropdown.Item>
 
@@ -34,7 +34,7 @@ function Sidebar({ handleShow, handleProjectShow }) {
               </NavDropdown>
               <NavDropdown title="Tickets" active="false" className="nav-dropdown">
                 {/* <NavDropdown.Item href="#action/3.1">My Tickets</NavDropdown.Item> */}
-                <NavDropdown.Item href="/dashboard">All Tickets</NavDropdown.Item>
+                <NavDropdown.Item href="/alltickets">All Tickets</NavDropdown.Item>
 
                 <NavDropdown.Item href="/mytickets">My Tickets</NavDropdown.Item>
 

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import MyTicketTable from "../components/MyTicketTable";
 import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS, QUERY_PROJECTS, QUERY_USERS } from "../utils/queries";
-import TicketModal from "../components/TicketModal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Spinner from "../components/Spinner";
@@ -13,6 +11,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "../utils/auth";
+import ProjectModal from "../components/ProjectModal";
+import ProjectTable from "../components/ProjectTable";
 
 const auth = AuthService;
 
@@ -26,7 +26,7 @@ const styles = {
   },
 };
 
-function MyTickets({
+function AllProjects({
   handleShow,
   handleClose,
   handleProjectShow,
@@ -76,32 +76,36 @@ function MyTickets({
               {" "}
             </Col>
             <Col xs={10} lg={9}>
-              <Card body className="welcome-card">
-              <div style={styles.header}>{currentUser.username}'s Tickets</div>
+            <Card body className="welcome-card">
+              <div style={styles.header}>Current Projects</div>
               </Card>
 
-              <TicketModal
-                dashData={dashData}
-                setDashData={setDashData}
+              <ProjectModal
+                projectData={projectData}
+                setProjectData={setProjectData}
                 currentUser={currentUser}
-                handleClose={handleClose}
-                show={show}
-                userList={userList}
+                handleProjectClose={handleProjectClose}
+                showProject={showProject}
               />
+
               {loading ? (
                 <Spinner />
               ) : (
                 <div>
-                 
                   <Button
                     style={styles.button}
                     variant="dark"
-                    onClick={handleShow}
+                    onClick={handleProjectShow}
                   >
-                    Create a Ticket
+                    Create a Project
                   </Button>
-  
-                  <MyTicketTable tickets={dashData} setDashData={setDashData} currentUser={currentUser}/>
+   
+                  <ProjectTable
+                    projects={projectData}
+                    setProjectData={setProjectData}
+                    currentUser={currentUser}
+                  />
+
                 </div>
               )}
             </Col>
@@ -116,4 +120,4 @@ function MyTickets({
   );
 }
 
-export default MyTickets;
+export default AllProjects;
