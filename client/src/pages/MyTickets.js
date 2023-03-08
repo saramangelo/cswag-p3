@@ -40,11 +40,6 @@ function MyTickets({
     },
   });
 
-  const projectQuery = useQuery(QUERY_PROJECTS, {
-    onCompleted: () => {
-      setProjectData(projectQuery.data.projects);
-    },
-  });
 
   const usersQuery = useQuery(QUERY_USERS, {
     onCompleted: () => {
@@ -52,7 +47,6 @@ function MyTickets({
     },
   });
   const [dashData, setDashData] = useState([]);
-  const [projectData, setProjectData] = useState([]);
   const [userList, setUserList] = useState([]);
 
   let currentUser;

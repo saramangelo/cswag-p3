@@ -25,38 +25,38 @@ function MyTicketTable({ tickets, setDashData, currentUser }) {
         {tickets &&
           tickets.map((ticket, i) => (
             <tr key={i}>
-            {currentUser.username===ticket.ticketAuthor ? (
-              <>
-              <td>{ticket.ticketTitle}</td>
-              <td>{ticket.ticketAuthor}</td>
-              <td>{ticket.ticketType}</td>
-              <td>{ticket.ticketPriority}</td>
-              <td>{ticket.ticketStatus}</td>
-              <td>{ticket.ticketAssignee}</td>
-              <td className="dashboard-table-links">
-                <Link to={`/viewticket/${ticket._id}`}>
-                  {" "}
-                  <MDBIcon fas icon="eye" className="icon-hover"/>{" "}
-                </Link>
-              
+              {currentUser.username === ticket.ticketAuthor ? (
                 <>
-                  <EditTicketModal
-                    ticketId={ticket._id}
-                    tickets={tickets}
-                    setDashData={setDashData}
-                  />
-                  <RemoveTicketModal
-                    ticket={ticket}
-                    tickets={tickets}
-                    setDashData={setDashData}
-                  />
+                  <td>{ticket.ticketTitle}</td>
+                  <td>{ticket.ticketAuthor}</td>
+                  <td>{ticket.ticketType}</td>
+                  <td>{ticket.ticketPriority}</td>
+                  <td>{ticket.ticketStatus}</td>
+                  <td>{ticket.ticketAssignee}</td>
+                  <td className="dashboard-table-links">
+                    <Link to={`/viewticket/${ticket._id}`}>
+                      {" "}
+                      <MDBIcon fas icon="eye" className="icon-hover" />{" "}
+                    </Link>
+
+                    <>
+                      <EditTicketModal
+                        ticketId={ticket._id}
+                        tickets={tickets}
+                        setDashData={setDashData}
+                      />
+                      <RemoveTicketModal
+                        ticket={ticket}
+                        tickets={tickets}
+                        setDashData={setDashData}
+                      />
+                    </>
+                  </td>
                 </>
-                </td>
-                </>
-                ) : (
-                  <></>
-                )}
-                   </tr>
+              ) : (
+                <></>
+              )}
+            </tr>
           ))}
       </tbody>
     </Table>

@@ -12,7 +12,7 @@ import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "../utils/auth";
 import ProjectModal from "../components/ProjectModal";
-import ProjectTable from "../components/ProjectTable";
+import MyProjectTable from "../components/ProjectTable";
 
 const auth = AuthService;
 
@@ -34,13 +34,7 @@ function MyProjects({
   show,
   showProject,
 }) {
-  const { loading, data } = useQuery(QUERY_TICKETS, {
-    onCompleted: () => {
-      setDashData(data.tickets);
-    },
-  });
-
-  const projectQuery = useQuery(QUERY_PROJECTS, {
+  const { loading, projectQuery } = useQuery(QUERY_PROJECTS, {
     onCompleted: () => {
       setProjectData(projectQuery.data.projects);
     },
@@ -62,7 +56,6 @@ function MyProjects({
     currentUser = auth.getProfile().data;
   }
 
-
   return (
     <>
       {auth.loggedIn() ? (
@@ -76,8 +69,10 @@ function MyProjects({
               {" "}
             </Col>
             <Col xs={10} lg={9}>
-            <Card body className="welcome-card">
-              <div style={styles.header}>{currentUser.username}'s Projects</div>
+              <Card body className="welcome-card">
+                <div style={styles.header}>
+                  {currentUser.username}'s Projects
+                </div>
               </Card>
 
               <ProjectModal
@@ -99,13 +94,12 @@ function MyProjects({
                   >
                     Create a Project
                   </Button>
-   
-                  <ProjectTable
+
+                  <MyProjectTable
                     projects={projectData}
                     setProjectData={setProjectData}
                     currentUser={currentUser}
                   />
-
                 </div>
               )}
             </Col>
