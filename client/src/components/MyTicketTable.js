@@ -25,6 +25,8 @@ function MyTicketTable({ tickets, setDashData, currentUser }) {
         {tickets &&
           tickets.map((ticket, i) => (
             <tr key={i}>
+            {currentUser.username===ticket.ticketAuthor ? (
+              <>
               <td>{ticket.ticketTitle}</td>
               <td>{ticket.ticketAuthor}</td>
               <td>{ticket.ticketType}</td>
@@ -36,7 +38,7 @@ function MyTicketTable({ tickets, setDashData, currentUser }) {
                   {" "}
                   <MDBIcon fas icon="eye" className="icon-hover"/>{" "}
                 </Link>
-                {currentUser.username===ticket.ticketAuthor ? (
+              
                 <>
                   <EditTicketModal
                     ticketId={ticket._id}
@@ -49,18 +51,12 @@ function MyTicketTable({ tickets, setDashData, currentUser }) {
                     setDashData={setDashData}
                   />
                 </>
+                </td>
+                </>
                 ) : (
-                  <>
-                    <Link variant="light" className="disabled-link">
-                      <MDBIcon fas icon="pencil-alt" color="muted"/>
-                    </Link>
-                    <Link className="disabled-link">
-                      <MDBIcon far icon="trash-alt" color="muted"/>
-                    </Link> 
-                  </>
+                  <></>
                 )}
-              </td>
-            </tr>
+                   </tr>
           ))}
       </tbody>
     </Table>
