@@ -40,7 +40,7 @@ function RemoveProjectModal({ project, projects, setProjectData }) {
             {error && <span className="ml-2">{error.message}</span>}
           </span>
           <Link>
-            <MDBIcon onClick={handleShow} far icon="trash-alt" />
+            <MDBIcon onClick={handleShow} far icon="trash-alt" className="icon-hover"/>
           </Link>
           {/* Content Here */}
           <Modal show={show} onHide={handleClose} class="black-text">
