@@ -31,7 +31,7 @@ function ProjectTable({ projects, setProjectData, currentUser }) {
               <td className="dashboard-table-links">
                 <Link to={`/viewproject/${project._id}`}>
                   {" "}
-                <MDBIcon fas icon="eye" />{" "}
+                <MDBIcon fas icon="eye" className="icon-hover"/>{" "}
                 </Link>
                 {currentUser.username===project.projectManager ? (
                 <>
@@ -49,6 +49,12 @@ function ProjectTable({ projects, setProjectData, currentUser }) {
                 </>
                 ) : (
                   <>
+                    <Link variant="light" className="disabled-link">
+                      <MDBIcon fas icon="pencil-alt" color="muted"/>
+                    </Link>
+                    <Link className="disabled-link">
+                      <MDBIcon far icon="trash-alt" color="muted"/>
+                    </Link> 
                   </>
                 )
               }

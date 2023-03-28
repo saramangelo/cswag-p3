@@ -139,8 +139,32 @@ function App() {
                     />
                   }
                 />
-                <Route path="/mytickets" element={<MyTickets />} />
-                <Route path="/myprojects" element={<MyProjects />} />
+                <Route
+                  path="/mytickets"
+                  element={
+                    <MyTickets
+                      handleClose={handleClose}
+                      handleShow={handleShow}
+                      handleProjectShow={handleProjectShow}
+                      handleProjectClose={handleProjectClose}
+                      show={show}
+                      showProject={showProject}
+                    />
+                  }
+                />
+                <Route
+                  path="/myprojects"
+                  element={
+                    <MyProjects 
+                      handleClose={handleClose}
+                      handleShow={handleShow}
+                      handleProjectShow={handleProjectShow}
+                      handleProjectClose={handleProjectClose}
+                      show={show}
+                      showProject={showProject}
+                    />
+                  }
+                />
                 <Route
                   path="/allprojects"
                   element={

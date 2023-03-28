@@ -94,7 +94,7 @@ function EditProjectModal({ projectId, projects, setProjectData }) {
             {error && <span className="ml-2">{error.message}</span>}
           </span>
           <Link>
-            <MDBIcon onClick={handleShow} fas icon="pencil-alt" />
+            <MDBIcon onClick={handleShow} fas icon="pencil-alt" className="icon-hover"/>
           </Link>
 
           <Modal show={show} onHide={handleClose} className="black-text">
